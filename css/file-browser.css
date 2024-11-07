@@ -1,0 +1,52 @@
+div.image_gallery {
+	display:flex;
+	flex-wrap:wrap;
+	justify-content:center;
+}
+
+div.image_gallery div {
+	margin:2px;
+	background-color: rgba(0,0,0,0.5);
+}
+
+div.image_gallery div img {
+	margin:2px;
+	max-height:300px;
+}
+
+div.single_image {
+	max-width: 780px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+div.single_image div {
+	padding:2px;
+	background-color: rgba(0,0,0,0.5);
+}
+
+div.single_image div img {
+	width: 100%;
+}
+
+#player {
+ width: 100%;
+}
+
+@media only screen and (max-width: 790px) {
+
+div.image_gallery div {
+	margin: 0px;
+	margin-bottom: 1px;
+}
+
+div.image_gallery div img {
+	margin:0px;
+	max-height:none;
+	max-width: 100%;
+}
+
+div.single_image {
+	max-width: 100%;
+}
+}

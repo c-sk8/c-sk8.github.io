@@ -1,0 +1,107 @@
+:root {
+	--em-colour: #486288;
+	--strong-colour: rgba(0,255,255,0.5);
+	--anchor-colour: #82a537;
+	--anchor-hover-colour: #b64026;
+	--body-background-colour: #191a1b;
+}
+
+h1 {
+    color: #e8eae1;
+}
+
+h2, h3, h4, h5, h6 {
+    color: #999;
+}
+
+p, ul, li, table, th, td, th, pre {
+	color: #58595b;
+}
+
+div.nav_container a {
+	background-color: #141516;
+    color: #58595b;
+	border-color: transparent;
+}
+
+div.nav_container a:focus-visible {
+  outline: 3px solid #fff;
+}
+
+div.nav_container a:hover {
+    background-color: #141516;
+	color: #82a537;
+}
+
+div.main_box {
+	background: #141516;
+}
+
+p.copyright {
+    color: rgba(255,255,255,0.1);
+}
+
+table, th, td {
+    border-collapse: collapse;
+	border: none;
+}
+
+/* ---------- Form CSS ---------- */
+
+div.control_group labelv{
+	color: #777;
+}
+
+div.controls input[type="password"],
+div.controls input[type="text"],
+div.controls input[type="email"],
+div.controls input[type="file"],
+div.controls textarea,
+div.controls select {
+	color: #888;
+	background-color: #111;
+	border-color: black;
+}
+
+div.controls input:focus-visible,
+div.controls textarea:focus-visible {
+  outline: 3px solid #222;
+}
+
+div.controls  input[type="button"],
+div.controls  input[type="submit"] {
+	background: #982812;
+	color: #aaa;
+}
+
+div.controls input[type="button"]:hover,
+div.controls input[type="submit"]:hover {
+	background: #b64026;
+	color: #ddd;
+}
+
+div.control_group label {
+	color: #777
+}
+
+div.controls select {
+	color: #bbb;
+	background-color: #191a1b;
+	border-color: #222;
+}
+
+div.controls select:focus-visible {
+  outline: 3px solid #fff;
+}
+
+div.controls input[type="button"]:focus-visible,
+div.controls input[type="submit"]:focus-visible {
+  outline: 3px solid #fff;
+}
+
+/* File Manager */
+
+div.image_gallery div, div.single_image div {
+	background-color: black;
+}
+

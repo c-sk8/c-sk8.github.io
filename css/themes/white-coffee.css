@@ -1,0 +1,52 @@
+:root {
+  --em-colour: peru;
+  --strong-colour: #555;
+  --header-colour: #666;
+  --anchor-hover-colour: #b4466a;
+}
+
+body {
+	background-color: hsl(41, 31%, 84%);
+}
+
+p, ul, li, table, th, td, th {
+	color: #888;
+}
+
+hr {
+	color: hsl(41, 31%, 84%);
+}
+
+div.nav_container a {
+    background-color: hsl(41, 31%, 81%);
+}
+
+div.nav_container a:hover {
+    background-color: hsl(41, 31%, 76%);
+    color: rgba(0,0,0,0.7);
+}
+
+div.main_box {
+	background-color: rgba(255,255,255,0.8);
+}
+
+p.copyright {
+	color: rgba(0,0,0,0.2);
+}
+
+pre.log {
+	border-width: 0;
+    border-color: none;
+    color: rgba(0,0,0,0.2);
+    background: rgba(255,255,255,0.2);
+}
+
+div.image_gallery div, div.single_image div {
+	background-color: white;
+}
+
+:root {
+  --control-background-color: hsl(41, 31%, 92%);
+  --control-text-color: #666;
+  --label-text-color: #888;
+}

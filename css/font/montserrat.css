@@ -1,0 +1,32 @@
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../../fonts/montserrat/Montserrat-VariableFont_wght.ttf') format('opentype');
+}
+
+body, input, th, strong {
+	font-family: 'Montserrat';
+	font-size: 13pt;
+    font-weight: 450;
+	line-height: 1.4;
+	-webkit-font-smoothing: subpixel-antialiased;
+}
+
+h1 {
+    font-size: 16pt;
+    font-weight: 600;
+}
+
+h2 {
+    font-size: 15pt;
+    font-weight: 500;
+}
+
+h3 {
+    font-size: 14pt;
+    font-weight: 450;
+}
+
+
+em {
+	font-style: normal;
+}

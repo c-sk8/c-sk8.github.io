@@ -1,0 +1,65 @@
+:root {
+	--em-colour: darkorange;
+	--strong-colour: limegreen;
+	--anchor-colour: hsl(213, 50%, 49%);
+	--anchor-hover-colour: #8a4292;
+	--body-background-colour: #f6f6f6;
+	--header-colour: #4a4a4a;
+	--paragraph-colour: #7c7c7c;
+}
+
+a:focus-visible {
+	background: #f7c94e;
+}
+
+hr {
+	color: hsl(41, 31%, 84%);
+}
+
+div.nav_container a {
+    background-color: #f0f0f0;
+}
+
+div.nav_container a:hover {
+    background-color: #d9d9d9;
+    color: rgba(0,0,0,0.7);
+}
+
+div.nav_container a:focus-visible {
+  outline-color: #90aef1;
+}
+
+div.main_box {
+	background-color: white;
+}
+
+p.copyright {
+	color: rgba(0,0,0,0.2);
+}
+
+pre.log {
+	border-width: 0;
+    border-color: none;
+    color: rgba(0,0,0,0.2);
+    background: rgba(255,255,255,0.2);
+}
+
+div.image_gallery div, div.single_image div {
+	background-color: white;
+}
+
+:root {
+  --control-background-color: #fbfbfb;
+  --control-text-color: #666;
+  --label-text-color: #888;
+}
+
+div.controls  input[type="button"],
+div.controls  input[type="submit"] {
+	background: #78b856;
+}
+
+div.controls input[type="button"]:hover,
+div.controls input[type="submit"]:hover {
+	background: #e8883a;
+}

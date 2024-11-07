@@ -1,0 +1,27 @@
+.clock-box {
+	position: relative;
+	width: 354px;
+	height: 354px;
+	margin: 0 auto 0 auto;
+}
+
+.face::before { content:url("file/watch-face.svg"); }
+.second-hand::before { content:url("file/second-hand.svg"); }
+.minute-hand::before { content:url("file/minute-hand.svg"); }
+.hour-hand::before { content:url("file/hour-hand.svg"); }
+
+.face, .second-hand, .minute-hand, .hour-hand {
+	width: 354px;
+	height: 354px;
+	position: absolute;
+}
+
+.second-hand {
+	transition-timing-function: ease;
+	transition-duration: 0.25s;
+}
+
+.resize-animation-stopper * {
+  transition: none !important;
+  animation: none !important;
+}

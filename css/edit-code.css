@@ -1,0 +1,24 @@
+@font-face {
+    font-family: 'Menlo';
+    src: url('../../fonts/menlo/Menlo-Regular.ttf') format('truetype');
+}
+
+div.controls textarea
+{
+	font-family: 'Menlo';
+	font-size: 10pt;
+	tab-size: 4;
+	height:calc(100vh - 190px);
+	padding:20px;
+	resize:none;
+	border:none;
+	margin-top:4px; /* Give some space for the focus ring */
+}
+
+@media only screen and (max-width: 780px)
+{
+	div.controls textarea {
+		padding:5px;
+		height:calc(100vh - 165px);
+	}
+}
