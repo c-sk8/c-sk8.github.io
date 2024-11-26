@@ -1,4 +1,5 @@
 let accumulated_seconds = 0;
+let accumulated_minutes = 0;
 
 function intervalAction() {
     const now = new Date();
@@ -7,14 +8,16 @@ function intervalAction() {
 	let hour_hand = document.querySelector(".hour-hand");
 
 	let milliseconds = now.getMilliseconds(); // Gets milliseconds (0-999)
-	let fraction = Math.floor((milliseconds % 1000) / 200) / 5; // Maps to 0, 1/3, or 2/3
+	let fraction = Math.floor((milliseconds % 1000) / 333.3) / 3; // Maps to 0, 1/3, or 2/3
 
 	// Seconds keep going up for continuous smooth animation
 	if (now.getSeconds() == 0 && fraction == 0) accumulated_seconds += 60;
     const seconds = accumulated_seconds + now.getSeconds() + fraction;
 
 	// Only move the minute hand once every 5 seconds. Less drawing needed.
-	const minutes = now.getMinutes() + (Math.floor(seconds % 60 / 5) * 5) / 60;
+	if (now.getMinutes() == 0 && fraction == 0) accumulated_minutes += 60;
+	const minutes =	accumulated_minutes + now.getMinutes() +
+					(Math.floor(seconds % 60 / 20) * 20) / 60;
 
 	// Hour hand is redrawn once every minute.
 	const hours = now.getHours() + (now.getMinutes() / 60);
@@ -34,7 +37,7 @@ function intervalAction() {
 
 intervalAction();
 
-const myInterval = setInterval(intervalAction, 200);
+const myInterval = setInterval(intervalAction, 333);
 
 let resizeTimer;
 
