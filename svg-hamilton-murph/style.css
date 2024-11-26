@@ -27,7 +27,12 @@ body {
 
 .second-hand {
 	transition-timing-function: ease;
-	transition-duration: 0.1s;
+	transition-duration: 0.33s;
+}
+
+.minute-hand, .hour-hand {
+	transition-timing-function: ease;
+	transition-duration: 1s;
 }
 
 .resize-animation-stopper * {
