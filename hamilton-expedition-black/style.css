@@ -16,11 +16,12 @@ body {
 }
 
 .face::before { content:url("svg/watch-face.svg"); }
-.second-hand::before { content:url("svg/second-hand.svg"); }
-.minute-hand::before { content:url("svg/minute-hand.svg"); }
 .hour-hand::before { content:url("svg/hour-hand.svg"); }
+.minute-hand::before { content:url("svg/minute-hand.svg"); }
+.second-hand::before { content:url("svg/second-hand.svg"); }
+.hands-pin::before { content:url("svg/hands-pin.svg"); }
 
-.face, .second-hand, .minute-hand, .hour-hand {
+.face, .second-hand, .minute-hand, .hour-hand, .hands-pin {
 	width: 420px;
 	height: 420px;
 	position: absolute;
