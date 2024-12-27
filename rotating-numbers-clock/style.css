@@ -1,0 +1,34 @@
+body {
+	margin:0px;
+	padding:0px;
+	min-height: 100vh;
+	background-image: none;
+	background-color: #222;
+}
+
+.clock-box {
+	margin-top: 20px;
+	position: relative;
+	width: 512px;
+	height: 512px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.clockbase::before { content:url("svg/clockbase.svg"); }
+.hours::before { content:url("svg/hours.svg"); }
+.minutes::before { content:url("svg/minutes.svg"); }
+.seconds::before { content:url("svg/seconds.svg"); }
+.masks::before { content:url("svg/masks.svg"); }
+
+.clockbase, .seconds, .minutes, .hours, .masks {
+	width: 512px;
+	height: 512px;
+	position: absolute;
+	transition-timing-function: ease;
+}
+
+.resize-animation-stopper * {
+	transition: none !important;
+	animation: none !important;
+}
