@@ -7,6 +7,10 @@ let previous_hours = 0;
 
 function intervalAction(animate = true) {
     const now = new Date();
+	
+	// Use this instead to test transitions
+	//var now = new Date(); now.setMinutes(now.getMinutes() + 40);
+	
 	let second_hand = document.querySelector(".seconds");
 	let minute_hand = document.querySelector(".minutes");
 	let hour_hand = document.querySelector(".hours");
@@ -51,9 +55,9 @@ function intervalAction(animate = true) {
 	}
 	else
 	{
-		second_hand.style.transition = "0.25s";
-		minute_hand.style.transition = "0.25s";
-		hour_hand.style.transition = "1s";
+		second_hand.style.transition = "0.3s";
+		minute_hand.style.transition = "0.3s";
+		hour_hand.style.transition = "0.3s";
 	}
 
     // Set rotation angle for each hand

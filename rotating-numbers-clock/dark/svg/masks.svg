@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g id="Mask" transform="matrix(0.971674,-0.0107401,0.0107401,0.971674,256,256)">
+        <path d="M135.969,9.072L246.561,15.438C239.14,145.104 131.511,246.981 0,246.981C-136.313,246.981 -246.981,136.313 -246.981,-0C-246.981,-136.313 -136.313,-246.981 0,-246.981C133.35,-246.981 242.161,-141.38 246.829,-9.161L136.138,-6.27C135.846,-11.65 135.255,-18.184 134.355,-23.383L76.065,-24.028C65.959,-55.998 36.216,-79.359 0.881,-79.75C-43.133,-80.236 -79.263,-44.896 -79.75,-0.881C-80.236,43.133 -44.896,79.263 -0.881,79.75C34.453,80.14 64.705,57.442 75.515,25.703L133.805,26.347C134.82,21.169 135.558,14.444 135.969,9.072Z" style="fill-opacity:0.67;"/>
+    </g>
+</svg>
