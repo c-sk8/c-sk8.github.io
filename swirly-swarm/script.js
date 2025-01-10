@@ -5,8 +5,8 @@ const MIN_SPEED = 2.5; // Minimum speed for particles
 const MAX_SPEED = 4.5; // Maximum speed for particles
 const ATTRACTION_FORCE = 0.05; // Strength of attraction towards the mouse
 const TARGET_VARIANCE = 0; // Max variance from the mouse pointer
-const PARTICLE_NUMBER = 230;
-const PARTICLE_LINE_WIDTH = 2;
+const PARTICLE_NUMBER = 500;
+const PARTICLE_LINE_WIDTH = 4;
 
 const particlesArray = [];
 let mouseX = 0;
@@ -20,6 +20,7 @@ let isPaused = false;
 function resizeCanvas() {
 	canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight;
+    //console.log("Width: " + canvas.width + " Height: " + canvas.height);
 	mouseX = canvas.width / 2;
 	mouseY = canvas.height / 2;
 }
@@ -130,13 +131,14 @@ function initializeParticles() {
 	
 	maxSpeed = MIN_SPEED; // Gradually increase speed from min to max
 	maxSpeedIncrement = (MAX_SPEED - MIN_SPEED) / PARTICLE_NUMBER;
-	start_fraction = Math.random() - 0.5;
+	start_fraction = 0.2;
 	
 	for (let i = 0; i < PARTICLE_NUMBER; i++) {
 	
-		const point = getCirclePoint((i / PARTICLE_NUMBER) * 90, canvas.height / 2);
+		const point = getCirclePoint((i / PARTICLE_NUMBER) * 90, canvas.width / 2);
 		const x = point.x;
-		const y = (canvas.height * start_fraction) + point.y + (canvas.height / 2);
+		const y = (canvas.height * 0.75) + point.y;
+		//const y = (canvas.height * start_fraction) + point.y + (canvas.height / 2);
 		particlesArray.push(new Particle(x, y, maxSpeed, getParticleColour(i)));
 		maxSpeed += maxSpeedIncrement;
 	}
@@ -151,10 +153,10 @@ function animate(timestamp) {
 		lastTime = timestamp;
 
 		// Calculate FPS
-		fps = Math.round(1000 / deltaTime);
-		fpsHistory.push(1000 / deltaTime);
-		if (fpsHistory.length > 60) fpsHistory.shift();
-		fps = Math.round(fpsHistory.reduce((a, b) => a + b) / fpsHistory.length);
+		//fps = Math.round(1000 / deltaTime);
+		//fpsHistory.push(1000 / deltaTime);
+		//if (fpsHistory.length > 60) fpsHistory.shift();
+		//fps = Math.round(fpsHistory.reduce((a, b) => a + b) / fpsHistory.length);
 		  
 		ctx.fillStyle = 'rgba(0, 0, 0, 0.1)'; // Fade effect
 		ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -165,9 +167,9 @@ function animate(timestamp) {
 			particle.draw();
 		}
 		
-		ctx.fillStyle = 'white';
-		ctx.font = '20px Arial';
-		ctx.fillText(`FPS: ${fps}`, 10, 30);
+		//ctx.fillStyle = 'white';
+		//ctx.font = '20px Arial';
+		//ctx.fillText(`FPS: ${fps}`, 10, 30);
 	}
 	
 	requestAnimationFrame(animate);
@@ -187,7 +189,7 @@ if (event.code === 'Space') {
 	}
 }
 });
-  
+
 // Initial setup
 resizeCanvas();
 initializeParticles();
