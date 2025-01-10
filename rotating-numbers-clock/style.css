@@ -1,0 +1,33 @@
+body {
+	margin:0px;
+	padding:0px;
+	min-height: 100vh;
+	background-image: none;
+	background-color: #333;
+}
+
+div.gallery {
+	display:flex;
+	flex-wrap:wrap;
+	justify-content:left;
+}
+
+div.gallery div {
+	margin-top: 10px;
+	margin-left:20px;
+	margin-bottom:10px;
+}
+
+div.gallery div div {
+	margin:0px;
+	width:200px;
+	height:200px;
+	border: 2px solid;
+	border-color: #000;
+}
+
+div.container:hover {
+    background-color: red;
+	border: 2px solid;
+	border-color: white;
+}
