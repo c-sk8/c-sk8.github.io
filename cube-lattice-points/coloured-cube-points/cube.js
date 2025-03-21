@@ -23,9 +23,9 @@ function resizeCanvas() {
 for (let x = -size / 2; x <= size / 2; x += step) {
     for (let y = -size / 2; y <= size / 2; y += step) {
         for (let z = -size / 2; z <= size / 2; z += step) {
-        	let red = ((x + size/2 + 100) / size) * 170;
-        	let green = ((y + size/2 + 100) / size) * 170;
-         	let blue = ((z + size/2 + 100) / size) * 170;
+        	let red = 255;
+        	let green = ((y + size/2) / size) * 150;
+         	let blue = ((z + size/2) / size) * 200;
            points.push({ x, y, z, red, green, blue});
         }
     }
@@ -69,7 +69,7 @@ function draw() {
         let color = `rgb(${red}, ${green}, ${blue})`;
 
         ctx.beginPath();
-        ctx.arc(screenX, screenY, 10, 0, Math.PI * 2);
+        ctx.arc(screenX, screenY, 3 + (1 - ((p.z + (size / 2)) / size)) * 3, 0, Math.PI * 2);
         ctx.fillStyle = color;
         ctx.fill();
     });
