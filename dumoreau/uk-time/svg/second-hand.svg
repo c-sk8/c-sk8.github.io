@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="100%" height="100%" viewBox="0 0 390 390" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
-    <g transform="matrix(1,0,0,1,-56.556,-55.8924)">
+<svg width="100%" height="100%" viewBox="0 0 310 310" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(1,0,0,1,-96.556,-95.8924)">
         <g id="Hands">
             <g id="Second-Hand" serif:id="Second Hand">
                 <path d="M249.013,256.342C246.964,255.384 245.543,253.303 245.543,250.892C245.543,248.44 247.014,246.328 249.122,245.393L250.54,102.897L252.552,102.887L253.996,245.396C256.101,246.332 257.569,248.442 257.569,250.892C257.569,253.299 256.152,255.378 254.107,256.338L254.569,301.893C254.569,301.893 254.336,303.943 251.544,303.945C248.72,303.947 248.56,301.876 248.56,301.876L249.013,256.342Z" style="fill:rgb(204,30,21);"/>

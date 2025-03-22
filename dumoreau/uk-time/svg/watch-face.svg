@@ -1,24 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="100%" height="100%" viewBox="0 0 390 390" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
-    <g id="Case" transform="matrix(1,0,0,1,-55,-55)">
-        <g transform="matrix(0.961445,0,0,0.922759,23.8781,-28.8302)">
-            <ellipse cx="235.19" cy="302.17" rx="200.739" ry="209.155"/>
-        </g>
-        <g transform="matrix(1.11267,0,0,1.11267,-31.1531,-53.458)">
-            <circle cx="252.683" cy="272.729" r="171.659" style="fill:url(#_Linear1);"/>
-        </g>
-        <g transform="matrix(1.06607,0,0,1.06607,-19.377,-40.7477)">
-            <circle cx="252.683" cy="272.729" r="171.659" style="fill:rgb(124,124,124);"/>
-        </g>
-        <g transform="matrix(1.01946,0,0,1.01946,-7.60098,-28.0374)">
-            <circle cx="252.683" cy="272.729" r="171.659" style="fill:url(#_Linear2);"/>
-        </g>
-    </g>
-    <g id="Watch-Face" serif:id="Watch Face" transform="matrix(1,0,0,1,-55,-55)">
-        <g transform="matrix(1.49334,0,0,1.49334,-106.2,-161.722)">
-            <circle cx="238.525" cy="275.705" r="111.83" style="fill:rgb(22,22,22);"/>
-            <path d="M238.525,163.875C300.245,163.875 350.354,213.984 350.354,275.705C350.354,337.425 300.245,387.534 238.525,387.534C176.804,387.534 126.695,337.425 126.695,275.705C126.695,213.984 176.804,163.875 238.525,163.875ZM238.525,164.768C177.297,164.768 127.588,214.477 127.588,275.705C127.588,336.932 177.297,386.641 238.525,386.641C299.753,386.641 349.462,336.932 349.462,275.705C349.462,214.477 299.753,164.768 238.525,164.768Z"/>
+<svg width="100%" height="100%" viewBox="0 0 310 310" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g id="Watch-Face" serif:id="Watch Face" transform="matrix(1,0,0,1,-95,-95)">
+        <g transform="matrix(1.36815,0,0,1.36815,-76.3386,-127.206)">
+            <circle cx="238.525" cy="275.705" r="111.83"/>
         </g>
         <g id="Numbers-Ring" serif:id="Numbers Ring" transform="matrix(3.68301,0,0,3.68301,-648.926,-333.389)">
             <path d="M244.074,130.162C259.659,130.162 272.312,142.815 272.312,158.4C272.312,173.985 259.659,186.638 244.074,186.638C228.489,186.638 215.836,173.985 215.836,158.4C215.836,142.815 228.489,130.162 244.074,130.162ZM244.074,130.57C228.714,130.57 216.244,143.04 216.244,158.4C216.244,173.76 228.714,186.231 244.074,186.231C259.434,186.231 271.905,173.76 271.905,158.4C271.905,143.04 259.434,130.57 244.074,130.57Z" style="fill:rgb(226,228,227);"/>
@@ -389,8 +374,4 @@
             <path d="M210.779,189.304C210.779,189.304 215.946,189.241 216.227,189.326C217.2,189.62 219.238,189.972 219.245,193.262C219.252,196.35 216.74,196.815 216.281,196.992C215.895,197.139 210.785,197.077 210.785,197.077L210.779,189.304ZM211.803,190.403L211.787,195.879C211.787,195.879 215.589,195.96 216.094,195.844C217.177,195.597 218.13,195.05 218.103,193.108C218.08,191.36 217.015,190.603 216.442,190.429C216.189,190.353 211.803,190.403 211.803,190.403Z" style="fill:white;"/>
         </g>
     </g>
-    <defs>
-        <linearGradient id="_Linear1" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(3.19473,344.446,-344.446,3.19473,250.03,100.696)"><stop offset="0" style="stop-color:rgb(224,224,224);stop-opacity:1"/><stop offset="1" style="stop-color:rgb(36,36,36);stop-opacity:1"/></linearGradient>
-        <linearGradient id="_Linear2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(2.0129,345.558,-345.558,2.0129,251.169,100.547)"><stop offset="0" style="stop-color:rgb(53,53,53);stop-opacity:1"/><stop offset="1" style="stop-color:rgb(210,210,210);stop-opacity:1"/></linearGradient>
-    </defs>
 </svg>

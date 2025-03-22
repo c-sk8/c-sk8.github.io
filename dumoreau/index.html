@@ -1,25 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="author" content="Christopher Kent">
-<meta name="description" content="An SVG and Javascript analogue clock inspired by a Dumoreau watch design.">
+<meta name="description" content="An SVG and Javascript Clock with a design that has been inspired by Dumoreau watches.">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SVG Dumoreau</title>
+<meta name="theme-color" content="#f6f6f6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1e1e1e" media="(prefers-color-scheme: dark)">
+<title>Dumoreau SVG Clock</title>
 <style media="screen">
-@import "style.css";
+@import "../css/base.css";
+@import "../css/montserrat.css";
 </style>
+<link rel="stylesheet" media="(prefers-color-scheme: light)" href="../css/default-light.css">
+<link rel="stylesheet" media="(prefers-color-scheme: dark)" href="../css/default-dark.css">
 </head>
 <body>
-<div class="container">
-    <div class="clock-box" id="clock-box">
-        <div class="face"></div>
-        <div class="hour-hand"></div>
-        <div class="minute-hand"></div>
-        <div class="second-hand"></div>
-        <div class="hands-pin"></div>
-	</div>
-</div>
-<script src="script.js"></script>
+<div class="outer_box"><div class="main_box"><div class="inner_box">
+<h1>Dumoreau SVG Clock</h1>
+<p>An SVG and Javascript Clock with a design that has been inspired by Dumoreau watches: <a href="https://dumoreau.com/">dumoreau.com</a></p>
+</div></div></div>
+
+<div class="main_content_divider"></div>
+
+<div class="outer_box"><div class="main_box"><div class="inner_box">
+<h1>Variations</h1>
+<ul>
+<li><a href="watchface/index.html">Auto Sizing</a> • Adjusted to full height of window.</li>
+<li><a href="watchface/small.html">Small</a></li>
+<li><a href="watchface/medium.html">Medium</a></li>
+<li><a href="watchface/large.html">Large</a></li>
+<li><a href="uk-time/index.html">UK Time Only</a></li>
+</ul>
+</div></div></div></div>
 </body>
 </html>
