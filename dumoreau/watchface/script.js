@@ -29,7 +29,7 @@ function setClockSize() {
       break;
     case 'height':
     default:
-      clockSize = 'calc(100vh - 20px)';
+      clockSize = '100vh';
       break;
   }
 

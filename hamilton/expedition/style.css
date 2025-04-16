@@ -1,3 +1,7 @@
+:root {
+  --clock_size: calc(100vh);
+}
+
 body {
 	margin:0px;
 	padding:0px;
@@ -7,10 +11,10 @@ body {
 }
 
 .clock-box {
-	margin-top: 20px;
+	margin-top: 0px;
 	position: relative;
-	width: 420px;
-	height: 420px;
+	width: var(--clock_size);
+	height: var(--clock_size);
 	margin-left: auto;
 	margin-right: auto;
 }
@@ -22,8 +26,8 @@ body {
 .hands-pin::before { content:url("svg/hands-pin.svg"); }
 
 .face, .second-hand, .minute-hand, .hour-hand, .hands-pin {
-	width: 420px;
-	height: 420px;
+	width: var(--clock_size);
+	height: var(--clock_size);
 	position: absolute;
 }
 

@@ -5,6 +5,39 @@ let previous_minutes = 0;
 let accumulated_hours = 0;
 let previous_hours = 0;
 
+function setClockSize() {
+  const params = new URLSearchParams(window.location.search);
+  const size = params.get('size');
+
+  let clockSize;
+
+  switch (size) {
+    case 'small':
+      clockSize = '300px';
+      break;
+    case 'medium':
+      clockSize = '500px';
+      break;
+    case 'large':
+      clockSize = '800px';
+      break;
+    case 'xlarge':
+      clockSize = '1200px';
+      break;
+    case 'width':
+      clockSize = '100vw';
+      break;
+    case 'height':
+    default:
+      clockSize = 'calc(100vh - 20px)';
+      break;
+  }
+
+  document.documentElement.style.setProperty('--clock_size', clockSize);
+}
+
+setClockSize();
+
 function intervalAction(animate = true) {
     const now = new Date();
 	let second_hand = document.querySelector(".second-hand");
