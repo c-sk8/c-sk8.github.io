@@ -11,7 +11,7 @@ let angleZ = 0;
 function resizeCanvas() {
 	canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight;
-	scale = canvas.height * 0.4;
+	scale = canvas.height * 0.45;
 }
 
 class Vector3d {

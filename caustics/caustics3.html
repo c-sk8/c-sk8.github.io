@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Caustic Light Simulation</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #004466;
+    }
+    canvas {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<script>
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+let w, h;
+function resize() {
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener("resize", resize);
+
+let t = 0;
+
+function wave(x, y, t) {
+  return (
+    Math.sin((x + t * 0.5) * 0.02) +
+    Math.sin((y - t * 0.8) * 0.015) +
+    Math.sin((x + y + t * 0.2) * 0.01)
+  ) * 5; // Increase intensity
+}
+
+function draw() {
+  ctx.fillStyle = "#004466";
+  ctx.fillRect(0, 0, w, h);
+
+  ctx.strokeStyle = "rgba(255,255,255,0.07)";
+  ctx.lineWidth = 1;
+
+  const spacing = 20;
+
+  for (let x = 0; x < w; x += spacing) {
+    ctx.beginPath();
+    for (let y = 0; y < h; y += 1) {
+      const offset = wave(x, y, t);
+      if (y === 0) {
+        ctx.moveTo(x + offset, y);
+      } else {
+        ctx.lineTo(x + offset, y);
+      }
+    }
+    ctx.stroke();
+  }
+
+  for (let y = 0; y < h; y += spacing) {
+    ctx.beginPath();
+    for (let x = 0; x < w; x += 1) {
+      const offset = wave(x, y, t);
+      if (x === 0) {
+        ctx.moveTo(x, y + offset);
+      } else {
+        ctx.lineTo(x, y + offset);
+      }
+    }
+    ctx.stroke();
+  }
+
+  t += 1;
+  requestAnimationFrame(draw);
+}
+
+draw();
+</script>
+</body>
+</html>
