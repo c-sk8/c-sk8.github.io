@@ -12,12 +12,13 @@ window.addEventListener('resize', resize);
 resize();
 
 const particles = [];
-const MAX_PARTICLES = 2000;
+const MAX_PARTICLES = 8000;
 const pressures = [];
 const NUM_CENTERS = 12;
 const MARGIN = 100;
 const MIN_DIST = 100;
-const SPAWN_DELAY = 100;
+const SPAWN_DELAY = Math.random() * 100;
+const LINE_WIDTH = 1.5;
 
 function distance(a, b) {
   const dx = a.x - b.x;
@@ -118,6 +119,8 @@ function respawnParticle(p) {
 
 function animate() {
   // No canvas clearing = permanent trails
+		//ctx.fillStyle = 'rgba(0, 0, 0, 0.1)'; // Fade effect
+		//ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   for (const p of particles) {
     const oldX = p.x;
@@ -146,8 +149,8 @@ function animate() {
     }
 
 	if (!respawned) {
-		ctx.strokeStyle = `hsl(${p.hue}, ${p.saturation}%, ${p.lightness}%)`;
-		ctx.lineWidth = 1.5;
+		ctx.strokeStyle = `hsla(${p.hue}, ${p.saturation}%, ${p.lightness}%, 10%)`;
+		ctx.lineWidth = LINE_WIDTH;
 		ctx.lineCap = 'round';
 		ctx.beginPath();
 		ctx.moveTo(oldX, oldY);
