@@ -12,13 +12,20 @@ window.addEventListener('resize', resize);
 resize();
 
 const particles = [];
-const MAX_PARTICLES = 8000;
 const pressures = [];
 const NUM_CENTERS = 12;
 const MARGIN = 100;
 const MIN_DIST = 100;
-const SPAWN_DELAY = Math.random() * 100;
-const LINE_WIDTH = 1.5;
+const SPAWN_DELAY = 0;
+
+let max_paticles = 500;
+let line_width = 1;
+
+function setParams() {
+  const params = new URLSearchParams(window.location.search);
+  if(params.get('linewidth') != null) line_width = params.get('linewidth');
+  if(params.get('maxparticles') != null) max_paticles = params.get('maxparticles');
+}
 
 function distance(a, b) {
   const dx = a.x - b.x;
@@ -50,6 +57,7 @@ function createPressureCenters() {
   }
 }
 
+setParams();
 createPressureCenters();
 
 function getWindVector(x, y) {
@@ -83,7 +91,7 @@ function getWindVector(x, y) {
 function spawnParticleFromHigh() {
   const highs = pressures.filter(p => p.type === 'H');
   for (const h of highs) {
-    if (particles.length >= MAX_PARTICLES) return;
+    if (particles.length >= max_paticles) return;
     const angle = Math.random() * 2 * Math.PI;
     const radius = 10;
     particles.push({
@@ -150,7 +158,7 @@ function animate() {
 
 	if (!respawned) {
 		ctx.strokeStyle = `hsla(${p.hue}, ${p.saturation}%, ${p.lightness}%, 10%)`;
-		ctx.lineWidth = LINE_WIDTH;
+		ctx.lineWidth = line_width;
 		ctx.lineCap = 'round';
 		ctx.beginPath();
 		ctx.moveTo(oldX, oldY);
