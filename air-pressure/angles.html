@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Circle Particle Emitter</title>
+<style>
+  body { margin: 0; background: #000; overflow: hidden; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+
+<script>
+// Emitter class from earlier
+class CircleEmitter {
+    constructor(initialStep = 10) {
+        this.level = 0;
+        this.initialStep = initialStep;
+        this.emittedCount = 0;
+    }
+
+    get numSlices() {
+        return Math.pow(2, this.level) * (360 / this.initialStep);
+    }
+
+    get angleStep() {
+        return 360 / this.numSlices;
+    }
+
+    getNextAngle() {
+        if (this.emittedCount >= this.numSlices) {
+            this.level++;
+            this.emittedCount = 0;
+        }
+        let angle = (this.emittedCount + 0.5 * (this.level > 0 ? 1 : 0)) * this.angleStep;
+        this.emittedCount++;
+        return angle % 360;
+    }
+}
+
+// Particle class
+class Particle {
+    constructor(x, y, angle) {
+        this.x = x;
+        this.y = y;
+        this.angle = angle * Math.PI / 180; // Convert to radians
+        this.speed = 0.05; // pixels per frame
+        this.radius = 0.5; // particle size
+    }
+
+    update() {
+        this.x += Math.cos(this.angle) * this.speed;
+        this.y += Math.sin(this.angle) * this.speed;
+    }
+
+    draw(ctx) {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = 'white';
+        ctx.fill();
+    }
+}
+
+// Setup Canvas
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+resizeCanvas();
+
+window.addEventListener('resize', resizeCanvas);
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+// Create Emitter
+const emitter = new CircleEmitter(10);
+const particles = [];
+
+function emitParticle() {
+    const angle = emitter.getNextAngle();
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const particle = new Particle(centerX, centerY, angle);
+    particles.push(particle);
+}
+
+// Animate
+function animate() {
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.2)'; // fade old frames
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    for (let p of particles) {
+        p.update();
+        p.draw(ctx);
+    }
+
+    requestAnimationFrame(animate);
+}
+
+// Start emitting particles
+setInterval(emitParticle, 100); // Emit one every 100ms
+animate();
+</script>
+</body>
+</html>
