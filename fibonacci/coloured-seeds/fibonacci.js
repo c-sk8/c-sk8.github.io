@@ -3,12 +3,17 @@ const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
+window.addEventListener('resize', resize);
+resize();
+
 const goldenAngle = Math.PI * (3 - Math.sqrt(5));
-const totalSeeds = 1440;
 const fadeDuration = 1000; // milliseconds for fade in/out
 const fadeOutDelay = 5;   // ms between each deletedAt assignment
-const maxSeedRadius = 12;
-const seedsScale = maxSeedRadius * 1.3;
 const seeds = [];
 
 let currentSeed = 1;
@@ -67,6 +72,32 @@ const colorStopsArray=[
 colorStopsIndex = Math.floor(Math.random() * colorStopsArray.length);
 
 
+function setSeedRadius() {
+	const params = new URLSearchParams(window.location.search);
+	const seed_radius = params.get('seedradius');
+
+	if(seed_radius != null)
+	{
+		seedRadius = seed_radius;
+		seedsScale = seedRadius * 1.3;
+	}
+}
+
+let seedRadius = 15;
+let seedsScale = seedRadius * 1.3;
+setSeedRadius();
+
+function setSeedsCount() {
+	const params = new URLSearchParams(window.location.search);
+	const seeds_count = params.get('seedscount');
+
+	if(seeds_count != null)
+		seedsCount = seeds_count;
+}
+
+let seedsCount = 610;
+setSeedsCount();
+
 // Interpolate between two HSL values
 function interpolateColor(index, total, colorStops) {
     const t = index / (total - 1) * (colorStops.length - 1);
@@ -97,7 +128,7 @@ function createSeed(index) {
 
   const x = radius * Math.cos(angle);
   const y = radius * Math.sin(angle);
-  const color = interpolateColor(index, totalSeeds, colorStopsArray[colorStopsIndex]);
+  const color = interpolateColor(index, seedsCount, colorStopsArray[colorStopsIndex]);
 
   seeds.push({
     x,
@@ -138,14 +169,14 @@ function drawSeeds() {
     if (phase === "growing" || phase === "waiting") {
       const progress = Math.min((now - seed.createdAt) / fadeDuration, 1);
       alpha = progress;
-      radius = progress * maxSeedRadius;
+      radius = progress * seedRadius;
     } else if (phase === "fading" && seed.deletedAt) {
       const progress = Math.min((now - seed.deletedAt) / fadeDuration, 1);
       alpha = 1 - progress;
-      radius = (1 - progress) * maxSeedRadius;
+      radius = (1 - progress) * seedRadius;
     } else {
       alpha = 1;
-      radius = maxSeedRadius;
+      radius = seedRadius;
     }
 
     if (alpha > 0) {
@@ -163,7 +194,7 @@ function animate() {
 
   if (phase === "growing") {
 
-    if (currentSeed < totalSeeds) {
+    if (currentSeed < seedsCount) {
       drawSeeds(); // draw BEFORE adding new seed
       createSeed(currentSeed);
       currentSeed++;

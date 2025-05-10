@@ -1,12 +1,7 @@
 body {
-	margin: 0;
-	overflow: hidden;
-	background-color: #111;
-}
-canvas {
-	display: block;
-	background-color: hsl(0,50%,10%);
-}
-div.canvas-container
-{
+	margin:0px;
+	padding:0px;
+	min-height: 100vh;
+	background-image: none;
+	background-color: #333;
 }

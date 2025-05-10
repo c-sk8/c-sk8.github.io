@@ -1,0 +1,44 @@
+<canvas id="canvas" width="800" height="600"></canvas>
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+
+function drawDroplet(x, y, radius, color) {
+  // Draw main droplet with radial gradient
+  const grad = ctx.createRadialGradient(x - radius / 3, y - radius / 3, radius / 5, x, y, radius);
+  grad.addColorStop(0, 'white');
+  grad.addColorStop(0.3, color);
+  grad.addColorStop(1, 'black');
+
+  ctx.fillStyle = grad;
+  ctx.shadowColor = 'rgba(0, 0, 0, 0.2)';
+  ctx.shadowBlur = 10;
+  ctx.beginPath();
+  ctx.arc(x, y, radius, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Highlight
+  ctx.shadowBlur = 0; // disable blur for highlight
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+  ctx.beginPath();
+  ctx.arc(x - radius / 3, y - radius / 3, radius / 5, 0, Math.PI * 2);
+  ctx.fill();
+
+  // Faint inner shadow on opposite side
+  const shadowGrad = ctx.createRadialGradient(
+    x + radius, y + radius, 0,
+    x + radius / 3, y + radius / 3, radius
+  );
+  shadowGrad.addColorStop(0, 'rgba(0,0,0,0.2)');
+  shadowGrad.addColorStop(1, 'rgba(0,0,0,0)');
+
+  ctx.fillStyle = shadowGrad;
+  ctx.beginPath();
+  ctx.arc(x + radius, y + radius, radius, 0, Math.PI * 2);
+  ctx.fill();
+
+}
+
+// Example
+drawDroplet(200, 200, 30, 'hsl(200, 100%, 50%)');
+</script>

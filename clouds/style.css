@@ -1,0 +1,12 @@
+body {
+	margin: 0;
+	overflow: hidden;
+	background-color: #fff;
+}
+canvas {
+	display: block;
+	background-color: hsl(0,100%,100%);
+}
+div.canvas-container
+{
+}
