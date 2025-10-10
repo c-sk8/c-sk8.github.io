@@ -1,0 +1,257 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Squashed Balloons</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<style>
+		html,body { height:100%; margin:0; background:#efefef; }
+		canvas { display:block; width:100%; height:100vh; }
+	</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<script>
+/*
+  Balloon Growth (rectangle + auto-restart)
+  - Catmull–Rom smoothing
+  - offscreen mask collision checks
+  - rectangular confinement with MARGIN gap
+*/
+
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d', { alpha: false });
+
+// offscreen mask canvas used to render other shapes for collision sampling
+const mask = document.createElement('canvas');
+const mctx = mask.getContext('2d', { alpha: true });
+
+let W = 1, H = 1;
+let rect = { x: 0, y: 0, w: 0, h: 0 }; // confining rectangle
+const RECT_MARGIN = 5; // how far in from window edges
+
+function resize() {
+  W = canvas.width = Math.floor(window.innerWidth);
+  H = canvas.height = Math.floor(window.innerHeight);
+  mask.width = W;
+  mask.height = H;
+  rect = {
+    x: RECT_MARGIN,
+    y: RECT_MARGIN,
+    w: Math.max(120, W - RECT_MARGIN * 2),
+    h: Math.max(120, H - RECT_MARGIN * 2)
+  };
+}
+window.addEventListener('resize', () => {
+  resize();
+  // optional: restart on resize so content fits new rect
+  resetShapes();
+});
+resize();
+
+// ---------- Parameters you can tweak ----------
+const NUM_SHAPES = 14;       // how many balloons
+const POINTS = 25;           // perimeter resolution
+const BASE_RADIUS = 7.8;       // starting per-vertex distance
+const GROWTH = 0.38;         // base growth per frame
+const SMOOTH_ITERS = 3;      // relaxation passes (more = smoother)
+const SMOOTH_FACTOR = 0.55;  // smoothing strength
+const MARGIN = 4;            // white gap in pixels between shapes AND the rectangle
+const MASK_ALPHA_THRESHOLD = 10; // alpha threshold to consider pixel "occupied"
+const RESTART_DELAY_MS = 700;    // small pause before starting a fresh set
+// ------------------------------------------------
+
+// utilities
+function random(min, max){ return Math.random()*(max-min)+min; }
+function randColor(alpha=0.55){
+  const h = Math.floor(Math.random()*360);
+  return `hsla(${h},70%,60%,${alpha})`;
+}
+
+// shape factory
+function createShape(x,y,id){
+  const points = [];
+  for(let i=0;i<POINTS;i++){
+    const angle = (i/POINTS) * Math.PI * 2;
+    points.push({
+      angle,
+      dist: BASE_RADIUS,
+      x,
+      y,
+      speed: 1.5,
+      growing: true
+    });
+  }
+  return { x, y, id, points, color: randColor(0.45) };
+}
+
+// place shape centers without them starting on top of each other (respect rect)
+const shapes = [];
+function seedShapes(){
+  shapes.length = 0;
+  let attempts = 0;
+  while(shapes.length < NUM_SHAPES && attempts < 3000){
+    attempts++;
+    const x = random(rect.x+50, rect.x+rect.w-50);
+    const y = random(rect.y+50, rect.y+rect.h-50);
+    let ok = true;
+    for(const s of shapes){
+      if(Math.hypot(s.x-x, s.y-y) < 90) { ok = false; break; }
+    }
+    if(ok) shapes.push(createShape(x,y, shapes.length+1));
+  }
+  if(shapes.length === 0)
+    shapes.push(createShape(rect.x + rect.w/2, rect.y + rect.h/2, 1));
+}
+seedShapes();
+
+// draw shape (filled) into a context using Catmull–Rom spline
+function drawShapeInto(ctxToDraw, shape){
+  const pts = shape.points;
+  if(!pts || pts.length < 2) return;
+  const allPts = pts.map(p => ({
+    x: shape.x + Math.cos(p.angle) * p.dist,
+    y: shape.y + Math.sin(p.angle) * p.dist
+  }));
+  const last = allPts[allPts.length - 1];
+  const first = allPts[0];
+  const second = allPts[1];
+  const ext = [ last, ...allPts, first, second ];
+
+  ctxToDraw.beginPath();
+  ctxToDraw.moveTo(ext[1].x, ext[1].y);
+
+  for(let i = 1; i < ext.length - 2; i++){
+    const p0 = ext[i-1], p1 = ext[i], p2 = ext[i+1], p3 = ext[i+2];
+    for(let t = 0; t <= 1; t += 0.2){
+      const t2 = t*t, t3 = t2*t;
+      const x = 0.5 * ((2*p1.x) + (-p0.x + p2.x)*t + (2*p0.x - 5*p1.x + 4*p2.x - p3.x)*t2 + (-p0.x + 3*p1.x - 3*p2.x + p3.x)*t3);
+      const y = 0.5 * ((2*p1.y) + (-p0.y + p2.y)*t + (2*p0.y - 5*p1.y + 4*p2.y - p3.y)*t2 + (-p0.y + 3*p1.y - 3*p2.y + p3.y)*t3);
+      ctxToDraw.lineTo(x, y);
+    }
+  }
+  ctxToDraw.closePath();
+  ctxToDraw.fill();
+}
+
+// helper: check mask neighborhood (square) for any occupied pixel alpha > threshold
+function maskHasOccupancy(maskData, ix, iy, margin){
+  const x0 = Math.max(0, ix - margin);
+  const x1 = Math.min(W-1, ix + margin);
+  const y0 = Math.max(0, iy - margin);
+  const y1 = Math.min(H-1, iy + margin);
+  for(let yy = y0; yy <= y1; yy++){
+    let base = (yy * W + x0) * 4 + 3; // alpha index
+    for(let xx = x0; xx <= x1; xx++){
+      if(maskData[base] > MASK_ALPHA_THRESHOLD) return true;
+      base += 4;
+    }
+  }
+  return false;
+}
+
+let frame = 0;
+let resetting = false;
+
+function resetShapes(){
+  seedShapes();
+  frame = 0;
+}
+
+function updateAndDraw(){
+  // For each shape, create a mask containing all other shapes, then attempt to grow its vertices
+
+  for(let si = 0; si < shapes.length; si++){
+    const shape = shapes[si];
+
+    // Clear mask and draw all other shapes into it
+    mctx.clearRect(0,0,W,H);
+    mctx.fillStyle = 'rgba(0,0,0,1)';
+    for(let sj = 0; sj < shapes.length; sj++){
+      if(sj === si) continue;
+      drawShapeInto(mctx, shapes[sj]);
+    }
+
+    const maskData = mctx.getImageData(0,0,W,H).data;
+    const cand = new Float32Array(POINTS);
+
+    for(let i=0;i<POINTS;i++){
+      const p = shape.points[i];
+
+      if(!p.growing){
+        cand[i] = p.dist;
+        continue;
+      }
+
+      const step = (GROWTH + (Math.random()-0.5) * 0.06) * p.speed;
+      const sampleDist = p.dist + step;
+      const nx = shape.x + Math.cos(p.angle) * sampleDist;
+      const ny = shape.y + Math.sin(p.angle) * sampleDist;
+
+	  if (step < 0.3)
+	  	p.growing = false;
+	  	
+      // rectangle boundary check with MARGIN gap
+      if (
+        nx < rect.x + MARGIN ||
+        ny < rect.y + MARGIN ||
+        nx >= rect.x + rect.w - MARGIN ||
+        ny >= rect.y + rect.h - MARGIN
+      ) {
+        p.growing = false;
+        cand[i] = p.dist;
+        continue;
+      }
+
+      const ix = Math.round(nx), iy = Math.round(ny);
+      const blocked = maskHasOccupancy(maskData, ix, iy, MARGIN);
+      if(blocked){
+        p.growing = false;
+        cand[i] = p.dist;
+      } else {
+        cand[i] = p.dist + step;
+      }
+
+
+    }
+
+		// smoothing / relaxation passes on candidate distances
+		let dists = new Float32Array(cand);
+		for(let pass=0; pass<SMOOTH_ITERS; pass++) {
+			const tmp = new Float32Array(dists);
+			for(let i=0;i<POINTS;i++) {
+				const prev = dists[(i-1+POINTS)%POINTS];
+				const next = dists[(i+1)%POINTS];
+				const avg = (prev + dists[i] + next) / 3;
+				tmp[i] = dists[i] + (avg - dists[i]) * SMOOTH_FACTOR;
+			}
+			dists = tmp;
+		}
+
+		// assign final distances but never exceed the candidate
+		for(let i=0;i<POINTS;i++) {
+			const p = shape.points[i];
+			p.dist = Math.max(2, Math.min(dists[i], cand[i]));
+		}
+	}
+
+	// draw to main canvas
+	ctx.clearRect(0,0,W,H);
+	
+	for(const shape of shapes)	{
+		ctx.fillStyle = shape.color;
+		drawShapeInto(ctx, shape);
+	
+		ctx.lineWidth = 1;
+		ctx.strokeStyle = 'rgba(30,30,30,0.12)';
+		ctx.stroke();
+	}
+
+	frame++;
+	requestAnimationFrame(updateAndDraw);
+}
+
+requestAnimationFrame(updateAndDraw);
+</script>
+</body>
+</html>
