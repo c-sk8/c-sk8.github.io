@@ -1,0 +1,47 @@
+:root {
+  --clock_size: calc(100vh);
+}
+
+body {
+	margin:0px;
+	padding:0px;
+	min-height: 100vh;
+	background-image: none;
+	background-color: #1d1d1d;
+}
+
+.clock-box {
+	margin-top: 0px;
+	position: relative;
+	width: var(--clock_size);
+	height: var(--clock_size);
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.face::before { content:url("svg/watch-face.svg"); }
+.hour-hand::before { content:url("svg/hour-hand.svg"); }
+.minute-hand::before { content:url("svg/minute-hand.svg"); }
+.second-hand::before { content:url("svg/second-hand.svg"); }
+.hands-pin::before { content:url("svg/hands-pin.svg"); }
+
+.face, .second-hand, .minute-hand, .hour-hand, .hands-pin {
+	width: var(--clock_size);
+	height: var(--clock_size);
+	position: absolute;
+}
+
+.second-hand {
+	transition: transform 1s linear;
+}
+
+.resize-animation-stopper * {
+	transition: none !important;
+	animation: none !important;
+}
+
+.minute-hand, .hour-hand {
+	transition-timing-function: ease;
+	transition-duration: 1s;
+}
+

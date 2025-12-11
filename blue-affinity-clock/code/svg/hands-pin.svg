@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 420 420" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g id="Pin">
+        <g transform="matrix(1,0,0,1,-1.252024,-1.488118)">
+            <circle cx="211.252" cy="211.488" r="3.281" style="fill:rgb(197,198,193);"/>
+        </g>
+        <g transform="matrix(1,0,0,1,-0.774185,-0.595599)">
+            <circle cx="210.774" cy="210.596" r="1.927" style="fill:rgb(230,231,226);"/>
+        </g>
+        <g transform="matrix(1,0,0,1,-0.538051,-0.439091)">
+            <circle cx="210.538" cy="210.439" r="1.48" style="fill:rgb(4,5,0);"/>
+        </g>
+    </g>
+</svg>
