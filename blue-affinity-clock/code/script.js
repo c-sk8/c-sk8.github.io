@@ -6,16 +6,16 @@ function setClockSize() {
 
   switch (size) {
     case 'small':
-      clockSize = '300px';
+      clockSize = '350px';
       break;
     case 'medium':
-      clockSize = '500px';
+      clockSize = '420px';
       break;
     case 'large':
-      clockSize = '800px';
+      clockSize = '700px';
       break;
     case 'xlarge':
-      clockSize = '1200px';
+      clockSize = '1000px';
       break;
     case 'width':
       clockSize = '100vw';
