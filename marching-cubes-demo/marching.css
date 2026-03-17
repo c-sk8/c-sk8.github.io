@@ -1,0 +1,42 @@
+body { margin: 0; overflow: hidden; background: #000; }
+
+#hud {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    padding: 10px 14px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font-family: monospace;
+    font-size: 14px;
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+.controls {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    gap: 0px;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.group {
+    display: flex;
+    gap: 0px;
+}
+
+.controls button {
+    font-size: 24px;
+    color: #fff;
+    background-color: rgba(255,255,255,0.2);
+    padding: 10px 20px;
+    border: none;
+    margin-right: 2px;
+    margin-bottom: 2px;
+}
+

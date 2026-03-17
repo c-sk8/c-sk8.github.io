@@ -1,1 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="marching.css" type="text/css">
+<title>Marching Cubes Demo</title>
+</head>
+<body>
+
+<div id="hud">
+    <div>Surface: <span id="surfaceName"></span></div>
+    <div>Colour Mode: <span id="colourMode"></span></div>
+    <div>Vertices: <span id="vertexCount"></span></div>
+    <div>Time: <span id="surfGenTime"></span></div>
+</div>
+
+<div class="controls">
+
+    <div class="group">
+        <button id="prevSurface">◀</button>
+        <button id="nextSurface">▶</button>
+    </div>
+
+    <div class="group">
+        <button id="prevColour">▲</button>
+        <button id="nextColour">▼</button>
+    </div>
+
+    <div class="group">
+        <button id="zoomIn">+</button>
+        <button id="zoomOut">−</button>
+    </div>
+
+    <div class="group">
+        <button id="flatShading">/</button>
+    </div>
+
+    <div class="group">
+        <button id="size50">50&#179;</button>
+        <button id="size100">100&#179;</button>
+        <button id="size150">150&#179;</button>
+    </div>
+
+</div>
+
+<script type="module" src="main.js"></script>
+
+</body>
+</html>
 
