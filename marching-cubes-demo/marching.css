@@ -23,6 +23,7 @@ body { margin: 0; overflow: hidden; background: #000; }
     gap: 0px;
     padding: 0 20px;
     box-sizing: border-box;
+    touch-action: manipulation;
 }
 
 .group {
