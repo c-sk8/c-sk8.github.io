@@ -1,13 +1,13 @@
 import * as THREE from './three.module.js';
 import { 	scene } from './scene.js';
-import {	resetVertexCount, getVertexCount, indexToXYZ, total_cubes, marchCube, vertexCount, setGridSize } from './cube-marcher.js';
+import {	resetVertexCount, getVertexCount, indexToXYZ, total_cubes, XYCubeMarcher,
+			vertexCount, setGridSize, getMarchingGridSize, precomputeSlice } from './cube-marcher.js';
 import { 	updateHUD, updateVertexCount, updateSurfaceGenerationTime, clearSurfaceGenerationTime  } from './hud.js';
 import { 	getCurrentField } from './field-functions.js';
 import {	positions, colors, normals } from './cube-marcher.js';
 
-const FRAME_BUDGET = 30; // ms
-
-let cubeIndex = 0;
+//let cubeIndex = 0;
+let zIndex = 0;
 export let isGenerating = true;
 export let mesh = null;
 let material = null;
@@ -15,6 +15,8 @@ let geometry = null;
 let generationToken = 0;
 let generationStartTime = 0;
 let flatShading = false;
+let slice0 = null;
+let slice1 = null;
 
 setGridSize();
 initialiseGeometry();
@@ -48,18 +50,20 @@ function generateGeometry(token) {
 
 	const fieldfn = getCurrentField();
 
+	if(zIndex == 0) {
+		slice0 = precomputeSlice(fieldfn, 0);
+		slice1 = precomputeSlice(fieldfn, 1);
+	}
+
 	const start = performance.now();
 
-	while (performance.now() - start < FRAME_BUDGET &&
-         cubeIndex < total_cubes) {
+	const gridsize = getMarchingGridSize();
 
-		const { x, y, z } = indexToXYZ(cubeIndex);
-		marchCube(fieldfn, x, y, z, flatShading);
-		cubeIndex++;
+	XYCubeMarcher(fieldfn, zIndex, slice0, slice1, flatShading)
+	zIndex++;
 		
-		// Stop if a new generation has started
-		if (token !== generationToken) break;
-	}
+	// Stop if a new generation has started
+	if (token !== generationToken) return;
 
 	geometry.setDrawRange(0, getVertexCount());
 	geometry.attributes.position.needsUpdate = true;
@@ -68,8 +72,11 @@ function generateGeometry(token) {
 
     updateVertexCount(vertexCount);
     
-	if (cubeIndex < total_cubes)
+	if (zIndex < gridsize) {
+		slice0 = slice1;
+		slice1 = precomputeSlice(fieldfn, zIndex + 1);
 		requestAnimationFrame(() => generateGeometry(token));
+	}
 	else
 	{
 		const elapsed = performance.now() - generationStartTime;
@@ -112,7 +119,8 @@ export function rebuildSurface() {
 		flatShading: false
 	});
 
-	cubeIndex = 0;
+	//cubeIndex = 0;
+	zIndex = 0;
 	resetVertexCount();
     mesh = new THREE.Mesh(geometry, material);
     mesh.rotation.x = rotation_x;

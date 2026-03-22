@@ -62,6 +62,11 @@ export function setGridSize(size = 100) {
 	setColourGridSize(marching_grid_size);
 }
 
+export function getMarchingGridSize()
+{
+	return marching_grid_size;
+}
+
 export function indexToXYZ(index) {
 	const x = index % marching_grid_size;
 	const y = Math.floor(index / marching_grid_size) % marching_grid_size;
@@ -130,64 +135,95 @@ function pushVertex(x, y, z, nx, ny, nz, r, g, b) {
   vertexCount++;
 }
 
-// ======================================================================================
-// Single cube function for a cube marcher. Calculates faces and adds vertices (point
-// position, normal, and colour) to a buffer. This is what eventually becomes a mesh.
-// ======================================================================================
+export function precomputeSlice(fieldFunction, z) {
+	const size = marching_grid_size + 1;
+	const slice = new Float32Array(size * size);
 
-export function marchCube(fieldFunction, x, y, z, flatShading) {
-	const cubePos = [];
-	const cubeVal = [];
-	
-	for (let i = 0; i < 8; i++) {
-		const vx = (x + CUBE_VERTS[i][0]) * vertex_scale - 1;
-		const vy = (y + CUBE_VERTS[i][1]) * vertex_scale - 1;
-		const vz = (z + CUBE_VERTS[i][2]) * vertex_scale - 1;
-		cubePos.push([vx, vy, vz]);
-		cubeVal.push(fieldFunction(vx, vy, vz));
-	}
+	let i = 0;
+	for (let x = 0; x < size; x++) {
+		for (let y = 0; y < size; y++) {
+			const vx = x * vertex_scale - 1;
+			const vy = y * vertex_scale - 1;
+			const vz = z * vertex_scale - 1;
 
-	let caseIndex = 0;
-	for (let i = 0; i < 8; i++) {
-		if (cubeVal[i] < 0) caseIndex |= (1 << i);
-	}
-
-	if (edgeTable[caseIndex] === 0) return;
-
-	const vertList = new Array(12);
-	
-	for (let e = 0; e < 12; e++) {
-		if (edgeTable[caseIndex] & (1 << e)) {
-			const [a, b] = EDGE_INDEX[e];
-			vertList[e] = interpolate(cubePos[a], cubePos[b], cubeVal[a], cubeVal[b]);
+			slice[i++] = fieldFunction(vx, vy, vz);
 		}
 	}
 
-	for (let i = 0; triTable[caseIndex][i] !== -1; i += 3) {
-	
-		const a = vertList[triTable[caseIndex][i]];
-		const b = vertList[triTable[caseIndex][i+1]];
-		const c = vertList[triTable[caseIndex][i+2]];
+	return slice;
+}
+
+function getVal(slice, x, y) {
+	return slice[x * (marching_grid_size + 1) + y];
+}
+
+export function XYCubeMarcher(fieldFunction, z, slice0, slice1, flatShading) {
+
+	for (let x = 0; x < marching_grid_size; x++) {
+		for (let y = 0; y < marching_grid_size; y++) {
+			
+			const cubePos = [];
+			
+			const cubeVal = [
+				getVal(slice0, x,     y),
+				getVal(slice0, x + 1, y),
+				getVal(slice0, x + 1, y + 1),
+				getVal(slice0, x,     y + 1),
+			
+				getVal(slice1, x,     y),
+				getVal(slice1, x + 1, y),
+				getVal(slice1, x + 1, y + 1),
+				getVal(slice1, x,     y + 1),
+			];
+			
+			for (let i = 0; i < 8; i++) {
+				const vx = (x + CUBE_VERTS[i][0]) * vertex_scale - 1;
+				const vy = (y + CUBE_VERTS[i][1]) * vertex_scale - 1;
+				const vz = (z + CUBE_VERTS[i][2]) * vertex_scale - 1;
+				cubePos.push([vx, vy, vz]);
+			}
 		
-		const acol = colourModeFunction(x,y,z);
-		const bcol = colourModeFunction(x,y,z);
-		const ccol = colourModeFunction(x,y,z);
-
-		if(flatShading)
-		{
-			const norm = faceNormal(a,b,c);
-			pushVertex(	a[0], a[1], a[2], norm[0], norm[1], norm[2], acol.r, acol.g, acol.b);
-			pushVertex(	b[0], b[1], b[2], norm[0], norm[1], norm[2], bcol.r, bcol.g, bcol.b);
-			pushVertex(	c[0], c[1], c[2], norm[0], norm[1], norm[2], ccol.r, ccol.g, ccol.b);
-		}
-		else
-		{
-			const anorm = computeNormal(fieldFunction, a[0], a[1], a[2]);
-			const bnorm = computeNormal(fieldFunction, b[0], b[1], b[2]);
-			const cnorm = computeNormal(fieldFunction, c[0], c[1], c[2]);
-			pushVertex(	a[0], a[1], a[2], anorm.x, anorm.y, anorm.z, acol.r, acol.g, acol.b);
-			pushVertex(	b[0], b[1], b[2], bnorm.x, bnorm.y, bnorm.z, bcol.r, bcol.g, bcol.b);
-			pushVertex(	c[0], c[1], c[2], cnorm.x, cnorm.y, cnorm.z, ccol.r, ccol.g, ccol.b);
+			let caseIndex = 0;
+			for (let i = 0; i < 8; i++) {
+				if (cubeVal[i] < 0) caseIndex |= (1 << i);
+			}
+		
+			if (edgeTable[caseIndex] === 0) continue;
+		
+			const vertList = new Array(12);
+			
+			for (let e = 0; e < 12; e++) {
+				if (edgeTable[caseIndex] & (1 << e)) {
+					const [a, b] = EDGE_INDEX[e];
+					vertList[e] = interpolate(cubePos[a], cubePos[b], cubeVal[a], cubeVal[b]);
+				}
+			}
+		
+			for (let i = 0; triTable[caseIndex][i] !== -1; i += 3) {
+			
+				const a = vertList[triTable[caseIndex][i]];
+				const b = vertList[triTable[caseIndex][i+1]];
+				const c = vertList[triTable[caseIndex][i+2]];
+				
+				const col = colourModeFunction(x,y,z);
+		
+				if(flatShading)
+				{
+					const norm = faceNormal(a,b,c);
+					pushVertex(	a[0], a[1], a[2], norm[0], norm[1], norm[2], col.r, col.g, col.b);
+					pushVertex(	b[0], b[1], b[2], norm[0], norm[1], norm[2], col.r, col.g, col.b);
+					pushVertex(	c[0], c[1], c[2], norm[0], norm[1], norm[2], col.r, col.g, col.b);
+				}
+				else
+				{
+					const anorm = computeNormal(fieldFunction, a[0], a[1], a[2]);
+					const bnorm = computeNormal(fieldFunction, b[0], b[1], b[2]);
+					const cnorm = computeNormal(fieldFunction, c[0], c[1], c[2]);
+					pushVertex(	a[0], a[1], a[2], anorm.x, anorm.y, anorm.z, col.r, col.g, col.b);
+					pushVertex(	b[0], b[1], b[2], bnorm.x, bnorm.y, bnorm.z, col.r, col.g, col.b);
+					pushVertex(	c[0], c[1], c[2], cnorm.x, cnorm.y, cnorm.z, col.r, col.g, col.b);
+				}
+			}
 		}
 	}
 }

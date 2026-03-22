@@ -578,7 +578,7 @@ export function getFieldFunctionName() {
 export const fieldFunctions = [
     {
         name: "Decocube",
-		fn: (x, y, z) => Decocube(x, y, z, 1.5, 1, 0.15)
+		fn: (x, y, z) => Decocube(x, y, z, 1.5, 0.9, 0.2)
 	},
     {
     	name: "Tooth",
