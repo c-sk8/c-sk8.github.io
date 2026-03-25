@@ -1,5 +1,5 @@
 :root {
-  --clock_size: calc(100vh);
+  --clock_size: 100vmin;
 }
 
 body {

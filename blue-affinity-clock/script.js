@@ -1,36 +1,3 @@
-function setClockSize() {
-  const params = new URLSearchParams(window.location.search);
-  const size = params.get('size');
-
-  let clockSize;
-
-  switch (size) {
-    case 'small':
-      clockSize = '350px';
-      break;
-    case 'medium':
-      clockSize = '420px';
-      break;
-    case 'large':
-      clockSize = '700px';
-      break;
-    case 'xlarge':
-      clockSize = '1000px';
-      break;
-    case 'width':
-      clockSize = '100vw';
-      break;
-    case 'height':
-    default:
-      clockSize = 'calc(100vh - 20px)';
-      break;
-  }
-
-  document.documentElement.style.setProperty('--clock_size', clockSize);
-}
-
-setClockSize();
-
 let accumulated_seconds = 0;
 let previous_seconds = 0;
 let accumulated_minutes = 0;

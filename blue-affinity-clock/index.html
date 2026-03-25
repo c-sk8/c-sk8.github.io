@@ -1,38 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="description" content="SVG and Javascript Clocks">
+<meta name="author" content="Christopher Kent">
+<meta name="description" content="An SVG and Javascript analogue clock inspired by a Hamilton watch design.">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#f6f6f6" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#1e1e1e" media="(prefers-color-scheme: dark)">
-<title>SVG and Javascript Clocks</title>
+<title>SVG Hamilton Murph</title>
 <style media="screen">
-@import "../css/base.css";
-@import "../css/montserrat.css";
+@import "style.css";
 </style>
-<link rel="stylesheet" media="(prefers-color-scheme: light)" href="../css/default-light.css">
-<link rel="stylesheet" media="(prefers-color-scheme: dark)" href="../css/default-dark.css">
 </head>
 <body>
-<div class="header_container">
-<div class="nav_container">
-<a href="../index.html">Home</a>
+<div class="container">
+    <div class="clock-box" id="clock-box">
+        <div class="face"></div>
+        <div class="hour-hand"></div>
+        <div class="minute-hand"></div>
+        <div class="second-hand"></div>
+        <div class="hands-pin"></div>
+	</div>
 </div>
-</div>
-
-<div class="outer_box"><div class="main_box"><div class="inner_box">
-<h1>Blue Affinity</h1>
-<ul>
-<li><a href="code/index.html?size=height">Full Height</a> •
-	<a href="code/index.html?size=width">Full Width</a></li>
-<li><a href="code/index.html?size=small">Small</a> •
-	<a href="code/index.html?size=medium">Medium</a> •
-	<a href="code/index.html?size=large">Large</a> •
-	<a href="code/index.html?size=xlarge">Extra Large</a></li>
-</ul>
-</div></div></div></div>
-<div class="main_content_divider"></div>
-
+<script src="script.js"></script>
 </body>
 </html>
