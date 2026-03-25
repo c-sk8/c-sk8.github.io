@@ -48,14 +48,14 @@ export function CushionCluster(x, y, z, scale = 1.3) {
     y *= scale;
     z *= scale;
 
-    let d = supersphere242(x, y*1.5, z);
+    let d = supersphere242(x, y*3, z);
     
     for (let i = 0; i < 8; i++) {
         let angle = (i / 8) * Math.PI * 2;
         let ox = Math.cos(angle) * 0.9;
         let oz = Math.sin(angle) * 0.9;
         
-        let sub = supersphere242((x-ox)*1.5, y*1.5, (z - oz)*1.5);
+        let sub = supersphere242((x-ox)*1.5, y*3, (z - oz)*1.5);
         d = smoothUnion(d, sub, 12);
     }
     
