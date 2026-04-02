@@ -1,6 +1,7 @@
 import {	rebuildSurface, toggleFlatShading, initialiseGeometry, destroyGeometry} from './surface-builder.js';
 import {	setGridSize} from './cube-marcher.js';
-import {	incrementFieldFunction, decrementFieldFunction } from './field-functions.js';
+import {	incrementFieldFunction, decrementFieldFunction,
+			incrementFFVariant, decrementFFVariant} from './field-functions.js';
 import {	incrementColourMode, decrementColourMode } from './colour-modes.js';
 import {	zoomIn, zoomOut } from './animate.js';
 
@@ -18,6 +19,16 @@ document.getElementById("prevSurface").onclick = () => {
 	rebuildSurface();
 }
 
+document.getElementById("nextVariant").onclick = () => {
+    incrementFFVariant();
+	rebuildSurface();
+}
+
+document.getElementById("prevVariant").onclick = () => {
+    decrementFFVariant();
+	rebuildSurface();
+}
+
 document.getElementById("prevColour").onclick  = () => {
 	decrementColourMode();
 	rebuildSurface();
@@ -28,24 +39,43 @@ document.getElementById("nextColour").onclick  = () => {
 	rebuildSurface();
 }
 
-document.getElementById("zoomIn").onclick  = () => { zoomIn() }
-document.getElementById("zoomOut").onclick  = () => { zoomOut() }
+document.getElementById("zoomIn").onclick  = () => {
+	zoomIn();
+}
+
+document.getElementById("zoomOut").onclick  = () => {
+	zoomOut();
+}
 
 document.getElementById("flatShading").onclick  = () => {
 	toggleFlatShading();
 	rebuildSurface();
 }
 
-document.getElementById("size50").onclick  = () => {
+document.getElementById("size30").onclick  = () => {
 	destroyGeometry();
-	setGridSize(50);
+	setGridSize(30);
 	initialiseGeometry();
 	rebuildSurface();
 }
 
-document.getElementById("size100").onclick  = () => {
+document.getElementById("size60").onclick  = () => {
 	destroyGeometry();
-	setGridSize(100);
+	setGridSize(60);
+	initialiseGeometry();
+	rebuildSurface();
+}
+
+document.getElementById("size90").onclick  = () => {
+	destroyGeometry();
+	setGridSize(90);
+	initialiseGeometry();
+	rebuildSurface();
+}
+
+document.getElementById("size120").onclick  = () => {
+	destroyGeometry();
+	setGridSize(120);
 	initialiseGeometry();
 	rebuildSurface();
 }
@@ -74,13 +104,28 @@ window.addEventListener('keydown', (e) => {
     }
 
 	if (e.key === "ArrowUp") {
-		incrementColourMode();
+		incrementFFVariant();
     	rebuildSurface();
 	}
 
 	if (e.key === "ArrowDown") {
+  		decrementFFVariant();
+	    rebuildSurface();
+	}
+
+	if (e.key === "]") {
+		incrementColourMode();
+    	rebuildSurface();
+	}
+
+	if (e.key === "[") {
   		decrementColourMode();
 	    rebuildSurface();
+	}
+
+	if (e.key === "/") {
+		toggleFlatShading();
+		rebuildSurface();
 	}
 
     if (e.key === "+" || e.key === "w") zoomIn();

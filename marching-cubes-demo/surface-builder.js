@@ -1,6 +1,6 @@
 import * as THREE from './three.module.js';
 import { 	scene } from './scene.js';
-import {	resetVertexCount, getVertexCount, indexToXYZ, total_cubes, XYCubeMarcher,
+import {	resetVertexCount, getVertexCount, indexToXYZ, total_cubes, XYCubeMarcher, CubeMarcher, 
 			vertexCount, setGridSize, getMarchingGridSize, precomputeSlice } from './cube-marcher.js';
 import { 	updateHUD, updateVertexCount, updateSurfaceGenerationTime, clearSurfaceGenerationTime  } from './hud.js';
 import { 	getCurrentField } from './field-functions.js';
@@ -46,20 +46,36 @@ export function toggleFlatShading() {
 	flatShading = !flatShading
 }
 
+function generateAllGeometry() {
+
+	const start = performance.now();
+
+	CubeMarcher(flatShading)
+		
+	geometry.setDrawRange(0, getVertexCount());
+	geometry.attributes.position.needsUpdate = true;
+	geometry.attributes.normal.needsUpdate = true;
+	geometry.attributes.color.needsUpdate = true;
+
+    updateVertexCount(vertexCount);
+    
+	const elapsed = performance.now() - generationStartTime;
+    updateSurfaceGenerationTime(elapsed);
+    isGenerating = false;
+}
+
 function generateGeometry(token) {
 
-	const fieldfn = getCurrentField();
-
 	if(zIndex == 0) {
-		slice0 = precomputeSlice(fieldfn, 0);
-		slice1 = precomputeSlice(fieldfn, 1);
+		slice0 = precomputeSlice(0);
+		slice1 = precomputeSlice(1);
 	}
 
 	const start = performance.now();
 
 	const gridsize = getMarchingGridSize();
 
-	XYCubeMarcher(fieldfn, zIndex, slice0, slice1, flatShading)
+	XYCubeMarcher(zIndex, slice0, slice1, flatShading)
 	zIndex++;
 		
 	// Stop if a new generation has started
@@ -74,8 +90,9 @@ function generateGeometry(token) {
     
 	if (zIndex < gridsize) {
 		slice0 = slice1;
-		slice1 = precomputeSlice(fieldfn, zIndex + 1);
-		requestAnimationFrame(() => generateGeometry(token));
+		slice1 = precomputeSlice(zIndex + 1);
+		//requestAnimationFrame(() => generateGeometry(token));
+		generateGeometry(token);
 	}
 	else
 	{
@@ -134,5 +151,6 @@ export function rebuildSurface() {
 
 	updateHUD();
 	
-    generateGeometry(myToken);
+    //generateGeometry(myToken);
+    generateAllGeometry();
 }
