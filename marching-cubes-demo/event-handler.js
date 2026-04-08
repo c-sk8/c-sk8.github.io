@@ -1,9 +1,22 @@
+// =====================================================================================
+// Copyright (C) 2026 Christopher Kent http://c-sk8.github.io
+// This program is free software: you can redistribute it and/or modify it
+// under the terms of the GNU General Public License as published by the
+// Free Software Foundation, version 3.
+// =====================================================================================
+
 import {	rebuildSurface, toggleFlatShading, initialiseGeometry, destroyGeometry} from './surface-builder.js';
 import {	setGridSize} from './cube-marcher.js';
 import {	incrementFieldFunction, decrementFieldFunction,
 			incrementFFVariant, decrementFFVariant} from './field-functions.js';
 import {	incrementColourMode, decrementColourMode } from './colour-modes.js';
-import {	zoomIn, zoomOut } from './animate.js';
+import {	zoomIn, zoomOut, resetRotationVelocity } from './animate.js';
+
+let animateSurfaceGeneration = false;
+
+function toggleAnimateSurfaceGeneration() {
+	animateSurfaceGeneration = !animateSurfaceGeneration;
+}
 
 // ============================================================
 //	Handle button presses
@@ -11,12 +24,14 @@ import {	zoomIn, zoomOut } from './animate.js';
 
 document.getElementById("nextSurface").onclick = () => {
     incrementFieldFunction();
-	rebuildSurface();
+    resetRotationVelocity();
+	rebuildSurface(animateSurfaceGeneration);
 }
 
 document.getElementById("prevSurface").onclick = () => {
     decrementFieldFunction();
-	rebuildSurface();
+    resetRotationVelocity();
+	rebuildSurface(animateSurfaceGeneration);
 }
 
 document.getElementById("nextVariant").onclick = () => {
@@ -47,45 +62,45 @@ document.getElementById("zoomOut").onclick  = () => {
 	zoomOut();
 }
 
-document.getElementById("flatShading").onclick  = () => {
-	toggleFlatShading();
+const flatShadingButton = document.getElementById("flatShading");
+
+flatShadingButton.onclick  = () => {
+	const active = toggleFlatShading();
+	if(active) flatShadingButton.classList.add('is-active');
+	else flatShadingButton.classList.remove('is-active');
 	rebuildSurface();
 }
 
-document.getElementById("size30").onclick  = () => {
-	destroyGeometry();
-	setGridSize(30);
-	initialiseGeometry();
-	rebuildSurface();
+const animateSurfaceGenerationButton = document.getElementById("animateSurfaceGeneration");
+
+animateSurfaceGenerationButton.onclick  = () => {
+	toggleAnimateSurfaceGeneration();
+	if(animateSurfaceGeneration) animateSurfaceGenerationButton.classList.add('is-active');
+	else animateSurfaceGenerationButton.classList.remove('is-active');
+	if(animateSurfaceGeneration) rebuildSurface(animateSurfaceGeneration);
 }
 
-document.getElementById("size60").onclick  = () => {
-	destroyGeometry();
-	setGridSize(60);
-	initialiseGeometry();
-	rebuildSurface();
-}
+// 1. Grab all buttons with the common class
+const sizeButtons = document.querySelectorAll('.size-btn');
 
-document.getElementById("size90").onclick  = () => {
-	destroyGeometry();
-	setGridSize(90);
-	initialiseGeometry();
-	rebuildSurface();
-}
+sizeButtons.forEach(button => {
+    button.onclick = () => {
+        // 2. Remove 'is-active' from ALL buttons in the group
+        sizeButtons.forEach(btn => btn.classList.remove('is-active'));
+        
+        // 3. Add 'is-active' only to the one we clicked
+        button.classList.add('is-active');
 
-document.getElementById("size120").onclick  = () => {
-	destroyGeometry();
-	setGridSize(120);
-	initialiseGeometry();
-	rebuildSurface();
-}
+        // 4. Get the size value from the data attribute (convert string to number)
+        const size = parseInt(button.dataset.size);
 
-document.getElementById("size150").onclick  = () => {
-	destroyGeometry();
-	setGridSize(150);
-	initialiseGeometry();
-	rebuildSurface();
-}
+        // 5. Run your shared geometry logic once
+        destroyGeometry();
+        setGridSize(size);
+        initialiseGeometry();
+        rebuildSurface();
+    };
+});
 
 // ============================================================
 //	Handle key presses
@@ -95,12 +110,14 @@ window.addEventListener('keydown', (e) => {
 
     if (e.key === 'ArrowRight') {
         incrementFieldFunction();
-        rebuildSurface();
+        resetRotationVelocity();
+        rebuildSurface(animateSurfaceGeneration);
     }
 
     if (e.key === 'ArrowLeft') {
     	decrementFieldFunction();
-        rebuildSurface();
+        resetRotationVelocity();
+        rebuildSurface(animateSurfaceGeneration);
     }
 
 	if (e.key === "ArrowUp") {
@@ -124,8 +141,17 @@ window.addEventListener('keydown', (e) => {
 	}
 
 	if (e.key === "/") {
-		toggleFlatShading();
+		const active = toggleFlatShading();
+		if(active) flatShadingButton.classList.add('is-active');
+		else flatShadingButton.classList.remove('is-active');
 		rebuildSurface();
+	}
+
+	if (e.key === "\\") {
+		toggleAnimateSurfaceGeneration();
+		if(animateSurfaceGeneration) animateSurfaceGenerationButton.classList.add('is-active');
+		else animateSurfaceGenerationButton.classList.remove('is-active');
+		if(animateSurfaceGeneration) rebuildSurface(animateSurfaceGeneration);
 	}
 
     if (e.key === "+" || e.key === "w") zoomIn();

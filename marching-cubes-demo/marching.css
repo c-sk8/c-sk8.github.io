@@ -41,3 +41,7 @@ body { margin: 0; overflow: hidden; background: #000; }
     margin-bottom: 2px;
 }
 
+.controls button.is-active {
+  color: #2ecc71; /* Green text */
+}
+

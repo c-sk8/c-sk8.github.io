@@ -1,6 +1,13 @@
+// =====================================================================================
+// Copyright (C) 2026 Christopher Kent http://c-sk8.github.io
+// This program is free software: you can redistribute it and/or modify it
+// under the terms of the GNU General Public License as published by the
+// Free Software Foundation, version 3.
+// =====================================================================================
+
 import * as THREE from './three.module.js';
 import { 	scene } from './scene.js';
-import {	resetVertexCount, getVertexCount, indexToXYZ, total_cubes, XYCubeMarcher, CubeMarcher, 
+import {	resetVertexCount, getVertexCount, total_cubes, XYCubeMarcher, CubeMarcher, 
 			vertexCount, setGridSize, getMarchingGridSize, precomputeSlice } from './cube-marcher.js';
 import { 	updateHUD, updateVertexCount, updateSurfaceGenerationTime, clearSurfaceGenerationTime  } from './hud.js';
 import { 	getCurrentField } from './field-functions.js';
@@ -8,7 +15,6 @@ import {	positions, colors, normals } from './cube-marcher.js';
 
 //let cubeIndex = 0;
 let zIndex = 0;
-export let isGenerating = true;
 export let mesh = null;
 let material = null;
 let geometry = null;
@@ -44,6 +50,7 @@ export function destroyGeometry()
 
 export function toggleFlatShading() {
 	flatShading = !flatShading
+	return flatShading;
 }
 
 function generateAllGeometry() {
@@ -61,7 +68,6 @@ function generateAllGeometry() {
     
 	const elapsed = performance.now() - generationStartTime;
     updateSurfaceGenerationTime(elapsed);
-    isGenerating = false;
 }
 
 function generateGeometry(token) {
@@ -91,14 +97,12 @@ function generateGeometry(token) {
 	if (zIndex < gridsize) {
 		slice0 = slice1;
 		slice1 = precomputeSlice(zIndex + 1);
-		//requestAnimationFrame(() => generateGeometry(token));
-		generateGeometry(token);
+		requestAnimationFrame(() => generateGeometry(token));
 	}
 	else
 	{
 		const elapsed = performance.now() - generationStartTime;
     	updateSurfaceGenerationTime(elapsed);
-    	isGenerating = false;
 	}
 }
 
@@ -111,7 +115,7 @@ export function destroyMesh()
 	}
 }
 
-export function rebuildSurface() {
+export function rebuildSurface(animateSurfaceGeneration = false) {
  
 	generationToken++;
 	const myToken = generationToken;
@@ -144,13 +148,14 @@ export function rebuildSurface() {
     mesh.rotation.y = rotation_y;
 
     scene.add(mesh);
-	isGenerating = true;
 
 	generationStartTime = performance.now();
     clearSurfaceGenerationTime();
 
 	updateHUD();
 	
-    //generateGeometry(myToken);
-    generateAllGeometry();
+	if(animateSurfaceGeneration)
+    	generateGeometry(myToken);
+    else
+	    generateAllGeometry();
 }

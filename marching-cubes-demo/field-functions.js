@@ -28,7 +28,7 @@ function smoothMax(a, b, k) {
 }
 
 // Pre-calculate the points as a Float32Array for better cache performance
-const bumpsCount = 34;
+const bumpsCount = 23;
 const bumpsX = new Float32Array(bumpsCount);
 const bumpsY = new Float32Array(bumpsCount);
 const bumpsZ = new Float32Array(bumpsCount);
@@ -295,6 +295,7 @@ export function AlgebraicSurface(x, y, z, params) {
 
 export function SurfacePattern(x, y, z, params) {
 	
+	y += 0.2;
 	const horizontal_scale = params[0];
 	const vertical_scale = params[1];
 	
@@ -544,19 +545,21 @@ export const fieldFunctions = [
 	{
         name: "Decocube",
         fn: Decocube,
-		currentVariant: 8,
+		currentVariant: 0,
 		variants: [
-            { params: [1.20, 0.0, 0.40] },
-            { params: [1.22, 0.1, 0.36] },
-            { params: [1.24, 0.2, 0.32] },
-            { params: [1.26, 0.3, 0.28] },
-            { params: [1.28, 0.4, 0.24] },
-            { params: [1.30, 0.5, 0.20] },
-            { params: [1.32, 0.6, 0.16] },
-            { params: [1.34, 0.7, 0.12] },
-            { params: [1.36, 0.8, 0.08] },
+            { params: [1.40, 1.0, 0.01] },
             { params: [1.38, 0.9, 0.04] },
-            { params: [1.40, 1.0, 0.01] }
+            { params: [1.36, 0.8, 0.08] },
+            { params: [1.34, 0.7, 0.12] },
+            { params: [1.32, 0.6, 0.16] },
+            { params: [1.30, 0.5, 0.20] },
+            { params: [1.28, 0.4, 0.24] },
+            { params: [1.26, 0.3, 0.28] },
+            { params: [1.24, 0.2, 0.32] },
+            { params: [1.22, 0.1, 0.36] },
+            { params: [1.20, 0.0, 0.40] },
+            { params: [1.20, -0.1, 0.44] },
+            { params: [1.20, -0.2, 0.48] }
         ]
     },
 	{
@@ -645,43 +648,48 @@ export const fieldFunctions = [
         ]		
     },
 	{
-		name: "34 Geodesic Sphere Points",
+		name: "Geodesic Sphere Points",
 		fn: GeodesicPointsSphereOptimized,
 		currentVariant: 0,
         variants: [
-            { params: [0.55, 0.20] },
-            { params: [0.55, 0.22] },
-            { params: [0.55, 0.24] },
-            { params: [0.55, 0.26] },
-            { params: [0.55, 0.28] },
-            { params: [0.55, 0.30] },
-            { params: [0.55, 0.32] },
-            { params: [0.55, 0.34] },
-            { params: [0.55, 0.36] },
-            { params: [0.55, 0.38] },
-            { params: [0.55, 0.40] },
-            { params: [0.55, 0.42] },
-            { params: [0.55, 0.44] },
-            { params: [0.55, 0.46] }
+            { params: [0.800, 0.20] },
+            { params: [0.775, 0.22] },
+            { params: [0.750, 0.24] },
+            { params: [0.725, 0.26] },
+            { params: [0.700, 0.28] },
+            { params: [0.675, 0.30] },
+            { params: [0.650, 0.32] },
+            { params: [0.625, 0.34] },
+            { params: [0.600, 0.36] },
+            { params: [0.575, 0.38] },
+            { params: [0.550, 0.40] },
+            { params: [0.525, 0.42] },
+            { params: [0.500, 0.44] },
+            { params: [0.475, 0.46] }
         ]		
     },
 	{
 		name: "Twisted Wave Torus",
 		fn: TwistedWaveTorus,
-		currentVariant: 1,
+		currentVariant: 12,
         variants: [
-            { params: [2.3, 2, 0.1] },
-            { params: [2.3, 3, 0.095] },
-            { params: [2.3, 4, 0.09] },
-            { params: [2.3, 5, 0.085] },
-            { params: [2.3, 6, 0.08] },
-            { params: [2.3, 7, 0.075] },
-            { params: [2.3, 8, 0.07] },
-            { params: [2.3, 9, 0.065] },
-            { params: [2.3, 10, 0.06] },
-            { params: [2.3, 11, 0.055] },
-            { params: [2.3, 12, 0.05] },
-            { params: [2.3, 13, 0.045] }
+            { params: [2.3, 3, 0.000] },
+            { params: [2.3, 3, 0.005] },
+            { params: [2.3, 3, 0.010] },
+            { params: [2.3, 3, 0.015] },
+            { params: [2.3, 3, 0.020] },
+            { params: [2.3, 3, 0.025] },
+            { params: [2.3, 3, 0.030] },
+            { params: [2.3, 3, 0.035] },
+            { params: [2.3, 3, 0.040] },
+            { params: [2.3, 3, 0.045] },
+            { params: [2.3, 3, 0.050] },
+            { params: [2.3, 3, 0.055] },
+            { params: [2.3, 3, 0.060] },
+            { params: [2.3, 3, 0.065] },
+            { params: [2.3, 3, 0.070] },
+            { params: [2.3, 3, 0.075] },
+            { params: [2.3, 3, 0.080] }
         ]		
     },
 	{
@@ -723,15 +731,15 @@ export const fieldFunctions = [
 		currentVariant: 6,
         variants: [
             { params: [5, 16] },
-            { params: [6, 17] },
-            { params: [7, 18] },
-            { params: [8, 19] },
-            { params: [9, 20] },
-            { params: [10, 21] },
-            { params: [11, 22] },
-            { params: [12, 23] },
-            { params: [13, 24] },
-            { params: [14, 25] }
+            { params: [6, 16] },
+            { params: [7, 16] },
+            { params: [8, 16] },
+            { params: [9, 16] },
+            { params: [10, 16] },
+            { params: [11, 16] },
+            { params: [12, 16] },
+            { params: [13, 16] },
+            { params: [14, 16] }
         ]		
     },
 	{
@@ -860,7 +868,7 @@ export const fieldFunctions = [
             { params: [11, 2] },
             { params: [12, 2] }
         ]
-    },
+    }
 ];
     
 // =====================================================================================
@@ -910,8 +918,15 @@ export function getCurrentField() {
     return fieldFunctions[ff_index].fn;
 }
 
+export function getSurfaceIndexString() {
+	return '(' + (ff_index+1) + '/' + fieldFunctions.length + ')';
+}
+
+export function getSurfaceVariantIndexString() {
+	return '(' + (ff_v_index+1) + '/' + fieldFunctions[ff_index].variants.length + ')';
+}
+
 export function getFieldFunctionName() {
-	return	fieldFunctions[ff_index].name + ' ' +
-			(ff_v_index+1) + '/' + fieldFunctions[ff_index].variants.length;
+	return	fieldFunctions[ff_index].name;
 }
 

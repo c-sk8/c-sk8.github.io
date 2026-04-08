@@ -1,9 +1,13 @@
 import * as THREE from './three.module.js';
-import { 	scene } from './scene.js';
-import { 	isGenerating, mesh } from './surface-builder.js';
+import { scene } from './scene.js';
+import { mesh } from './surface-builder.js';
 
-let rotationVelocity = 0;
-let targetVelocity = 0.1;
+let rotationXVelocity = 0;
+let rotationYVelocity = 0;
+let rotationZVelocity = 0;
+let targetXVelocity = 0.12;
+let targetYVelocity = 0.15;
+let targetZVelocity = 0;
 
 let cameraZ = 3;
 let targetCameraZ = 3;
@@ -22,16 +26,25 @@ document.body.appendChild(renderer.domElement);
 export function zoomIn() { targetCameraZ -= step; }
 export function zoomOut() { targetCameraZ += step; }
 
+export function resetRotationVelocity() {
+	rotationXVelocity = 0;
+	rotationYVelocity = 0;
+	rotationZVelocity = 0;
+}
+
 export function animate() {
 
     const delta = clock.getDelta();
 
     // --- Rotation ---
-    if (!isGenerating) {
-        rotationVelocity += (targetVelocity - rotationVelocity) * 0.02;
-        mesh.rotation.y += rotationVelocity * delta;
-        mesh.rotation.x += rotationVelocity * delta;
-    }
+	rotationXVelocity += (targetXVelocity - rotationXVelocity) * 0.02;
+	mesh.rotation.x += rotationXVelocity * delta;
+	
+	rotationYVelocity += (targetYVelocity - rotationYVelocity) * 0.02;
+	mesh.rotation.y += rotationYVelocity * delta;
+	
+	rotationZVelocity += (targetZVelocity - rotationZVelocity) * 0.02;
+	mesh.rotation.z += rotationZVelocity * delta;
 
 	cameraZ += (targetCameraZ - cameraZ) * 0.1;
 	camera.position.z = cameraZ;

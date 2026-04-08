@@ -1,10 +1,16 @@
+// =====================================================================================
+// Copyright (C) 2026 Christopher Kent http://c-sk8.github.io
+// This program is free software: you can redistribute it and/or modify it
+// under the terms of the GNU General Public License as published by the
+// Free Software Foundation, version 3.
+// =====================================================================================
+
 import * as THREE from './three.module.js';
 import {colourModeFunction, setColourGridSize} from './colour-modes.js';
 import {ff, ff_params} from './field-functions.js';
 
 // ============================================================
 //	EDGE TABLE + TRI TABLE (STANDARD)
-//	(Truncated explanation: these are canonical, do not edit)
 // ============================================================
 
 import { edgeTable, triTable as triTableFlat } from './tables.js';
@@ -54,7 +60,7 @@ export function setGridSize(size = 90) {
     vertex_scale = 2 / marching_grid_size;
     total_cubes = marching_grid_size ** 3;
 
-    max_vertices = 42 * marching_grid_size * marching_grid_size;
+    max_vertices = 44 * marching_grid_size * marching_grid_size;
 
     positions = new Float32Array(max_vertices * 3);
     normals   = new Float32Array(max_vertices * 3);
@@ -63,16 +69,8 @@ export function setGridSize(size = 90) {
 	setColourGridSize(marching_grid_size);
 }
 
-export function getMarchingGridSize()
-{
+export function getMarchingGridSize() {
 	return marching_grid_size;
-}
-
-export function indexToXYZ(index) {
-	const x = index % marching_grid_size;
-	const y = Math.floor(index / marching_grid_size) % marching_grid_size;
-	const z = Math.floor(index / (marching_grid_size * marching_grid_size));
-	return { x, y, z };
 }
 
 function interpolate(p1, p2, v1, v2) {
@@ -160,6 +158,9 @@ function getVal(slice, x, y) {
 
 export function CubeMarcher(flatShading) {
 
+	let ymin = 0;
+	let ymax = 0;
+	
 	let slice0 = null;
 	let slice1 = null;
 
@@ -197,6 +198,9 @@ export function CubeMarcher(flatShading) {
 				}
 			
 				if (edgeTable[caseIndex] === 0) continue;
+				
+				if(ymin == 0 && y > 0) ymin = y;
+				if(y > ymax) ymax = y;
 			
 				const vertList = new Array(12);
 				
@@ -238,6 +242,8 @@ export function CubeMarcher(flatShading) {
 		slice0 = slice1;
 		slice1 = precomputeSlice(z + 1);
 	}
+	
+	console.log(ymin, ymax);
 }
 
 export function XYCubeMarcher(z, slice0, slice1, flatShading) {
@@ -310,3 +316,12 @@ export function XYCubeMarcher(z, slice0, slice1, flatShading) {
 		}
 	}
 }
+
+/*
+export function indexToXYZ(index) {
+	const x = index % marching_grid_size;
+	const y = Math.floor(index / marching_grid_size) % marching_grid_size;
+	const z = Math.floor(index / (marching_grid_size * marching_grid_size));
+	return { x, y, z };
+}
+*/
