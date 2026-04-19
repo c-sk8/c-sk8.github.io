@@ -6,8 +6,6 @@
 // =====================================================================================
 
 import * as THREE from './three.module.js';
-import {colourModeFunction, setColourGridSize} from './colour-modes.js';
-import {ff, ff_params} from './field-functions.js';
 
 // ============================================================
 //	EDGE TABLE + TRI TABLE (STANDARD)
@@ -54,19 +52,17 @@ export let colors;
 //	MARCHING CUBES FUNCTIONS
 // ============================================================
 
-export function setGridSize(size = 90) {
+export function setGridSize(size = 100) {
 
     marching_grid_size = size;
     vertex_scale = 2 / marching_grid_size;
     total_cubes = marching_grid_size ** 3;
 
-    max_vertices = 44 * marching_grid_size * marching_grid_size;
+    max_vertices = 56 * marching_grid_size * marching_grid_size;
 
     positions = new Float32Array(max_vertices * 3);
     normals   = new Float32Array(max_vertices * 3);
     colors    = new Float32Array(max_vertices * 3);
-    
-	setColourGridSize(marching_grid_size);
 }
 
 export function getMarchingGridSize() {
@@ -90,12 +86,15 @@ function faceNormal(a, b, c) {
 	return [nx/len, ny/len, nz/len];
 }
 
-function computeNormal(x, y, z) {
+function computeNormal(x, y, z, field_function, field_function_params) {
     const eps = 0.01;
 
-    const dx = ff(x - eps, y, z, ff_params) - ff(x + eps, y, z, ff_params);
-    const dy = ff(x, y - eps, z, ff_params) - ff(x, y + eps, z, ff_params);
-    const dz = ff(x, y, z - eps, ff_params) - ff(x, y, z + eps, ff_params);
+    const dx =	field_function(x - eps, y, z, field_function_params) - 
+    			field_function(x + eps, y, z, field_function_params);
+    const dy =	field_function(x, y - eps, z, field_function_params) -
+    			field_function(x, y + eps, z, field_function_params);
+    const dz =	field_function(x, y, z - eps, field_function_params) -
+    			field_function(x, y, z + eps, field_function_params);
 
     let nx = dx;
     let ny = dy;
@@ -134,42 +133,64 @@ function pushVertex(x, y, z, nx, ny, nz, r, g, b) {
   vertexCount++;
 }
 
-export function precomputeSlice(z) {
-	const size = marching_grid_size + 1;
-	const slice = new Float32Array(size * size);
+export function precomputeSlice(z, bounds, field_function, field_function_params) {
 
-	let i = 0;
-	for (let x = 0; x < size; x++) {
-		for (let y = 0; y < size; y++) {
-			const vx = x * vertex_scale - 1;
-			const vy = y * vertex_scale - 1;
-			const vz = z * vertex_scale - 1;
+    const minX = bounds.x.min;
+    const maxX = bounds.x.max;
 
-			slice[i++] = ff(vx, vy, vz, ff_params);
-		}
-	}
+    const minY = bounds.y.min;
+    const maxY = bounds.y.max;
 
-	return slice;
+    const width  = (maxX - minX + 1);
+    const height = (maxY - minY + 1);
+
+    const data = new Float32Array(width * height);
+
+    let i = 0;
+
+    for (let x = minX; x <= maxX; x++) {
+        for (let y = minY; y <= maxY; y++) {
+
+            const vx = x * vertex_scale - 1;
+            const vy = y * vertex_scale - 1;
+            const vz = z * vertex_scale - 1;
+
+            data[i++] = field_function(vx, vy, vz, field_function_params);
+        }
+    }
+    
+    return {
+        data,
+        minX,
+        maxX,
+        minY,
+        maxY,
+        width,
+        height,
+        stride: height
+    };
 }
 
 function getVal(slice, x, y) {
-	return slice[x * (marching_grid_size + 1) + y];
+    const localX = x - slice.minX;
+    const localY = y - slice.minY;
+
+    return slice.data[localX * slice.height + localY];
 }
 
-export function CubeMarcher(flatShading) {
+export function CubeMarcher(flatShading, bounds, field_function, field_function_params, colour_function) {
 
-	let ymin = 0;
-	let ymax = 0;
-	
 	let slice0 = null;
 	let slice1 = null;
 
-	slice0 = precomputeSlice(0);
-	slice1 = precomputeSlice(1);
+	slice0 = precomputeSlice(	bounds.z.min, bounds,
+								field_function, field_function_params);
+	slice1 = precomputeSlice(	bounds.z.min + 1, bounds,
+								field_function, field_function_params);
 
-	for (let z = 0; z < marching_grid_size; z++) {
-		for (let x = 0; x < marching_grid_size; x++) {
-			for (let y = 0; y < marching_grid_size; y++) {
+	for (let z = bounds.z.min; z < bounds.z.max; z++) {
+		for (let x = bounds.x.min; x < bounds.x.max; x++) {
+			for (let y = bounds.y.min; y < bounds.y.max; y++) {
 				
 				const cubePos = [];
 				
@@ -184,7 +205,7 @@ export function CubeMarcher(flatShading) {
 					getVal(slice1, x + 1, y + 1),
 					getVal(slice1, x,     y + 1),
 				];
-				
+								
 				for (let i = 0; i < 8; i++) {
 					const vx = (x + CUBE_VERTS[i][0]) * vertex_scale - 1;
 					const vy = (y + CUBE_VERTS[i][1]) * vertex_scale - 1;
@@ -199,9 +220,6 @@ export function CubeMarcher(flatShading) {
 			
 				if (edgeTable[caseIndex] === 0) continue;
 				
-				if(ymin == 0 && y > 0) ymin = y;
-				if(y > ymax) ymax = y;
-			
 				const vertList = new Array(12);
 				
 				for (let e = 0; e < 12; e++) {
@@ -217,8 +235,8 @@ export function CubeMarcher(flatShading) {
 					const b = vertList[triTable[caseIndex][i+1]];
 					const c = vertList[triTable[caseIndex][i+2]];
 					
-					const col = colourModeFunction(x,y,z);
-			
+					const col = colour_function(x,y,z);
+					
 					if(flatShading)
 					{
 						const norm = faceNormal(a,b,c);
@@ -228,9 +246,9 @@ export function CubeMarcher(flatShading) {
 					}
 					else
 					{
-						const anorm = computeNormal(a[0], a[1], a[2]);
-						const bnorm = computeNormal(b[0], b[1], b[2]);
-						const cnorm = computeNormal(c[0], c[1], c[2]);
+						const anorm = computeNormal(a[0], a[1], a[2], field_function, field_function_params);
+						const bnorm = computeNormal(b[0], b[1], b[2], field_function, field_function_params);
+						const cnorm = computeNormal(c[0], c[1], c[2], field_function, field_function_params);
 						pushVertex(	a[0], a[1], a[2], anorm.x, anorm.y, anorm.z, col.r, col.g, col.b);
 						pushVertex(	b[0], b[1], b[2], bnorm.x, bnorm.y, bnorm.z, col.r, col.g, col.b);
 						pushVertex(	c[0], c[1], c[2], cnorm.x, cnorm.y, cnorm.z, col.r, col.g, col.b);
@@ -240,16 +258,18 @@ export function CubeMarcher(flatShading) {
 		}
 		
 		slice0 = slice1;
-		slice1 = precomputeSlice(z + 1);
+		slice1 = precomputeSlice(z + 1, bounds, field_function, field_function_params);
 	}
-	
-	console.log(ymin, ymax);
 }
 
-export function XYCubeMarcher(z, slice0, slice1, flatShading) {
-
-	for (let x = 0; x < marching_grid_size; x++) {
-		for (let y = 0; y < marching_grid_size; y++) {
+export function XYCubeMarcher(	z, slice0, slice1, bounds,
+								flatShading,
+								field_function,
+								field_function_params,
+								colour_function) {
+								
+	for (let x = bounds.x.min; x < bounds.x.max; x++) {
+		for (let y = bounds.y.min; y < bounds.y.max; y++) {
 			
 			const cubePos = [];
 			
@@ -294,7 +314,7 @@ export function XYCubeMarcher(z, slice0, slice1, flatShading) {
 				const b = vertList[triTable[caseIndex][i+1]];
 				const c = vertList[triTable[caseIndex][i+2]];
 				
-				const col = colourModeFunction(x,y,z);
+				const col = colour_function(x,y,z);
 		
 				if(flatShading)
 				{
@@ -305,9 +325,9 @@ export function XYCubeMarcher(z, slice0, slice1, flatShading) {
 				}
 				else
 				{
-					const anorm = computeNormal(a[0], a[1], a[2]);
-					const bnorm = computeNormal(b[0], b[1], b[2]);
-					const cnorm = computeNormal(c[0], c[1], c[2]);
+					const anorm = computeNormal(a[0], a[1], a[2], field_function, field_function_params);
+					const bnorm = computeNormal(b[0], b[1], b[2], field_function, field_function_params);
+					const cnorm = computeNormal(c[0], c[1], c[2], field_function, field_function_params);
 					pushVertex(	a[0], a[1], a[2], anorm.x, anorm.y, anorm.z, col.r, col.g, col.b);
 					pushVertex(	b[0], b[1], b[2], bnorm.x, bnorm.y, bnorm.z, col.r, col.g, col.b);
 					pushVertex(	c[0], c[1], c[2], cnorm.x, cnorm.y, cnorm.z, col.r, col.g, col.b);

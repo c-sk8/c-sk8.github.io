@@ -5,14 +5,18 @@
 // Free Software Foundation, version 3.
 // =====================================================================================
 
-import {	rebuildSurface, toggleFlatShading, initialiseGeometry, destroyGeometry} from './surface-builder.js';
+import {	rebuildSurface, toggleFlatShading,
+			initialiseGeometry, destroyGeometry} from './surface-builder.js';
 import {	setGridSize} from './cube-marcher.js';
-import {	incrementFieldFunction, decrementFieldFunction,
-			incrementFFVariant, decrementFFVariant} from './field-functions.js';
-import {	incrementColourMode, decrementColourMode } from './colour-modes.js';
 import {	zoomIn, zoomOut, resetRotationVelocity } from './animate.js';
+import {	getNextFieldIndex, getPreviousFieldIndex,
+			nextVariant, previousVariant,
+			nextColourMode, previousColourMode } from './field-functions-manager.js';
+import { 	updateHUD } from './hud.js';
+import {	getColourModeCount } from './colour-modes.js';
 
 let animateSurfaceGeneration = false;
+export let fieldIndex = 0;
 
 function toggleAnimateSurfaceGeneration() {
 	animateSurfaceGeneration = !animateSurfaceGeneration;
@@ -23,35 +27,41 @@ function toggleAnimateSurfaceGeneration() {
 // ============================================================
 
 document.getElementById("nextSurface").onclick = () => {
-    incrementFieldFunction();
     resetRotationVelocity();
-	rebuildSurface(animateSurfaceGeneration);
+    fieldIndex = getNextFieldIndex(fieldIndex);
+    updateHUD();
+	rebuildSurface(fieldIndex, animateSurfaceGeneration);
 }
 
 document.getElementById("prevSurface").onclick = () => {
-    decrementFieldFunction();
     resetRotationVelocity();
-	rebuildSurface(animateSurfaceGeneration);
+    fieldIndex = getPreviousFieldIndex(fieldIndex);
+    updateHUD();
+	rebuildSurface(fieldIndex, animateSurfaceGeneration);
 }
 
 document.getElementById("nextVariant").onclick = () => {
-    incrementFFVariant();
-	rebuildSurface();
+    nextVariant(fieldIndex);
+    updateHUD();
+	rebuildSurface(fieldIndex, animateSurfaceGeneration);
 }
 
 document.getElementById("prevVariant").onclick = () => {
-    decrementFFVariant();
-	rebuildSurface();
+    previousVariant(fieldIndex);
+    updateHUD();
+	rebuildSurface(fieldIndex, animateSurfaceGeneration);
 }
 
 document.getElementById("prevColour").onclick  = () => {
-	decrementColourMode();
-	rebuildSurface();
+	previousColourMode(fieldIndex, getColourModeCount());
+    updateHUD();
+	rebuildSurface(fieldIndex, animateSurfaceGeneration);
 }
 
 document.getElementById("nextColour").onclick  = () => {
-	incrementColourMode();
-	rebuildSurface();
+	nextColourMode(fieldIndex, getColourModeCount());
+    updateHUD();
+	rebuildSurface(fieldIndex, animateSurfaceGeneration);
 }
 
 document.getElementById("zoomIn").onclick  = () => {
@@ -68,7 +78,7 @@ flatShadingButton.onclick  = () => {
 	const active = toggleFlatShading();
 	if(active) flatShadingButton.classList.add('is-active');
 	else flatShadingButton.classList.remove('is-active');
-	rebuildSurface();
+	rebuildSurface(fieldIndex, animateSurfaceGeneration);
 }
 
 const animateSurfaceGenerationButton = document.getElementById("animateSurfaceGeneration");
@@ -77,7 +87,7 @@ animateSurfaceGenerationButton.onclick  = () => {
 	toggleAnimateSurfaceGeneration();
 	if(animateSurfaceGeneration) animateSurfaceGenerationButton.classList.add('is-active');
 	else animateSurfaceGenerationButton.classList.remove('is-active');
-	if(animateSurfaceGeneration) rebuildSurface(animateSurfaceGeneration);
+	if(animateSurfaceGeneration) rebuildSurface(fieldIndex, animateSurfaceGeneration);
 }
 
 // 1. Grab all buttons with the common class
@@ -98,7 +108,7 @@ sizeButtons.forEach(button => {
         destroyGeometry();
         setGridSize(size);
         initialiseGeometry();
-        rebuildSurface();
+		rebuildSurface(fieldIndex, animateSurfaceGeneration);
     };
 });
 
@@ -109,52 +119,74 @@ sizeButtons.forEach(button => {
 window.addEventListener('keydown', (e) => {
 
     if (e.key === 'ArrowRight') {
-        incrementFieldFunction();
-        resetRotationVelocity();
-        rebuildSurface(animateSurfaceGeneration);
+		resetRotationVelocity();
+		fieldIndex = getNextFieldIndex(fieldIndex);
+		updateHUD();
+		rebuildSurface(fieldIndex, animateSurfaceGeneration);
     }
 
     if (e.key === 'ArrowLeft') {
-    	decrementFieldFunction();
-        resetRotationVelocity();
-        rebuildSurface(animateSurfaceGeneration);
+		resetRotationVelocity();
+		fieldIndex = getPreviousFieldIndex(fieldIndex);
+		updateHUD();
+		rebuildSurface(fieldIndex, animateSurfaceGeneration);
     }
 
 	if (e.key === "ArrowUp") {
-		incrementFFVariant();
-    	rebuildSurface();
+    	nextVariant(fieldIndex);
+    	updateHUD();
+		rebuildSurface(fieldIndex, animateSurfaceGeneration);
 	}
 
 	if (e.key === "ArrowDown") {
-  		decrementFFVariant();
-	    rebuildSurface();
+		previousVariant(fieldIndex);
+		updateHUD();
+		rebuildSurface(fieldIndex, animateSurfaceGeneration);
 	}
 
 	if (e.key === "]") {
-		incrementColourMode();
-    	rebuildSurface();
+		nextColourMode(fieldIndex, getColourModeCount());
+		updateHUD();
+		rebuildSurface(fieldIndex, animateSurfaceGeneration);
 	}
 
 	if (e.key === "[") {
-  		decrementColourMode();
-	    rebuildSurface();
+		previousColourMode(fieldIndex, getColourModeCount());
+		updateHUD();
+		rebuildSurface(fieldIndex, animateSurfaceGeneration);
 	}
 
 	if (e.key === "/") {
 		const active = toggleFlatShading();
 		if(active) flatShadingButton.classList.add('is-active');
 		else flatShadingButton.classList.remove('is-active');
-		rebuildSurface();
+		rebuildSurface(fieldIndex, animateSurfaceGeneration);
 	}
 
 	if (e.key === "\\") {
 		toggleAnimateSurfaceGeneration();
 		if(animateSurfaceGeneration) animateSurfaceGenerationButton.classList.add('is-active');
 		else animateSurfaceGenerationButton.classList.remove('is-active');
-		if(animateSurfaceGeneration) rebuildSurface(animateSurfaceGeneration);
+		if(animateSurfaceGeneration) rebuildSurface(fieldIndex, animateSurfaceGeneration);
 	}
 
     if (e.key === "+" || e.key === "w") zoomIn();
     if (e.key === "-" || e.key === "s") zoomOut();
 
 });
+
+function setupHUDToggle() {
+    const hud = document.getElementById('hud');
+    const controls = document.getElementById('controls');
+
+    window.addEventListener('keydown', (event) => {
+        // Check if the pressed key is "h" or "H"
+        if (event.key.toLowerCase() === 'h') {
+            hud.classList.toggle('hidden');
+            controls.classList.toggle('hidden');
+        }
+    });
+}
+
+// Initialize the listener
+setupHUDToggle();

@@ -1,3 +1,10 @@
+// =====================================================================================
+// Copyright (C) 2026 Christopher Kent http://c-sk8.github.io
+// This program is free software: you can redistribute it and/or modify it
+// under the terms of the GNU General Public License as published by the
+// Free Software Foundation, version 3.
+// =====================================================================================
+
 import * as THREE from './three.module.js';
 import { scene } from './scene.js';
 import { mesh } from './surface-builder.js';
@@ -9,14 +16,14 @@ let targetXVelocity = 0.12;
 let targetYVelocity = 0.15;
 let targetZVelocity = 0;
 
-let cameraZ = 3;
-let targetCameraZ = 3;
+let cameraZ = 2.5;
+let targetCameraZ = 2.5;
 const step = 0.5;
 
 let clock = new THREE.Clock();
 
 const camera = new THREE.PerspectiveCamera(50, innerWidth / innerHeight, 0.1, 100);
-camera.position.set(0, 1, 2.6);
+camera.position.set(0, 1, 2.5);
 camera.lookAt(0, 0, 0);
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });

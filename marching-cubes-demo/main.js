@@ -8,7 +8,11 @@
 import * as THREE from './three.module.js';
 import {	rebuildSurface } from './surface-builder.js';
 import {	animate } from './animate.js';
-import './event-handler.js';
+import { 	updateHUD } from './hud.js';
+//import {	generateAllBounds } from './bounds-generator.js';
 
-rebuildSurface();
+rebuildSurface(0);
+updateHUD();
 animate();
+
+//generateAllBounds();

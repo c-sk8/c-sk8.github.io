@@ -5,6 +5,12 @@
 // Free Software Foundation, version 3.
 // =====================================================================================
 
+// Pre-calculate constants for efficiency
+const SQRT3 = Math.sqrt(3);
+const TWO_PI = 2 * Math.PI;
+
+// =====================================================================================
+
 function slowSmoothUnion(a, b, k) {
     return -Math.log(Math.exp(-k*a) + Math.exp(-k*b)) / k;
 }
@@ -295,7 +301,6 @@ export function AlgebraicSurface(x, y, z, params) {
 
 export function SurfacePattern(x, y, z, params) {
 	
-	y += 0.2;
 	const horizontal_scale = params[0];
 	const vertical_scale = params[1];
 	
@@ -303,9 +308,18 @@ export function SurfacePattern(x, y, z, params) {
     let sy = -y * vertical_scale;
     let sz = z * horizontal_scale;
 	
+	// A "Gyroid" floor
+	//const gyroid = Math.sin(sx) * Math.cos(sy) + 
+    //           Math.sin(sy) * Math.cos(sz) + 
+    //           Math.sin(sz) * Math.cos(sx);
+	//const surface_top = gyroid + (sy * 0.5) + 2; 
+
+	// The Schwarz P Surface	
+	// const surface_top = Math.cos(sx) + Math.cos(sy) + Math.cos(sz) + 0.1;
+
 	const surface_top =	Math.cos(sx) * Math.cos(sz) +
-			Math.cos((Math.sqrt(3)*sx-sz)/2) * Math.cos((sx + Math.sqrt(3) * sz)/2) +
-			Math.cos((Math.sqrt(3)*sx+sz)/2) * Math.cos((sx - Math.sqrt(3) * sz)/2) + sy + 6;
+			Math.cos((SQRT3*sx-sz)/2) * Math.cos((sx + SQRT3 * sz)/2) +
+			Math.cos((SQRT3*sx+sz)/2) * Math.cos((sx - SQRT3 * sz)/2) + sy + 6;
 
     return surface_top;
 }
@@ -315,7 +329,7 @@ export function BlobRing(x, y, z, params) {
     const ringRadius = params[1];
     const sharpness = 7;
     const blobCount = 8;
-    const angleStep = (Math.PI * 2) / blobCount;
+    const angleStep = TWO_PI / blobCount;
 
     x *= scale; y *= scale; z *= scale;
 
@@ -528,8 +542,8 @@ export function FlattenedWavePattern(x, y, z, params) { //scale = 12, flatness =
 	
     // 1. Calculate the raw interference pattern
     let wave = Math.cos(x) * Math.cos(z) +
-               Math.cos((Math.sqrt(3) * x - z) / 2) * Math.cos((x + Math.sqrt(3) * z) / 2) +
-               Math.cos((Math.sqrt(3) * x + z) / 2) * Math.cos((x - Math.sqrt(3) * z) / 2);
+               Math.cos((SQRT3 * x - z) / 2) * Math.cos((x + SQRT3 * z) / 2) +
+               Math.cos((SQRT3 * x + z) / 2) * Math.cos((x - SQRT3 * z) / 2);
 
     // 2. Apply the "squash" (Hyperbolic Tangent)
     // We divide by the flatness after tanh to keep the scale consistent
@@ -539,394 +553,46 @@ export function FlattenedWavePattern(x, y, z, params) { //scale = 12, flatness =
     return (squashedWave + y);
 }
 
-// =====================================================================================
+export function SpheredSchwarzP(x, y, z, params) {
 
-export const fieldFunctions = [
-	{
-        name: "Decocube",
-        fn: Decocube,
-		currentVariant: 0,
-		variants: [
-            { params: [1.40, 1.0, 0.01] },
-            { params: [1.38, 0.9, 0.04] },
-            { params: [1.36, 0.8, 0.08] },
-            { params: [1.34, 0.7, 0.12] },
-            { params: [1.32, 0.6, 0.16] },
-            { params: [1.30, 0.5, 0.20] },
-            { params: [1.28, 0.4, 0.24] },
-            { params: [1.26, 0.3, 0.28] },
-            { params: [1.24, 0.2, 0.32] },
-            { params: [1.22, 0.1, 0.36] },
-            { params: [1.20, 0.0, 0.40] },
-            { params: [1.20, -0.1, 0.44] },
-            { params: [1.20, -0.2, 0.48] }
-        ]
-    },
-	{
-		name: "Tooth",
-		fn: Tooth,
-		currentVariant: 4,
-		variants: [
-			{ params: [1.3, 1.22] },
-			{ params: [1.3, 1.12] },
-			{ params: [1.3, 1.02] },
-			{ params: [1.3, 0.92] },
-			{ params: [1.3, 0.82] },
-			{ params: [1.3, 0.72] },
-			{ params: [1.3, 0.62] },
-			{ params: [1.3, 0.52] },
-			{ params: [1.3, 0.42] },
-			{ params: [1.3, 0.32] }
-		]
-	},
-	{
-		name: "Super Sphere",
-		fn: SuperSphere,
-		currentVariant: 2,
-        variants: [
-            { params: [1, 1.0] },
-            { params: [1, 1.5] },
-            { params: [1, 2.0] },
-            { params: [1, 2.5] }, 
-            { params: [1, 3.0] },
-            { params: [1, 3.5] },
-            { params: [1, 4.0] },
-            { params: [1, 4.5] } 
-        ]		
-	},
-	{
-		name: "GumdropTorus",
-		fn: GumdropTorus,
-		currentVariant: 5,
-        variants: [
-            { params: [2.3, 12.5] },
-            { params: [2.3, 13.5] },
-            { params: [2.3, 14.5] },
-            { params: [2.3, 15.5] },
-            { params: [2.3, 16.5] },
-            { params: [2.3, 17.5] },
-            { params: [2.3, 18.5] },
-            { params: [2.3, 19.5] },
-            { params: [2.3, 20.5] },
-            { params: [2.3, 21.5] }
-        ]		
-	},
-	{
-		name: "Sinusoidal Sphere",
-		fn: SinusoidalSphere,
-		currentVariant: 1,
-        variants: [
-            { params: [0.4, 0.2, 10, 1.0, 2] },
-            { params: [0.4, 0.3, 9, 1.5, 2] },
-            { params: [0.4, 0.4, 8, 2.0, 2] },
-            { params: [0.4, 0.5, 7, 2.5, 2] },
-            { params: [0.4, 0.6, 6, 3.0, 2] },
-            { params: [0.4, 0.7, 5, 3.5, 2] },
-            { params: [0.4, 0.8, 4, 4.0, 2] },
-            { params: [0.4, 0.9, 3, 4.5, 2] },
-            { params: [0.4, 0.9, 2, 5.0, 2] },
-            { params: [0.4, 0.9, 1, 5.5, 2] }
-        ]		
-    },
-	{
-		name: "Chair Surface",
-		fn: ChairSurface,
-		currentVariant: 2,
-        variants: [
-            { params: [1, 0.74, 0.10] },
-            { params: [1, 0.74, 0.15] },
-            { params: [1, 0.74, 0.20] },
-            { params: [1, 0.74, 0.25] },
-            { params: [1, 0.74, 0.30] },
-            { params: [1, 0.74, 0.35] },
-            { params: [1, 0.74, 0.40] },
-            { params: [1, 0.74, 0.45] },
-            { params: [1, 0.74, 0.50] },
-            { params: [1, 0.74, 0.55] },
-            { params: [1, 0.74, 0.60] },
-            { params: [1, 0.74, 0.65] }
-        ]		
-    },
-	{
-		name: "Geodesic Sphere Points",
-		fn: GeodesicPointsSphereOptimized,
-		currentVariant: 0,
-        variants: [
-            { params: [0.800, 0.20] },
-            { params: [0.775, 0.22] },
-            { params: [0.750, 0.24] },
-            { params: [0.725, 0.26] },
-            { params: [0.700, 0.28] },
-            { params: [0.675, 0.30] },
-            { params: [0.650, 0.32] },
-            { params: [0.625, 0.34] },
-            { params: [0.600, 0.36] },
-            { params: [0.575, 0.38] },
-            { params: [0.550, 0.40] },
-            { params: [0.525, 0.42] },
-            { params: [0.500, 0.44] },
-            { params: [0.475, 0.46] }
-        ]		
-    },
-	{
-		name: "Twisted Wave Torus",
-		fn: TwistedWaveTorus,
-		currentVariant: 12,
-        variants: [
-            { params: [2.3, 3, 0.000] },
-            { params: [2.3, 3, 0.005] },
-            { params: [2.3, 3, 0.010] },
-            { params: [2.3, 3, 0.015] },
-            { params: [2.3, 3, 0.020] },
-            { params: [2.3, 3, 0.025] },
-            { params: [2.3, 3, 0.030] },
-            { params: [2.3, 3, 0.035] },
-            { params: [2.3, 3, 0.040] },
-            { params: [2.3, 3, 0.045] },
-            { params: [2.3, 3, 0.050] },
-            { params: [2.3, 3, 0.055] },
-            { params: [2.3, 3, 0.060] },
-            { params: [2.3, 3, 0.065] },
-            { params: [2.3, 3, 0.070] },
-            { params: [2.3, 3, 0.075] },
-            { params: [2.3, 3, 0.080] }
-        ]		
-    },
-	{
-		name: "Moebius Strip",
-		fn: MoebiusStrip,
-		currentVariant: 3,
-        variants: [
-            { params: [4.2, 1, 0.5, 1] },
-            { params: [4.2, 2, 0.5, 1] },
-            { params: [4.2, 3, 0.5, 1] },
-            { params: [4.2, 4, 0.5, 1] },
-            { params: [4.2, 5, 0.5, 1] }
-        ]		
-    },
-	{
-		name: "Algebraic Surface",
-		fn: AlgebraicSurface,
-		currentVariant: 7,
-        variants: [
-            { params: [3.9, 3.0, 2.0, 10.0, 14] },
-            { params: [3.9, 3.0, 3.0, 10.0, 16] },
-            { params: [3.9, 3.0, 4.0, 10.0, 18] },
-            { params: [3.9, 3.0, 5.0, 10.0, 20] },
-            { params: [3.9, 3.0, 6.0, 10.0, 22] },
-            { params: [3.9, 3.0, 7.0, 10.0, 24] },
-            { params: [3.9, 3.0, 8.0, 10.0, 26] },
-            { params: [3.9, 3.0, 9.0, 10.0, 28] },
-            { params: [3.9, 3.0, 10.0, 10.0, 30] },
-            { params: [3.9, 3.0, 11.0, 10.0, 32] },
-            { params: [3.9, 3.0, 12.0, 10.0, 34] },
-            { params: [3.9, 3.0, 13.0, 10.0, 36] },
-            { params: [3.9, 3.0, 14.0, 10.0, 38] },
-            { params: [3.9, 3.0, 15.0, 10.0, 40] }
-        ]		
-    },
-	{
-		name: "Surface Pattern",
-		fn: SurfacePattern,
-		currentVariant: 6,
-        variants: [
-            { params: [5, 16] },
-            { params: [6, 16] },
-            { params: [7, 16] },
-            { params: [8, 16] },
-            { params: [9, 16] },
-            { params: [10, 16] },
-            { params: [11, 16] },
-            { params: [12, 16] },
-            { params: [13, 16] },
-            { params: [14, 16] }
-        ]		
-    },
-	{
-		name: "Blob Ring",
-		fn: BlobRing,
-		currentVariant: 5,
-        variants: [
-            { params: [1.4, 0.725] },
-            { params: [1.4, 0.750] },
-            { params: [1.4, 0.775] },
-            { params: [1.4, 0.800] },
-            { params: [1.4, 0.825] },
-            { params: [1.4, 0.850] },
-            { params: [1.4, 0.875] },
-            { params: [1.4, 0.900] },
-            { params: [1.4, 0.925] },
-            { params: [1.4, 0.950] },
-            { params: [1.4, 0.975] },
-            { params: [1.4, 1.000] },
-            { params: [1.4, 1.025] },
-            { params: [1.4, 1.050] }
-        ]		
-    },
-	{
-		name: "Piriform Diabolo",
-		fn: PiriformDiabolo,
-		currentVariant: 11,
-        variants: [
-            { params: [3.5, 1.6, 0.00] },
-            { params: [3.5, 1.5, 0.00] },
-            { params: [3.5, 1.4, 0.00] },
-            { params: [3.5, 1.3, 0.00] },
-            { params: [3.5, 1.2, 0.02] },
-            { params: [3.5, 1.1, 0.04] },
-            { params: [3.5, 1.0, 0.06] },
-            { params: [3.5, 0.9, 0.08] },
-            { params: [3.5, 0.8, 0.10] },
-            { params: [3.5, 0.7, 0.12] },
-            { params: [3.5, 0.6, 0.14] },
-            { params: [3.5, 0.5, 0.16] }
-		]		
-    },
-    {
-        name: "Super Sphere Cluster",
-        fn: SuperSphereCluster,
-		currentVariant: 4,
-		variants: [
-            { params: [0.6, 1.0, 0] },
-            { params: [0.64, 1.2, 0.1] },
-            { params: [0.68, 1.4, 0.2] },
-            { params: [0.72, 1.6, 0.3] },
-            { params: [0.76, 1.8, 0.4] },
-            { params: [0.8, 2.0, 0.5] },
-            { params: [0.84, 2.2, 0.6] },
-            { params: [0.88, 2.4, 0.7] },
-            { params: [0.92, 2.6, 0.8] },
-            { params: [0.96, 2.8, 0.9] },
-            { params: [1.0, 3.0, 1.0] }
-         ]
-    },
-    {
-        name: "Tetrahedral",
-        fn: Tetrahedral,
-		currentVariant: 7,
-		variants: [
-            { params: [3.1, 10] },
-            { params: [3.1, 12] },
-            { params: [3.1, 14] },
-            { params: [3.1, 16] },
-            { params: [3.1, 18] },
-            { params: [3.1, 20] },
-            { params: [3.1, 22] },
-            { params: [3.1, 24] },
-            { params: [3.1, 26] },
-            { params: [3.1, 28] },
-            { params: [3.1, 30] },
-            { params: [3.1, 32] },
-            { params: [3.1, 34] },
-            { params: [3.1, 36] },
-            { params: [3.1, 38] },
-            { params: [3.1, 40] }
-         ]
-    },
-	{
-        name: "Drei Tori",
-        fn: ThreeTori,
-		currentVariant: 4,
-		variants: [
-            { params: [3.65, 3, 0.46, 0.4] },
-            { params: [3.65, 3, 0.42, 0.6] },
-            { params: [3.65, 3, 0.38, 0.8] },
-            { params: [3.65, 3, 0.34, 1.0] },
-            { params: [3.65, 3, 0.30, 1.2] },
-            { params: [3.65, 3, 0.26, 1.4] },
-            { params: [3.65, 3, 0.22, 1.6] },
-            { params: [3.65, 3, 0.18, 1.8] },
-            { params: [3.65, 3, 0.15, 2.0] }
-        ]
-    },
-	{
-        name: "Radial Wave Sphere",
-        fn: RadialWaveSphere,
-		currentVariant: 4,
-		variants: [
-            { params: [0.3] },
-            { params: [0.35] },
-            { params: [0.4] },
-            { params: [0.45] },
-            { params: [0.5] },
-            { params: [0.55] },
-            { params: [0.6] },
-            { params: [0.65] },
-            { params: [0.7] }
-        ]
-    },
-	{
-        name: "Flattened Wave Pattern",
-        fn: FlattenedWavePattern,
-		currentVariant: 3,
-		variants: [
-            { params: [6, 2] },
-            { params: [7, 2] },
-            { params: [8, 2] },
-            { params: [9, 2] },
-            { params: [10, 2] },
-            { params: [11, 2] },
-            { params: [12, 2] }
-        ]
-    }
-];
+	const lattice_density = params[0]; // Higher values mean more, smaller holes
+	const spherical_radius = params[1]; // Size of the final sphere
+    const boundary_smoothness = params[2];
+	const lattice_thickness = 0; // How 'thick' the walls of the tubes are
+
+    // 1. Calculate distance from the origin (assuming 0,0,0 is center)
+    // The marching cubes bounds must center the pattern.
+    const distSq = (x * x) + (y * y) + (z * z);
+    const distance = Math.sqrt(distSq);
+
+    // 2. Generate the high-frequency networked lattice
+    // We use high-frequency sine waves to create the texture.
+    const frequency = lattice_density * TWO_PI;
     
-// =====================================================================================
+    // A simplified field that approximates the periodic structure
+    // (similar to P-surface but with density and scale)
+    const raw_lattice_field = Math.cos(x * frequency) +
+                              Math.cos(y * frequency) +
+                              Math.cos(z * frequency);
 
-let ff_index = 0; // current field function index
-let ff_v_index = 1; // current field function variant index
-export let ff = null; // active field function
-export let ff_params = null; // parameters for active field function
+    // 3. Create a clean boundary 'mask' for the sphere.
+    // The mask is positive inside the sphere and negative outside.
+    // We can use a smooth falloff function.
+    
+    // This function creates a value of 1.0 inside the radius, 
+    // decaying smoothly to 0.0 outside, over a narrow region.
+    const mask = 1.0 - Math.tanh((distance - spherical_radius) / boundary_smoothness);
+    
+    // 4. Final Field Combine: Apply Thickness and Mask
+    // We can add thickness by biasing the field towards a specific isovalue,
+    // and then apply the spherical boundary to 'cut' the pattern.
+    
+    // Adding thickness
+    let surface_field = raw_lattice_field - (1.0 - lattice_thickness);
 
-ff = fieldFunctions[ff_index].fn;
-ff_v_index = fieldFunctions[ff_index].currentVariant;
-ff_params = fieldFunctions[ff_index].variants[ff_v_index].params;
-
-export function incrementFieldFunction() {
-	ff_index = (ff_index + 1) % fieldFunctions.length;
-	ff = fieldFunctions[ff_index].fn;
-	ff_v_index = fieldFunctions[ff_index].currentVariant;
-	ff_params = fieldFunctions[ff_index].variants[ff_v_index].params;
+    // Apply the mask and shift for a final surface top, 
+    // ensuring positive values are inside the final structure.
+    const final_surface = (surface_field * mask) + 1.0; 
+    
+    return final_surface;
 }
-
-export function decrementFieldFunction() {
-	ff_index--;
-	if (ff_index < 0) {
-		ff_index = fieldFunctions.length - 1;
-	}
-	ff = fieldFunctions[ff_index].fn;
-	ff_v_index = fieldFunctions[ff_index].currentVariant;
-	ff_params = fieldFunctions[ff_index].variants[ff_v_index].params;
-}
-
-export function incrementFFVariant() {
-	ff_v_index = (ff_v_index + 1) % fieldFunctions[ff_index].variants.length;
-	ff_params = fieldFunctions[ff_index].variants[ff_v_index].params;
-	fieldFunctions[ff_index].currentVariant = ff_v_index;
-}
-
-export function decrementFFVariant() {
-	ff_v_index--;
-	if (ff_v_index < 0) {
-		ff_v_index = fieldFunctions[ff_index].variants.length - 1;
-	}
-	ff_params = fieldFunctions[ff_index].variants[ff_v_index].params;
-	fieldFunctions[ff_index].currentVariant = ff_v_index;
-}
-
-export function getCurrentField() {
-    return fieldFunctions[ff_index].fn;
-}
-
-export function getSurfaceIndexString() {
-	return '(' + (ff_index+1) + '/' + fieldFunctions.length + ')';
-}
-
-export function getSurfaceVariantIndexString() {
-	return '(' + (ff_v_index+1) + '/' + fieldFunctions[ff_index].variants.length + ')';
-}
-
-export function getFieldFunctionName() {
-	return	fieldFunctions[ff_index].name;
-}
-

@@ -9,13 +9,16 @@ import * as THREE from './three.module.js';
 import { 	scene } from './scene.js';
 import {	resetVertexCount, getVertexCount, total_cubes, XYCubeMarcher, CubeMarcher, 
 			vertexCount, setGridSize, getMarchingGridSize, precomputeSlice } from './cube-marcher.js';
-import { 	updateHUD, updateVertexCount, updateSurfaceGenerationTime, clearSurfaceGenerationTime  } from './hud.js';
-import { 	getCurrentField } from './field-functions.js';
-import {	positions, colors, normals } from './cube-marcher.js';
+import { 	updateVertexCount, updateSurfaceGenerationTime, clearSurfaceGenerationTime  } from './hud.js';
+import { 	getVariantBounds, getFieldFunction, getFieldFunctionParams, getColourMode }
+			from './field-functions-manager.js';
+import {	positions, colors, normals, marching_grid_size } from './cube-marcher.js';
+import {	setCubeSpaceBounds, getColourFunction} from './colour-modes.js';
+import {	BoundingBox } from './bounds.js';
 
-//let cubeIndex = 0;
-let zIndex = 0;
 export let mesh = null;
+
+let zIndex = null;
 let material = null;
 let geometry = null;
 let generationToken = 0;
@@ -53,12 +56,26 @@ export function toggleFlatShading() {
 	return flatShading;
 }
 
-function generateAllGeometry() {
+function generateAllGeometry(fieldIndex) {
+
+	let bounds = new BoundingBox();
+	bounds.setValues(getVariantBounds(fieldIndex)); // Get Normalised values
+	bounds.scale(marching_grid_size);
+	bounds.expand(1); 	// Make sure the surface is inside the bounding box
+	bounds.roundout();	// And then round up or down the edges
+	bounds.clamp(0,marching_grid_size);
+	
+	setCubeSpaceBounds(bounds); // Let the colouring code know who big the surface is
 
 	const start = performance.now();
-
-	CubeMarcher(flatShading)
+	
+	CubeMarcher(flatShading, bounds,
+				getFieldFunction(fieldIndex),
+				getFieldFunctionParams(fieldIndex),
+				getColourFunction(getColourMode(fieldIndex)));
 		
+	const elapsed = performance.now() - generationStartTime;
+
 	geometry.setDrawRange(0, getVertexCount());
 	geometry.attributes.position.needsUpdate = true;
 	geometry.attributes.normal.needsUpdate = true;
@@ -66,26 +83,49 @@ function generateAllGeometry() {
 
     updateVertexCount(vertexCount);
     
-	const elapsed = performance.now() - generationStartTime;
     updateSurfaceGenerationTime(elapsed);
 }
 
-function generateGeometry(token) {
+function generateGeometry(token, fieldIndex) {
 
-	if(zIndex == 0) {
-		slice0 = precomputeSlice(0);
-		slice1 = precomputeSlice(1);
+	if (token !== generationToken) {
+		geometry.setDrawRange(0, 0);
+		return;
+	}
+
+	let bounds = new BoundingBox();
+	bounds.setValues(getVariantBounds(fieldIndex));
+	bounds.scale(marching_grid_size);
+	bounds.expand(1);
+	bounds.roundout();
+	bounds.clamp(0,marching_grid_size);
+
+	setCubeSpaceBounds(bounds);  // Let the colouring code know who big the surface is
+
+	if(zIndex == null) {
+		zIndex = bounds.z.min;
+		slice0 = precomputeSlice(	bounds.z.min, bounds,
+									getFieldFunction(fieldIndex),
+									getFieldFunctionParams(fieldIndex));
+		slice1 = precomputeSlice(	bounds.z.min + 1, bounds,
+									getFieldFunction(fieldIndex),
+									getFieldFunctionParams(fieldIndex));
 	}
 
 	const start = performance.now();
 
 	const gridsize = getMarchingGridSize();
 
-	XYCubeMarcher(zIndex, slice0, slice1, flatShading)
+	XYCubeMarcher(	zIndex, slice0, slice1, bounds, flatShading,
+					getFieldFunction(fieldIndex),
+					getFieldFunctionParams(fieldIndex),
+					getColourFunction(getColourMode(fieldIndex)) );
 	zIndex++;
 		
-	// Stop if a new generation has started
-	if (token !== generationToken) return;
+	if (token !== generationToken) {
+		geometry.setDrawRange(0, 0);
+		return;
+	}
 
 	geometry.setDrawRange(0, getVertexCount());
 	geometry.attributes.position.needsUpdate = true;
@@ -94,10 +134,12 @@ function generateGeometry(token) {
 
     updateVertexCount(vertexCount);
     
-	if (zIndex < gridsize) {
+	if (zIndex < bounds.z.max) {
 		slice0 = slice1;
-		slice1 = precomputeSlice(zIndex + 1);
-		requestAnimationFrame(() => generateGeometry(token));
+		slice1 = precomputeSlice(	zIndex + 1, bounds,
+									getFieldFunction(fieldIndex),
+									getFieldFunctionParams(fieldIndex));
+		requestAnimationFrame(() => generateGeometry(token, fieldIndex));
 	}
 	else
 	{
@@ -115,11 +157,8 @@ export function destroyMesh()
 	}
 }
 
-export function rebuildSurface(animateSurfaceGeneration = false) {
+export function rebuildSurface(fieldIndex = 0, animateSurfaceGeneration = false) {
  
-	generationToken++;
-	const myToken = generationToken;
-
  	let rotation_x = 0;
  	let rotation_y = 0;
  	
@@ -140,8 +179,7 @@ export function rebuildSurface(animateSurfaceGeneration = false) {
 		flatShading: false
 	});
 
-	//cubeIndex = 0;
-	zIndex = 0;
+	zIndex = null;
 	resetVertexCount();
     mesh = new THREE.Mesh(geometry, material);
     mesh.rotation.x = rotation_x;
@@ -151,11 +189,16 @@ export function rebuildSurface(animateSurfaceGeneration = false) {
 
 	generationStartTime = performance.now();
     clearSurfaceGenerationTime();
-
-	updateHUD();
 	
 	if(animateSurfaceGeneration)
-    	generateGeometry(myToken);
+	{
+		generationToken++;
+		const myToken = generationToken;
+		
+    	generateGeometry(myToken, fieldIndex);
+    }
     else
-	    generateAllGeometry();
+    {
+	    generateAllGeometry(fieldIndex);
+	}
 }

@@ -45,3 +45,7 @@ body { margin: 0; overflow: hidden; background: #000; }
   color: #2ecc71; /* Green text */
 }
 
+.hidden {
+    display: none !important;
+}
+
