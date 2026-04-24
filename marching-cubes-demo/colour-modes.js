@@ -38,7 +38,7 @@ export function PaletteColours(x, y, z, palette, l_stripe = 0.95) {
     const c = palette[index];
     let l = c[2];
     if(l < 0.25 && !(z % 2)) l *= 1.1;
-    if(l >= 0.25 && z % 2) l *= 0.95;
+    if(l >= 0.25 && z % 2) l *= l_stripe;
 	tempColor.setHSL(c[0] / 360, c[1], l);
 	tempColor.convertSRGBToLinear();
     return { r: tempColor.r, g: tempColor.g, b: tempColor.b};
@@ -85,17 +85,12 @@ const orange = [[5,1,0.5],[23,1,0.5],[23,1,0.5],[5,1,0.5]];
 const yellow_roses = [[80,0.91,0.18],[80,1,0.22],[44,1,0.5],[47,1,0.53]];
 const bluebells = [[216,0.79,0.65],[269,0.79,0.65]];
 const vibrant_sky = [[205,0.91,0.63],[360,0.91,0.63]];
-const full_spectrum = [[0,1,0.5],[360,1,0.5]];
 const wood = [[20,1,0.4],[30,1,0.6],[20,1,0.4]];
 
 const hot_and_cold = [	[20,1,0.50],[26,1,0.50],[31,1,0.50],[34,1,0.50],[37,1,0.50],
 						[190,1,0.42],[195,1,0.39],[201,1,0.36],[214,0.97,0.27],
 						[239,0.94,0.19]];
 
-const rosy_blush = [	[0,0.79,0.72],[3,0.80,0.74],[5,0.82,0.76],[7,0.83,0.77],
-						[7,0.84,0.78],[11,0.87,0.79],[15,0.90,0.81],[19,0.91,0.83],
-						[23,0.95,0.85],[28,1,0.86] ];
-						
 const creamy_colours = [	[200,1,0.09],[175,0.63,0.24],[181,0.36,0.47],
 							[106,0.24,0.69],[45,1,0.80],[25,0.92,0.71],
 							[24,0.85,0.52],[6,0.68,0.40],[20,0.85,0.24]];
@@ -104,7 +99,12 @@ const coastal_blues = [	[206,0.97,0.15],[205,0.98,0.20],[205,0.98,0.25],[205,0.9
 						[202,0.56,0.38],[198,0.57,0.40],[198,0.43,0.48],[198,0.44,0.57],
 						[197,0.51,0.69],[195,0.54,0.78]];
 
-
+const orange_and_green_bands = [	[105, 0.45, 0.36], [101, 0.37, 0.48],
+									[98, 0.49, 0.61], [84, 0.61, 0.68], [64, 0.68, 0.72],
+									[47, 1, 0.76], [38, 1, 0.67], [33, 1, 0.59] ];
+									
+const bumble_bee = [[37,1,.5],[38,1,0],[37,1,.5],[38,1,0],[37,1,.5],[38,1,0],
+					[37,1,.5],[38,1,0],[37,1,.5]];
 
 export const colourModeFunctions = [
   	{
@@ -144,16 +144,12 @@ export const colourModeFunctions = [
 		fn: (x, y, z) => SmoothPaletteGradient(x, y, z, vibrant_sky, 0.96)
     },
     {
-    	name: "Full Spectrum",
-    	fn: (x, y, z) => SmoothPaletteGradient(x, y, z, full_spectrum)
-    },
-    {
     	name: "Hot And Cold",
     	fn: (x, y, z) => PaletteColours(x, y, z, hot_and_cold)
     },
     {
-    	name: "Rosy Blush",
-    	fn: (x, y, z) => PaletteColours(x, y, z, rosy_blush)
+    	name: "Orange And Green Bands",
+    	fn: (x, y, z) => PaletteColours(x, y, z, orange_and_green_bands)
     },
     {
     	name: "Creamy Colours",
@@ -166,12 +162,9 @@ export const colourModeFunctions = [
     {
     	name: "Polished Wood",
     	fn: (x, y, z) => SmoothPaletteGradient(x, y, z, wood, 0.9)
+    },
+    {
+    	name: "Bumble Bee",
+    	fn: (x, y, z) => PaletteColours(x, y, z, bumble_bee, 0.96)
     }
 ];
-
-
-
-
-
-
-

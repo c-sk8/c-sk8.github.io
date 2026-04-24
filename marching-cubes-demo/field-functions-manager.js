@@ -324,7 +324,7 @@ const fieldList = [
 	name: "Blob Ring",
 	fn: BlobRing,
 	colourMode: 14,
-	currentVariant: 5,
+	currentVariant: 7,
 	variants: [
 		{ params: [1.4, 0.725], bounds: [0.154,0.846,0.393,0.607,0.154,0.846] },
 		{ params: [1.4, 0.75], bounds: [0.149,0.851,0.397,0.603,0.149,0.851] },
@@ -345,7 +345,7 @@ const fieldList = [
 {
 	name: "Piriform Diabolo",
 	fn: PiriformDiabolo,
-	colourMode: 11,
+	colourMode: 13,
 	currentVariant: 11,
 	variants: [
 		{ params: [3.5, 1.6, 0], bounds: [0.152,0.848,0.237,0.763,0.237,0.763] },
@@ -408,8 +408,8 @@ const fieldList = [
 {
 	name: "Drei Tori",
 	fn: ThreeTori,
-	colourMode: 6,
-	currentVariant: 4,
+	colourMode: 10,
+	currentVariant: 7,
 	variants: [
 		{ params: [3.65, 3, 0.46, 0.4], bounds: [0.016,0.984,0.016,0.984,0.016,0.984] },
 		{ params: [3.65, 3, 0.42, 0.6], bounds: [0.017,0.983,0.017,0.983,0.017,0.983] },
@@ -442,7 +442,7 @@ const fieldList = [
 {
 	name: "Flattened Wave Pattern",
 	fn: FlattenedWavePattern,
-	colourMode: 10,
+	colourMode: 9,
 	currentVariant: 6,
 	variants: [
 		{ params: [6, 2], bounds: [0,1,0.458,0.542,0,1] },
@@ -457,7 +457,7 @@ const fieldList = [
 {
 	name: "Sphered Schwarz P",
 	fn: SpheredSchwarzP,
-	colourMode: 12,
+	colourMode: 11,
 	currentVariant: 4,
 	variants: [
 		{ params: [1.9, 0.8, 0.06], bounds: [0.093,0.907,0.093,0.907,0.093,0.907] },
