@@ -16,8 +16,8 @@ let targetXVelocity = 0.12;
 let targetYVelocity = 0.15;
 let targetZVelocity = 0;
 
-let cameraZ = 2.5;
-let targetCameraZ = 2.5;
+let cameraZ = 5;
+let targetCameraZ = 3;
 const step = 0.5;
 
 let clock = new THREE.Clock();

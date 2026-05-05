@@ -77,7 +77,7 @@ export function SmoothPaletteGradient(x, y, z, palette, l_stripe = 0.95) {
 }
 
 const aqua = [[160, 1.00, 0.5],[180, 1.00, 0.5],[200, 1.00, 0.5]];
-const warm_fire = [[40,0.90,0.5],[20,1.0,0.45],[0,1.0,0.4]];
+const yellow_to_red = [[37,1,.55],[0,1,.4]];
 const spring_greens = [[50, 1.00, 0.4],[60, 1.00, 0.30],[70, 1.00, 0.2]];
 const pinks_and_purples = [[282,1,0.3],[307,1,0.5]];
 const pale_blues = [[190,0.7,0.8],[210,0.6,0.5],[210,0.6,0.5],[190,0.7,0.8]];
@@ -103,17 +103,22 @@ const orange_and_green_bands = [	[105, 0.45, 0.36], [101, 0.37, 0.48],
 									[98, 0.49, 0.61], [84, 0.61, 0.68], [64, 0.68, 0.72],
 									[47, 1, 0.76], [38, 1, 0.67], [33, 1, 0.59] ];
 									
-const bumble_bee = [[37,1,.5],[38,1,0],[37,1,.5],[38,1,0],[37,1,.5],[38,1,0],
-					[37,1,.5],[38,1,0],[37,1,.5]];
-
+const bumble_bee = [[37,1,.5],[30,.8,.5],[38,1,0],[30,.8,.5],[37,1,.5],
+					[37,1,.5],[30,.8,.5],[38,1,0],[30,.8,.5],[37,1,.5],
+					[37,1,.5],[30,.8,.5],[38,1,0],[30,.8,.5],[37,1,.5]];
+					
+const meadow_green = [	[73,0.72,0.75],[92,0.62,0.72],[110,0.50,0.70],[141,0.43,0.62],
+					[163,0.41,0.52],[182,0.52,0.42],[194,0.77,0.38],[199,0.72,0.36],
+					[206,0.66,0.34],[206,0.66,0.28]];
+					
 export const colourModeFunctions = [
   	{
     	name: "Aqua",
 		fn: (x, y, z) => SmoothPaletteGradient(x, y, z, aqua)
     },
    	{
-    	name: "Warm Fire",
-		fn: (x, y, z) => SmoothPaletteGradient(x, y, z, warm_fire)
+    	name: "Yellow To Red",
+		fn: (x, y, z) => SmoothPaletteGradient(x, y, z, yellow_to_red)
     },
    	{
     	name: "Spring Greens",
@@ -166,5 +171,8 @@ export const colourModeFunctions = [
     {
     	name: "Bumble Bee",
     	fn: (x, y, z) => PaletteColours(x, y, z, bumble_bee, 0.96)
-    }
-];
+    },
+    {
+    	name: "Meadow Green",
+    	fn: (x, y, z) => PaletteColours(x, y, z, meadow_green)
+    }];

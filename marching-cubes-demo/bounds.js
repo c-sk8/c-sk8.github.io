@@ -91,6 +91,13 @@ export class BoundingBox {
 		return `[${this.x.min},${this.x.max},${this.y.min},${this.y.max},${this.z.min},${this.z.max}]`;
 	}
 	
+	getDimensionsString = () => {
+		const width = this.x.max - this.x.min;
+		const height = this.y.max - this.y.min;
+		const depth = this.z.max - this.z.min;
+		return `${width} ${height} ${depth}`;
+	}
+
 	normalize(rMin, rMax) {
 		this.x.min = (this.x.min - rMin) / (rMax - rMin);
 		this.x.max = (this.x.max - rMin) / (rMax - rMin);

@@ -9,14 +9,24 @@
 <body>
 
 <div id="hud">
-    <div>Surface: <span id="surfaceIndex"></span> <span id="surfaceName"></span></div>
-    <div>Surface Variant: <span id="variantIndex"></span></div>
-    <div>Colour Mode: <span id="colourModeIndex"></span> <span id="colourMode"></span></div>
+    <div>Surface: <span id="surfaceIndex"></span> <span id="surfaceName"></span> <span id="variantIndex"></span></div>
+    <div>Colour Mode: <span id="colourMode"></span> <span id="colourModeIndex"></span></div>
+    <div>Bounds: <span id="surfaceBounds"></span></div>
     <div>Vertices: <span id="vertexCount"></span></div>
     <div>Time: <span id="surfGenTime"></span></div>
 </div>
 
+<div class="controls hidden" id="hiddencontrols">
+    <div class="group dimmed">
+        <button id="showControls">H</button>
+    </div>
+</div>
+
 <div class="controls" id="controls">
+
+    <div class="group">
+        <button id="hideControls">H</button>
+    </div>
 
     <div class="group">
         <button id="prevSurface">◀</button>
@@ -39,15 +49,15 @@
     </div>
 
     <div class="group">
-        <button id="flatShading">/</button>
-        <button id="animateSurfaceGeneration">\</button>
+        <button id="flatShading" class="is-active">/</button>
+        <button id="animateSurfaceGeneration" class="is-active">\</button>
     </div>
 
     <div class="group">
-        <button class="size-btn" id="size50" data-size="50">50</button>
-        <button class="size-btn is-active" id="size100" data-size="100">100</button>
-        <button class="size-btn" id="size150" data-size="150">150</button>
-        <button class="size-btn" id="size200" data-size="200">200</button>
+        <button class="size-btn" id="num1" data-size="50">1</button>
+        <button class="size-btn is-active" id="num2" data-size="100">2</button>
+        <button class="size-btn" id="num3" data-size="150">3</button>
+        <button class="size-btn" id="num4" data-size="200">4</button>
     </div>
 
 </div>

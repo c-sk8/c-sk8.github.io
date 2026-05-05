@@ -23,7 +23,7 @@ let material = null;
 let geometry = null;
 let generationToken = 0;
 let generationStartTime = 0;
-let flatShading = false;
+let flatShading = true;
 let slice0 = null;
 let slice1 = null;
 
@@ -99,6 +99,8 @@ function generateGeometry(token, fieldIndex) {
 	bounds.expand(1);
 	bounds.roundout();
 	bounds.clamp(0,marching_grid_size);
+
+    document.getElementById("surfaceBounds").textContent = bounds.getDimensionsString();
 
 	setCubeSpaceBounds(bounds);  // Let the colouring code know who big the surface is
 

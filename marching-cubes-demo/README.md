@@ -12,8 +12,9 @@ A real-time marching cubes surface visualiser with progressive slice-by-slice re
 - Runs in any modern browser — including phones and tablets
 - Adjustable **speed and detail levels**
 - Multiple **field functions** (Decocube, torus variants, etc.)
+- Different versions of each field function
 - Various **colour modes and surface patterns**
-- Optimised for performance using cached field evaluation
+- Optimised for performance using cached field evaluation and bounding boxes
 
 ---
 
@@ -25,17 +26,15 @@ Click the on-screen buttons or use the keyboard:
 | --- | --- |
 | Left Arrow | Previous field function |
 | Right Arrow | Next field function |
-| Up Arrow | Next colour / pattern mode |
-| Down Arrow | Previous colour / pattern mode |
+| Up Arrow | Next variant of field function |
+| Down Arrow | Previous variant of field function |
+| ] | Next colour / pattern mode |
+| [ | Previous colour / pattern mode |
 | / | Toggle flat shading / smooth normals |
+| \ | Toggle suface generation animation |
 | W or + | Zoom in |
 | S or - | Zoom out |
-
----
-
-## Screenshots
-
-<img src="https://raw.githubusercontent.com/c-sk8/marching-cubes-demo/refs/heads/main/screenshots/marching-cubes-1.jpg" width="295"/> <img src="https://raw.githubusercontent.com/c-sk8/marching-cubes-demo/refs/heads/main/screenshots/marching-cubes-2.jpg" width="295"/>
+| h or H | Hide and show controls |
 
 ---
 

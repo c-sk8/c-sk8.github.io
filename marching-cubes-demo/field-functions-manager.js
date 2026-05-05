@@ -9,7 +9,8 @@ import {	Decocube, Tooth, SuperSphere, GumdropTorus, SinusoidalSphere,
 			ChairSurface, GeodesicPointsSphereOptimized, TwistedWaveTorus,
 			MoebiusStrip, AlgebraicSurface, SurfacePattern, BlobRing,
 			PiriformDiabolo, SuperSphereCluster, Tetrahedral, ThreeTori,
-			RadialWaveSphere, FlattenedWavePattern, SpheredSchwarzP
+			RadialWaveSphere, FlattenedWavePattern, SpheredSchwarzP,
+			Rhombicuboctahedron, GyroidFloor
  			} from './field-functions.js';
 
 export function getNextFieldFunctionIndex(index) {
@@ -34,8 +35,8 @@ export function getVariantsCount(index) {
 }
 
 export function getVariantBounds(index) {
-	const v_index = fieldList[index].currentVariant;
-	return fieldList[index].variants[v_index].bounds;
+	const v_index = fieldList[index]?.currentVariant;
+	return fieldList[index]?.variants?.[v_index]?.bounds ?? [0, 1, 0, 1, 0, 1];
 }
 
 export function getFieldFunction(index) {
@@ -113,21 +114,14 @@ const fieldList = [
 	name: "Decocube",
 	fn: Decocube,
 	colourMode: 0,
-	currentVariant: 1,
+	currentVariant: 3,
 	variants: [
-		{ params: [1.4, 1, 0.01], bounds: [0.1,0.9,0.1,0.9,0.1,0.9] },
-		{ params: [1.38, 0.9, 0.04], bounds: [0.087,0.913,0.087,0.913,0.087,0.913] },
-		{ params: [1.36, 0.8, 0.08], bounds: [0.078,0.922,0.078,0.922,0.078,0.922] },
-		{ params: [1.34, 0.7, 0.12], bounds: [0.073,0.927,0.073,0.927,0.073,0.927] },
-		{ params: [1.32, 0.6, 0.16], bounds: [0.067,0.933,0.067,0.933,0.067,0.933] },
-		{ params: [1.3, 0.5, 0.2], bounds: [0.062,0.938,0.062,0.938,0.062,0.938] },
-		{ params: [1.28, 0.4, 0.24], bounds: [0.057,0.943,0.057,0.943,0.057,0.943] },
-		{ params: [1.26, 0.3, 0.28], bounds: [0.052,0.948,0.052,0.948,0.052,0.948] },
-		{ params: [1.24, 0.2, 0.32], bounds: [0.046,0.954,0.046,0.954,0.046,0.954] },
-		{ params: [1.22, 0.1, 0.36], bounds: [0.04,0.96,0.04,0.96,0.04,0.96] },
-		{ params: [1.2, 0, 0.4], bounds: [0.034,0.966,0.034,0.966,0.034,0.966] },
-		{ params: [1.2, -0.1, 0.44], bounds: [0.039,0.961,0.039,0.961,0.039,0.961] },
-		{ params: [1.2, -0.2, 0.48], bounds: [0.054,0.946,0.054,0.946,0.054,0.946] }
+		{ params: [1.9, 3, 2] },
+		{ params: [1.6, 2, 0.2] },
+		{ params: [1.2, 1, 0.03] },
+		{ params: [1.2, 0.9, 0.01] },
+		{ params: [1.2, 0.4, 0.08] },
+		{ params: [1.2, 0.2, 0.08] }
 	]
 },
 {
@@ -146,22 +140,6 @@ const fieldList = [
 		{ params: [1.3, 0.52], bounds: [0.078,0.922,0.078,0.922,0.078,0.922] },
 		{ params: [1.3, 0.42], bounds: [0.072,0.928,0.072,0.928,0.072,0.928] },
 		{ params: [1.3, 0.32], bounds: [0.066,0.934,0.066,0.934,0.066,0.934] }
-	]
-},
-{
-	name: "Super Sphere",
-	fn: SuperSphere,
-	colourMode: 2,
-	currentVariant: 2,
-	variants: [
-		{ params: [1, 1], bounds: [0.226,0.774,0.226,0.774,0.226,0.774] },
-		{ params: [1, 1.5], bounds: [0.165,0.835,0.165,0.835,0.165,0.835] },
-		{ params: [1, 2], bounds: [0.129,0.871,0.129,0.871,0.129,0.871] },
-		{ params: [1, 2.5], bounds: [0.107,0.893,0.107,0.893,0.107,0.893] },
-		{ params: [1, 3], bounds: [0.09,0.91,0.09,0.91,0.09,0.91] },
-		{ params: [1, 3.5], bounds: [0.079,0.921,0.079,0.921,0.079,0.921] },
-		{ params: [1, 4], bounds: [0.069,0.931,0.069,0.931,0.069,0.931] },
-		{ params: [1, 4.5], bounds: [0.062,0.938,0.062,0.938,0.062,0.938] }
 	]
 },
 {
@@ -283,7 +261,7 @@ const fieldList = [
 {
 	name: "Algebraic Surface",
 	fn: AlgebraicSurface,
-	colourMode: 0,
+	colourMode: 15,
 	currentVariant: 7,
 	variants: [
 		{ params: [3.9, 3, 2, 10, 14], bounds: [0.031,0.969,0.031,0.969,0.031,0.969] },
@@ -387,39 +365,33 @@ const fieldList = [
 	colourMode: 5,
 	currentVariant: 7,
 	variants: [
-		{ params: [3.1, 10], bounds: [0.003,0.997,0.003,0.997,0.003,0.997] },
-		{ params: [3.1, 12], bounds: [0.008,0.992,0.008,0.992,0.008,0.992] },
-		{ params: [3.1, 14], bounds: [0.013,0.987,0.013,0.987,0.013,0.987] },
-		{ params: [3.1, 16], bounds: [0.018,0.982,0.018,0.982,0.018,0.982] },
-		{ params: [3.1, 18], bounds: [0.023,0.977,0.023,0.977,0.023,0.977] },
-		{ params: [3.1, 20], bounds: [0.028,0.972,0.028,0.972,0.028,0.972] },
-		{ params: [3.1, 22], bounds: [0.034,0.966,0.034,0.966,0.034,0.966] },
-		{ params: [3.1, 24], bounds: [0.04,0.96,0.04,0.96,0.04,0.96] },
-		{ params: [3.1, 26], bounds: [0.046,0.954,0.046,0.954,0.046,0.954] },
-		{ params: [3.1, 28], bounds: [0.052,0.948,0.052,0.948,0.052,0.948] },
-		{ params: [3.1, 30], bounds: [0.059,0.941,0.059,0.941,0.059,0.941] },
-		{ params: [3.1, 32], bounds: [0.066,0.934,0.066,0.934,0.066,0.934] },
-		{ params: [3.1, 34], bounds: [0.073,0.927,0.073,0.927,0.073,0.927] },
-		{ params: [3.1, 36], bounds: [0.081,0.919,0.081,0.919,0.081,0.919] },
-		{ params: [3.1, 38], bounds: [0.089,0.911,0.089,0.911,0.089,0.911] },
-		{ params: [3.1, 40], bounds: [0.099,0.901,0.099,0.901,0.099,0.901] }
+		{ params: [3.2, 10] },
+		{ params: [3.2, 12] },
+		{ params: [3.2, 14] },
+		{ params: [3.2, 16] },
+		{ params: [3.2, 18] },
+		{ params: [3.2, 20] },
+		{ params: [3.2, 22] },
+		{ params: [3.2, 24] },
+		{ params: [3.2, 26] },
+		{ params: [3.2, 28] },
+		{ params: [3.2, 30] },
+		{ params: [3.2, 32] },
+		{ params: [3.2, 34] },
+		{ params: [3.2, 36] },
+		{ params: [3.2, 38] },
+		{ params: [3.2, 40] }
 	]
 },
 {
 	name: "Drei Tori",
 	fn: ThreeTori,
-	colourMode: 10,
-	currentVariant: 7,
+	colourMode: 11,
+	currentVariant: 0,
 	variants: [
-		{ params: [3.65, 3, 0.46, 0.4], bounds: [0.016,0.984,0.016,0.984,0.016,0.984] },
-		{ params: [3.65, 3, 0.42, 0.6], bounds: [0.017,0.983,0.017,0.983,0.017,0.983] },
-		{ params: [3.65, 3, 0.38, 0.8], bounds: [0.018,0.982,0.018,0.982,0.018,0.982] },
-		{ params: [3.65, 3, 0.34, 1], bounds: [0.019,0.981,0.019,0.981,0.019,0.981] },
-		{ params: [3.65, 3, 0.3, 1.2], bounds: [0.02,0.98,0.02,0.98,0.02,0.98] },
-		{ params: [3.65, 3, 0.26, 1.4], bounds: [0.021,0.979,0.021,0.979,0.021,0.979] },
-		{ params: [3.65, 3, 0.22, 1.6], bounds: [0.022,0.978,0.022,0.978,0.022,0.978] },
-		{ params: [3.65, 3, 0.18, 1.8], bounds: [0.023,0.977,0.023,0.977,0.023,0.977] },
-		{ params: [3.65, 3, 0.15, 2], bounds: [0.022,0.978,0.022,0.978,0.022,0.978] }
+		{ params: [3.9, 3, 0.55, 2] },
+		{ params: [3.9, 3, 0.35, 0.5] },
+		{ params: [3.5, 3, 0.15, 2] }
 	]
 },
 {
@@ -473,5 +445,50 @@ const fieldList = [
 		{ params: [1.9, 0.4, 0.46], bounds: [0.115,0.885,0.115,0.885,0.115,0.885] },
 		{ params: [1.9, 0.36, 0.5], bounds: [0.116,0.884,0.116,0.884,0.116,0.884] }
 	]
+},
+{
+	name: "Rhombicuboctahedron",
+	fn: Rhombicuboctahedron,
+	colourMode: 15,
+	currentVariant: 6,
+	variants: [
+		{ params: [3.1, 1, 2.2, 3.6] },
+		{ params: [3.1, 1, 2.2, 3.1] },
+		{ params: [3.1, 1, 2.2, 2.6] },
+		{ params: [3.1, 1, 2.2, 2.1] },
+		{ params: [3.1, 1, 2.2, 1.6] },
+		{ params: [3.1, 1, 2.2, 1.1] },
+		{ params: [3.1, 1, 2.2, 0.6] },
+		{ params: [3.1, 1, 2.2, 0.1] }
+	]
+},
+{
+	name: "Gyroid Floor",
+	fn: GyroidFloor,
+	colourMode: 5,
+	currentVariant: 0,
+	variants: [
+		{ params: [8, 8], bounds: [0.0000,1.0000,0.5650,0.9372,0.0000,1.0000] }
+	]
 }
 ];
+
+
+/*
+{
+	name: "Super Sphere",
+	fn: SuperSphere,
+	colourMode: 2,
+	currentVariant: 2,
+	variants: [
+		{ params: [1, 1], bounds: [0.226,0.774,0.226,0.774,0.226,0.774] },
+		{ params: [1, 1.5], bounds: [0.165,0.835,0.165,0.835,0.165,0.835] },
+		{ params: [1, 2], bounds: [0.129,0.871,0.129,0.871,0.129,0.871] },
+		{ params: [1, 2.5], bounds: [0.107,0.893,0.107,0.893,0.107,0.893] },
+		{ params: [1, 3], bounds: [0.09,0.91,0.09,0.91,0.09,0.91] },
+		{ params: [1, 3.5], bounds: [0.079,0.921,0.079,0.921,0.079,0.921] },
+		{ params: [1, 4], bounds: [0.069,0.931,0.069,0.931,0.069,0.931] },
+		{ params: [1, 4.5], bounds: [0.062,0.938,0.062,0.938,0.062,0.938] }
+	]
+},
+*/

@@ -9,11 +9,14 @@ import * as THREE from './three.module.js';
 
 export const scene = new THREE.Scene();
 const ambiLight = new THREE.AmbientLight(0x2a2a2a);
-const light = new THREE.DirectionalLight(0xffffee, 1);
+const top_light = new THREE.DirectionalLight(0xffffff, 1);
+const bottom_light = new THREE.DirectionalLight(0xffffff, 0.2);
 
 scene.background = new THREE.Color('black');
 
-light.position.set(1,1,2);
+top_light.position.set(1,1,2);
+bottom_light.position.set(-1,-1,2);
 
 scene.add(ambiLight);
-scene.add(light);
+scene.add(top_light);
+scene.add(bottom_light);

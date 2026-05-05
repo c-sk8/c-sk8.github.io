@@ -11,7 +11,7 @@ import {	animate } from './animate.js';
 import { 	updateHUD } from './hud.js';
 //import {	generateAllBounds } from './bounds-generator.js';
 
-rebuildSurface(0);
+rebuildSurface(0, true);
 updateHUD();
 animate();
 

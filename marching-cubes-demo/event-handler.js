@@ -15,7 +15,7 @@ import {	getNextFieldIndex, getPreviousFieldIndex,
 import { 	updateHUD } from './hud.js';
 import {	getColourModeCount } from './colour-modes.js';
 
-let animateSurfaceGeneration = false;
+let animateSurfaceGeneration = true;
 export let fieldIndex = 0;
 
 function toggleAnimateSurfaceGeneration() {
@@ -25,6 +25,24 @@ function toggleAnimateSurfaceGeneration() {
 // ============================================================
 //	Handle button presses
 // ============================================================
+
+document.getElementById("hideControls").onclick = () => {
+    const hud = document.getElementById('hud');
+    const controls = document.getElementById('controls');
+    const hiddencontrols = document.getElementById('hiddencontrols');
+	hud.classList.toggle('hidden');
+	controls.classList.toggle('hidden');
+	hiddencontrols.classList.toggle('hidden');
+}
+
+document.getElementById("showControls").onclick = () => {
+    const hud = document.getElementById('hud');
+    const controls = document.getElementById('controls');
+    const hiddencontrols = document.getElementById('hiddencontrols');
+	hud.classList.toggle('hidden');
+	controls.classList.toggle('hidden');
+	hiddencontrols.classList.toggle('hidden');
+}
 
 document.getElementById("nextSurface").onclick = () => {
     resetRotationVelocity();
@@ -116,8 +134,32 @@ sizeButtons.forEach(button => {
 //	Handle key presses
 // ============================================================
 
+const buttons = [
+    document.getElementById("num1"),
+    document.getElementById("num2"),
+    document.getElementById("num3"),
+    document.getElementById("num4")
+];
+
 window.addEventListener('keydown', (e) => {
 
+	const index = parseInt(e.key, 10) - 1;
+
+    // Only handle keys 1–4
+    if (index >= 0 && index < buttons.length) {
+        const selectedButton = buttons[index];
+
+        // Toggle active class
+        buttons.forEach(btn => btn.classList.remove('is-active'));
+        selectedButton.classList.add('is-active');
+
+        // Rebuild geometry
+        destroyGeometry();
+        setGridSize(parseInt(selectedButton.dataset.size));
+        initialiseGeometry();
+        rebuildSurface(fieldIndex, animateSurfaceGeneration);
+    }
+    
     if (e.key === 'ArrowRight') {
 		resetRotationVelocity();
 		fieldIndex = getNextFieldIndex(fieldIndex);
@@ -178,12 +220,14 @@ window.addEventListener('keydown', (e) => {
 function setupHUDToggle() {
     const hud = document.getElementById('hud');
     const controls = document.getElementById('controls');
+    const hiddencontrols = document.getElementById('hiddencontrols');
 
     window.addEventListener('keydown', (event) => {
         // Check if the pressed key is "h" or "H"
         if (event.key.toLowerCase() === 'h') {
             hud.classList.toggle('hidden');
             controls.classList.toggle('hidden');
+            hiddencontrols.classList.toggle('hidden');
         }
     });
 }

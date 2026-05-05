@@ -308,15 +308,6 @@ export function SurfacePattern(x, y, z, params) {
     let sy = -y * vertical_scale;
     let sz = z * horizontal_scale;
 	
-	// A "Gyroid" floor
-	//const gyroid = Math.sin(sx) * Math.cos(sy) + 
-    //           Math.sin(sy) * Math.cos(sz) + 
-    //           Math.sin(sz) * Math.cos(sx);
-	//const surface_top = gyroid + (sy * 0.5) + 2; 
-
-	// The Schwarz P Surface	
-	// const surface_top = Math.cos(sx) + Math.cos(sy) + Math.cos(sz) + 0.1;
-
 	const surface_top =	Math.cos(sx) * Math.cos(sz) +
 			Math.cos((SQRT3*sx-sz)/2) * Math.cos((sx + SQRT3 * sz)/2) +
 			Math.cos((SQRT3*sx+sz)/2) * Math.cos((sx - SQRT3 * sz)/2) + sy + 6;
@@ -595,4 +586,63 @@ export function SpheredSchwarzP(x, y, z, params) {
     const final_surface = (surface_field * mask) + 1.0; 
     
     return final_surface;
+}
+
+export function Rhombicuboctahedron(x, y, z, params) {
+
+    const scale = params[0];
+    const b = params[1];
+    const c = params[2];
+    const t = params[3];
+
+    // Scale once
+    x *= scale;
+    y *= scale;
+    z *= scale;
+
+    // Precompute squares
+    const x2 = x * x * 0.3;
+    const y2 = y * y * 0.3;
+    const z2 = z * z * 0.3;
+
+    // Precompute (v - 1)^2 and (v + 1)^2 efficiently
+    const xm1 = x - 1, xp1 = x + 1;
+    const ym1 = y - 1, yp1 = y + 1;
+    const zm1 = z - 1, zp1 = z + 1;
+
+    const xpm = xm1 * xm1 * xp1 * xp1; // (x-1)^2 * (x+1)^2
+    const ypm = ym1 * ym1 * yp1 * yp1;
+    const zpm = zm1 * zm1 * zp1 * zp1;
+
+    // Precompute shared sums
+    const xy = x2 + y2 - c;
+    const yz = y2 + z2 - c;
+    const zx = z2 + x2 - c;
+
+    const term1 = xy * xy + zpm;
+    const term2 = yz * yz + xpm;
+    const term3 = zx * zx + ypm;
+
+    const core = term1 * term2 * term3;
+
+    const subtract = t * (1 + b * (x2 + y2 + z2));
+
+    return core - subtract;
+}
+
+export function GyroidFloor(x, y, z, params) {
+	
+	const horizontal_scale = params[0];
+	const vertical_scale = params[1];
+	
+    let sx = x * horizontal_scale;
+    let sy = -y * vertical_scale;
+    let sz = z * horizontal_scale;
+	
+	const gyroid = Math.sin(sx) * Math.cos(sy) + 
+               Math.sin(sy) * Math.cos(sz) + 
+               Math.sin(sz) * Math.cos(sx);
+	const surface_top = gyroid + (sy * 0.5) + 2; 
+
+    return surface_top;
 }
