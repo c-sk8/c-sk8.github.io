@@ -258,7 +258,10 @@ export function CubeMarcher(flatShading, bounds, field_function, field_function_
 		}
 		
 		slice0 = slice1;
-		slice1 = precomputeSlice(z + 1, bounds, field_function, field_function_params);
+		
+		// Here was a difficult bug to fix, this line used z + 1, but it needs to be
+		// z + 2, otherwise one line looks wrong!
+		slice1 = precomputeSlice(z + 2, bounds, field_function, field_function_params);
 	}
 }
 
