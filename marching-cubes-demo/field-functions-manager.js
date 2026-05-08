@@ -427,26 +427,6 @@ const fieldList = [
 	]
 },
 {
-	name: "Sphered Schwarz P",
-	fn: SpheredSchwarzP,
-	colourMode: 11,
-	currentVariant: 4,
-	variants: [
-		{ params: [1.9, 0.8, 0.06], bounds: [0.093,0.907,0.093,0.907,0.093,0.907] },
-		{ params: [1.9, 0.76, 0.1], bounds: [0.098,0.902,0.098,0.902,0.098,0.902] },
-		{ params: [1.9, 0.72, 0.14], bounds: [0.101,0.899,0.101,0.899,0.101,0.899] },
-		{ params: [1.9, 0.68, 0.18], bounds: [0.104,0.896,0.104,0.896,0.104,0.896] },
-		{ params: [1.9, 0.64, 0.22], bounds: [0.106,0.894,0.106,0.894,0.106,0.894] },
-		{ params: [1.9, 0.6, 0.26], bounds: [0.108,0.892,0.108,0.892,0.108,0.892] },
-		{ params: [1.9, 0.56, 0.3], bounds: [0.109,0.891,0.109,0.891,0.109,0.891] },
-		{ params: [1.9, 0.52, 0.34], bounds: [0.111,0.889,0.111,0.889,0.111,0.889] },
-		{ params: [1.9, 0.48, 0.38], bounds: [0.112,0.888,0.112,0.888,0.112,0.888] },
-		{ params: [1.9, 0.44, 0.42], bounds: [0.113,0.887,0.113,0.887,0.113,0.887] },
-		{ params: [1.9, 0.4, 0.46], bounds: [0.115,0.885,0.115,0.885,0.115,0.885] },
-		{ params: [1.9, 0.36, 0.5], bounds: [0.116,0.884,0.116,0.884,0.116,0.884] }
-	]
-},
-{
 	name: "Rhombicuboctahedron",
 	fn: Rhombicuboctahedron,
 	colourMode: 15,
@@ -463,16 +443,26 @@ const fieldList = [
 	]
 },
 {
-	name: "Gyroid Floor",
-	fn: GyroidFloor,
-	colourMode: 5,
+	name: "Sphered Schwarz P",
+	fn: SpheredSchwarzP,
+	colourMode: 1,
 	currentVariant: 0,
 	variants: [
-		{ params: [8, 8], bounds: [0.0000,1.0000,0.5650,0.9372,0.0000,1.0000] }
+		{ params: [2, 0.6, 1.5], bounds: [0.1251,0.8749,0.1251,0.8749,0.1251,0.8749] },
+		{ params: [2, 1, 1.5], bounds: [0.0259,0.9741,0.0259,0.9741,0.0259,0.9741] },
+		{ params: [1, 1, 1], bounds: [0.0707,0.9293,0.0707,0.9293,0.0707,0.9293] }
+	]
+},
+{
+	name: "Gyroid Floor Sphere",
+	fn: GyroidFloor,
+	colourMode: 2,
+	currentVariant: 0,
+	variants: [
+		{ params: [9, 9], bounds: [0.0094,0.9693,0.1839,0.6940,0.0040,0.9885] }
 	]
 }
 ];
-
 
 /*
 {
