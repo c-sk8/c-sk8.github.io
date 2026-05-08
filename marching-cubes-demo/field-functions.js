@@ -546,46 +546,19 @@ export function FlattenedWavePattern(x, y, z, params) { //scale = 12, flatness =
 
 export function SpheredSchwarzP(x, y, z, params) {
 
-	const lattice_density = params[0]; // Higher values mean more, smaller holes
-	const spherical_radius = params[1]; // Size of the final sphere
-    const boundary_smoothness = params[2];
-	const lattice_thickness = 0; // How 'thick' the walls of the tubes are
+	const density = params[0];
+	const radius = params[1];
+    const smoothness = params[2];
 
-    // 1. Calculate distance from the origin (assuming 0,0,0 is center)
-    // The marching cubes bounds must center the pattern.
-    const distSq = (x * x) + (y * y) + (z * z);
-    const distance = Math.sqrt(distSq);
-
-    // 2. Generate the high-frequency networked lattice
-    // We use high-frequency sine waves to create the texture.
-    const frequency = lattice_density * TWO_PI;
-    
-    // A simplified field that approximates the periodic structure
-    // (similar to P-surface but with density and scale)
+    const frequency = density * TWO_PI;
     const raw_lattice_field = Math.cos(x * frequency) +
                               Math.cos(y * frequency) +
                               Math.cos(z * frequency);
 
-    // 3. Create a clean boundary 'mask' for the sphere.
-    // The mask is positive inside the sphere and negative outside.
-    // We can use a smooth falloff function.
     
-    // This function creates a value of 1.0 inside the radius, 
-    // decaying smoothly to 0.0 outside, over a narrow region.
-    const mask = 1.0 - Math.tanh((distance - spherical_radius) / boundary_smoothness);
-    
-    // 4. Final Field Combine: Apply Thickness and Mask
-    // We can add thickness by biasing the field towards a specific isovalue,
-    // and then apply the spherical boundary to 'cut' the pattern.
-    
-    // Adding thickness
-    let surface_field = raw_lattice_field - (1.0 - lattice_thickness);
+    const sphere = (x * x) + (y * y) + (z * z) - radius;
 
-    // Apply the mask and shift for a final surface top, 
-    // ensuring positive values are inside the final structure.
-    const final_surface = (surface_field * mask) + 1.0; 
-    
-    return final_surface;
+    return smoothMax(raw_lattice_field, sphere, smoothness);
 }
 
 export function Rhombicuboctahedron(x, y, z, params) {
@@ -636,13 +609,15 @@ export function GyroidFloor(x, y, z, params) {
 	const vertical_scale = params[1];
 	
     let sx = x * horizontal_scale;
-    let sy = -y * vertical_scale;
+    let sy = (y-0.6) * vertical_scale;
     let sz = z * horizontal_scale;
 	
+    const sphere = (x * x) + (y * y * 2.5) + (z * z) - 1;
+
 	const gyroid = Math.sin(sx) * Math.cos(sy) + 
                Math.sin(sy) * Math.cos(sz) + 
                Math.sin(sz) * Math.cos(sx);
 	const surface_top = gyroid + (sy * 0.5) + 2; 
 
-    return surface_top;
+    return smoothMax(surface_top, sphere, 3);
 }

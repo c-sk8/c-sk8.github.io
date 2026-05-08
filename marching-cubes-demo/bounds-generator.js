@@ -20,22 +20,24 @@ for (let i = 0; i < 256; i++) {
 
 export function generateAllBounds() {
 
-	const f_count = getFieldsCount();
-	
-	for(let index = 0; index < f_count; index++) {
-		let bounds = [];
-		for (let v = 0; v < getVariantsCount(index); v++) {
-			bounds[v] = CalculateSurfaceBounds(
-				getFieldFunction(index),
-				getVariantParams(index, v),
-				200);
-				
-			bounds[v].normalize(-1,1);
-			bounds[v].round(4);
-		}
-		
-		outputToLog(index, bounds);
+//	const f_count = getFieldsCount();
+//	for(let index = 0; index < f_count; index++) {
+//	}
+
+	const index = 18;
+
+	let bounds = [];
+	for (let v = 0; v < getVariantsCount(index); v++) {
+		bounds[v] = CalculateSurfaceBounds(
+			getFieldFunction(index),
+			getVariantParams(index, v),
+			200);
+			
+		bounds[v].normalize(-1,1);
+		bounds[v].round(4);
 	}
+	
+	outputToLog(index, bounds);
 }
 
 function outputToLog(index, bounds)
