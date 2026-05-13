@@ -114,7 +114,7 @@ const fieldList = [
 	name: "Decocube",
 	fn: Decocube,
 	colourMode: 0,
-	currentVariant: 3,
+	currentVariant: 2,
 	variants: [
 		{ params: [1.9, 3, 2] },
 		{ params: [1.6, 2, 0.2] },

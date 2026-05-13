@@ -8,7 +8,13 @@
 import {	rebuildSurface, toggleFlatShading,
 			initialiseGeometry, destroyGeometry} from './surface-builder.js';
 import {	setGridSize} from './cube-marcher.js';
-import {	zoomIn, zoomOut, resetRotationVelocity } from './animate.js';
+import {	zoomIn, zoomOut, resetRotationVelocity,
+			set_X_RotationVelocity, set_Y_RotationVelocity,
+			isUpsideDown,
+			set_X_TargetRotationVelocity, get_X_TargetRotationVelocity,
+			set_Y_TargetRotationVelocity, get_Y_TargetRotationVelocity,
+			set_Z_TargetRotationVelocity, get_Z_TargetRotationVelocity,
+			} from './animate.js';
 import {	getNextFieldIndex, getPreviousFieldIndex,
 			nextVariant, previousVariant,
 			nextColourMode, previousColourMode } from './field-functions-manager.js';
@@ -130,6 +136,46 @@ sizeButtons.forEach(button => {
     };
 });
 
+const xRotationButton = document.getElementById("xRotation");
+const yRotationButton = document.getElementById("yRotation");
+const zRotationButton = document.getElementById("zRotation");
+
+xRotationButton.onclick = () => {
+	const x_trv = get_X_TargetRotationVelocity();
+	if(x_trv == 0) {
+		set_X_TargetRotationVelocity(1.5);
+		xRotationButton.classList.add('is-active');
+	}
+	else {
+		set_X_TargetRotationVelocity(0);
+		xRotationButton.classList.remove('is-active');
+	}	
+}
+
+yRotationButton.onclick = () => {
+	const y_trv = get_Y_TargetRotationVelocity();
+	if(y_trv == 0) {
+		set_Y_TargetRotationVelocity(1.5);
+		yRotationButton.classList.add('is-active');
+	}
+	else {
+		set_Y_TargetRotationVelocity(0);
+		yRotationButton.classList.remove('is-active');
+	}	
+}
+
+zRotationButton.onclick = () => {
+	const z_trv = get_Z_TargetRotationVelocity();
+	if(z_trv == 0) {
+		set_Z_TargetRotationVelocity(1.5);
+		zRotationButton.classList.add('is-active');
+	}
+	else {
+		set_Z_TargetRotationVelocity(0);
+		zRotationButton.classList.remove('is-active');
+	}	
+}
+
 // ============================================================
 //	Handle key presses
 // ============================================================
@@ -231,6 +277,93 @@ function setupHUDToggle() {
         }
     });
 }
+
+// ============================================================
+//	Handle touch
+// ============================================================
+
+let rotX = 0;
+let rotY = 0;
+
+let lastX = 0;
+let lastY = 0;
+
+window.addEventListener("touchstart", e => {
+	const touch = e.touches[0];
+	lastX = touch.clientX;
+	lastY = touch.clientY;
+});
+
+window.addEventListener("touchmove", e => {
+
+	e.preventDefault();
+
+	const touch = e.touches[0];
+
+	const dx = touch.clientX - lastX;
+	const dy = touch.clientY - lastY;
+
+	const rotY = isUpsideDown()
+		? -dx
+		:  dx;
+
+	const rotX = dy;
+
+	set_X_RotationVelocity(rotX);
+	set_Y_RotationVelocity(rotY);
+
+	lastX = touch.clientX;
+	lastY = touch.clientY;
+
+}, { passive: false });
+
+// ============================================================
+//	Handle mouse and trackpad
+// ============================================================
+
+let dragging = false;
+
+window.addEventListener("mousedown", e => {
+
+	dragging = true;
+
+	lastX = e.clientX;
+	lastY = e.clientY;
+
+});
+
+window.addEventListener("mousemove", e => {
+
+	if (!dragging) return;
+
+	const dx = e.clientX - lastX;
+	const dy = e.clientY - lastY;
+
+	let rotY = isUpsideDown() ? -dx :  dx;
+	let rotX = dy;
+
+	const MAX_SPEED = 50;
+	
+	rotX = Math.max(-MAX_SPEED,
+		Math.min(MAX_SPEED, rotX));
+	
+	rotY = Math.max(-MAX_SPEED,
+		Math.min(MAX_SPEED, rotY));
+	
+	set_X_RotationVelocity(rotX);
+	set_Y_RotationVelocity(rotY);
+
+	lastX = e.clientX;
+	lastY = e.clientY;
+
+});
+
+window.addEventListener("mouseup", () => {
+
+	dragging = false;
+
+});
+
 
 // Initialize the listener
 setupHUDToggle();

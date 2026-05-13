@@ -52,7 +52,7 @@ export let colors;
 //	MARCHING CUBES FUNCTIONS
 // ============================================================
 
-export function setGridSize(size = 100) {
+export function setGridSize(size = 150) {
 
     marching_grid_size = size;
     vertex_scale = 2 / marching_grid_size;
