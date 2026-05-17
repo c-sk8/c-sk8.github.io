@@ -35,6 +35,7 @@ Click the on-screen buttons or use the keyboard:
 | W or + | Zoom in |
 | S or - | Zoom out |
 | h or H | Hide and show controls |
+| 1, 2, 3, 4 | Level of detail |
 
 ---
 

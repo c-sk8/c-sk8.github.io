@@ -5,7 +5,7 @@
 // Free Software Foundation, version 3.
 // =====================================================================================
 
-import {	fieldIndex } from './event-handler.js';
+import {	fieldIndex } from './event-process.js';
 import {	getColourModeName,  getColourModeIndexString} from './colour-modes.js';
 import {	getFieldIndexString, getFieldName, getVariantIndexString, getColourMode }
 		 from './field-functions-manager.js';

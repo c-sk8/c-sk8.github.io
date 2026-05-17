@@ -9,7 +9,8 @@ import * as THREE from './three.module.js';
 import {	rebuildSurface } from './surface-builder.js';
 import {	animate } from './animate.js';
 import { 	updateHUD } from './hud.js';
-//import {	generateAllBounds } from './bounds-generator.js';
+import { } from './event-handler.js';
+//import { generateAllBounds } from './bounds-generator.js';
 
 rebuildSurface(0, true);
 updateHUD();

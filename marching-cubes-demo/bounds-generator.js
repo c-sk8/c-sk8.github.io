@@ -24,7 +24,7 @@ export function generateAllBounds() {
 //	for(let index = 0; index < f_count; index++) {
 //	}
 
-	const index = 18;
+	const index = 9;
 
 	let bounds = [];
 	for (let v = 0; v < getVariantsCount(index); v++) {

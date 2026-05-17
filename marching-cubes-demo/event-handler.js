@@ -5,278 +5,72 @@
 // Free Software Foundation, version 3.
 // =====================================================================================
 
-import {	rebuildSurface, toggleFlatShading,
-			initialiseGeometry, destroyGeometry} from './surface-builder.js';
-import {	setGridSize} from './cube-marcher.js';
-import {	zoomIn, zoomOut, resetRotationVelocity,
+import {	zoomIn, zoomOut,
 			set_X_RotationVelocity, set_Y_RotationVelocity,
-			isUpsideDown,
+			isUpsideDown, resetRotation,
 			set_X_TargetRotationVelocity, get_X_TargetRotationVelocity,
 			set_Y_TargetRotationVelocity, get_Y_TargetRotationVelocity,
 			set_Z_TargetRotationVelocity, get_Z_TargetRotationVelocity,
 			} from './animate.js';
-import {	getNextFieldIndex, getPreviousFieldIndex,
-			nextVariant, previousVariant,
+import {	nextVariant, previousVariant,
 			nextColourMode, previousColourMode } from './field-functions-manager.js';
 import { 	updateHUD } from './hud.js';
-import {	getColourModeCount } from './colour-modes.js';
-
-let animateSurfaceGeneration = true;
-export let fieldIndex = 0;
-
-function toggleAnimateSurfaceGeneration() {
-	animateSurfaceGeneration = !animateSurfaceGeneration;
-}
+import {	toggleHideControls, processFlatShadingToggle,
+			nextSurface, previousSurface, fieldIndex, animateGen,
+			doXRotation, doYRotation, doResetRotation,
+			doAnimateGen, doNextVariant, doPrevVariant,
+			doNextColour, doPrevColour, doCubeLevel } from './event-process.js';
 
 // ============================================================
 //	Handle button presses
 // ============================================================
 
-document.getElementById("hideControls").onclick = () => {
-    const hud = document.getElementById('hud');
-    const controls = document.getElementById('controls');
-    const hiddencontrols = document.getElementById('hiddencontrols');
-	hud.classList.toggle('hidden');
-	controls.classList.toggle('hidden');
-	hiddencontrols.classList.toggle('hidden');
-}
-
-document.getElementById("showControls").onclick = () => {
-    const hud = document.getElementById('hud');
-    const controls = document.getElementById('controls');
-    const hiddencontrols = document.getElementById('hiddencontrols');
-	hud.classList.toggle('hidden');
-	controls.classList.toggle('hidden');
-	hiddencontrols.classList.toggle('hidden');
-}
-
-document.getElementById("nextSurface").onclick = () => {
-    resetRotationVelocity();
-    fieldIndex = getNextFieldIndex(fieldIndex);
-    updateHUD();
-	rebuildSurface(fieldIndex, animateSurfaceGeneration);
-}
-
-document.getElementById("prevSurface").onclick = () => {
-    resetRotationVelocity();
-    fieldIndex = getPreviousFieldIndex(fieldIndex);
-    updateHUD();
-	rebuildSurface(fieldIndex, animateSurfaceGeneration);
-}
-
-document.getElementById("nextVariant").onclick = () => {
-    nextVariant(fieldIndex);
-    updateHUD();
-	rebuildSurface(fieldIndex, animateSurfaceGeneration);
-}
-
-document.getElementById("prevVariant").onclick = () => {
-    previousVariant(fieldIndex);
-    updateHUD();
-	rebuildSurface(fieldIndex, animateSurfaceGeneration);
-}
-
-document.getElementById("prevColour").onclick  = () => {
-	previousColourMode(fieldIndex, getColourModeCount());
-    updateHUD();
-	rebuildSurface(fieldIndex, animateSurfaceGeneration);
-}
-
-document.getElementById("nextColour").onclick  = () => {
-	nextColourMode(fieldIndex, getColourModeCount());
-    updateHUD();
-	rebuildSurface(fieldIndex, animateSurfaceGeneration);
-}
-
-document.getElementById("zoomIn").onclick  = () => {
-	zoomIn();
-}
-
-document.getElementById("zoomOut").onclick  = () => {
-	zoomOut();
-}
-
-const flatShadingButton = document.getElementById("flatShading");
-
-flatShadingButton.onclick  = () => {
-	const active = toggleFlatShading();
-	if(active) flatShadingButton.classList.add('is-active');
-	else flatShadingButton.classList.remove('is-active');
-	rebuildSurface(fieldIndex, animateSurfaceGeneration);
-}
-
-const animateSurfaceGenerationButton = document.getElementById("animateSurfaceGeneration");
-
-animateSurfaceGenerationButton.onclick  = () => {
-	toggleAnimateSurfaceGeneration();
-	if(animateSurfaceGeneration) animateSurfaceGenerationButton.classList.add('is-active');
-	else animateSurfaceGenerationButton.classList.remove('is-active');
-	if(animateSurfaceGeneration) rebuildSurface(fieldIndex, animateSurfaceGeneration);
-}
-
-// 1. Grab all buttons with the common class
-const sizeButtons = document.querySelectorAll('.size-btn');
-
-sizeButtons.forEach(button => {
-    button.onclick = () => {
-        // 2. Remove 'is-active' from ALL buttons in the group
-        sizeButtons.forEach(btn => btn.classList.remove('is-active'));
-        
-        // 3. Add 'is-active' only to the one we clicked
-        button.classList.add('is-active');
-
-        // 4. Get the size value from the data attribute (convert string to number)
-        const size = parseInt(button.dataset.size);
-
-        // 5. Run your shared geometry logic once
-        destroyGeometry();
-        setGridSize(size);
-        initialiseGeometry();
-		rebuildSurface(fieldIndex, animateSurfaceGeneration);
-    };
-});
-
-const xRotationButton = document.getElementById("xRotation");
-const yRotationButton = document.getElementById("yRotation");
-const zRotationButton = document.getElementById("zRotation");
-
-xRotationButton.onclick = () => {
-	const x_trv = get_X_TargetRotationVelocity();
-	if(x_trv == 0) {
-		set_X_TargetRotationVelocity(1.5);
-		xRotationButton.classList.add('is-active');
-	}
-	else {
-		set_X_TargetRotationVelocity(0);
-		xRotationButton.classList.remove('is-active');
-	}	
-}
-
-yRotationButton.onclick = () => {
-	const y_trv = get_Y_TargetRotationVelocity();
-	if(y_trv == 0) {
-		set_Y_TargetRotationVelocity(1.5);
-		yRotationButton.classList.add('is-active');
-	}
-	else {
-		set_Y_TargetRotationVelocity(0);
-		yRotationButton.classList.remove('is-active');
-	}	
-}
-
-zRotationButton.onclick = () => {
-	const z_trv = get_Z_TargetRotationVelocity();
-	if(z_trv == 0) {
-		set_Z_TargetRotationVelocity(1.5);
-		zRotationButton.classList.add('is-active');
-	}
-	else {
-		set_Z_TargetRotationVelocity(0);
-		zRotationButton.classList.remove('is-active');
-	}	
-}
+document.getElementById("hideControls").onclick = () => { toggleHideControls(); }
+document.getElementById("showControls").onclick = () => { toggleHideControls(); }
+document.getElementById("zoomIn").onclick  = () => { zoomIn(); }
+document.getElementById("zoomOut").onclick  = () => { zoomOut(); }
+document.getElementById("flatShading").onclick  = () => { processFlatShadingToggle(); }
+document.getElementById("animateGen").onclick  = () => { doAnimateGen(); }
+document.getElementById("nextSurface").onclick = () => { nextSurface(); }
+document.getElementById("prevSurface").onclick = () => { previousSurface(); }
+document.getElementById("xRotation").onclick = () => { doXRotation(); }
+document.getElementById("yRotation").onclick = () => { doYRotation(); }
+document.getElementById("resetRotation").onclick = () => { doResetRotation(); }
+document.getElementById("nextVariant").onclick = () => { doNextVariant(); }
+document.getElementById("prevVariant").onclick = () => { doPrevVariant(); }
+document.getElementById("prevColour").onclick  = () => { doPrevColour(); }
+document.getElementById("nextColour").onclick  = () => { doNextColour(); }
+document.getElementById("num1").onclick  = () => { doCubeLevel(1); }
+document.getElementById("num2").onclick  = () => { doCubeLevel(2); }
+document.getElementById("num3").onclick  = () => { doCubeLevel(3); }
+document.getElementById("num4").onclick  = () => { doCubeLevel(4); }
 
 // ============================================================
 //	Handle key presses
 // ============================================================
 
-const buttons = [
-    document.getElementById("num1"),
-    document.getElementById("num2"),
-    document.getElementById("num3"),
-    document.getElementById("num4")
-];
-
 window.addEventListener('keydown', (e) => {
-
-	const index = parseInt(e.key, 10) - 1;
-
-    // Only handle keys 1–4
-    if (index >= 0 && index < buttons.length) {
-        const selectedButton = buttons[index];
-
-        // Toggle active class
-        buttons.forEach(btn => btn.classList.remove('is-active'));
-        selectedButton.classList.add('is-active');
-
-        // Rebuild geometry
-        destroyGeometry();
-        setGridSize(parseInt(selectedButton.dataset.size));
-        initialiseGeometry();
-        rebuildSurface(fieldIndex, animateSurfaceGeneration);
-    }
     
-    if (e.key === 'ArrowRight') {
-		resetRotationVelocity();
-		fieldIndex = getNextFieldIndex(fieldIndex);
-		updateHUD();
-		rebuildSurface(fieldIndex, animateSurfaceGeneration);
-    }
-
-    if (e.key === 'ArrowLeft') {
-		resetRotationVelocity();
-		fieldIndex = getPreviousFieldIndex(fieldIndex);
-		updateHUD();
-		rebuildSurface(fieldIndex, animateSurfaceGeneration);
-    }
-
-	if (e.key === "ArrowUp") {
-    	nextVariant(fieldIndex);
-    	updateHUD();
-		rebuildSurface(fieldIndex, animateSurfaceGeneration);
-	}
-
-	if (e.key === "ArrowDown") {
-		previousVariant(fieldIndex);
-		updateHUD();
-		rebuildSurface(fieldIndex, animateSurfaceGeneration);
-	}
-
-	if (e.key === "]") {
-		nextColourMode(fieldIndex, getColourModeCount());
-		updateHUD();
-		rebuildSurface(fieldIndex, animateSurfaceGeneration);
-	}
-
-	if (e.key === "[") {
-		previousColourMode(fieldIndex, getColourModeCount());
-		updateHUD();
-		rebuildSurface(fieldIndex, animateSurfaceGeneration);
-	}
-
-	if (e.key === "/") {
-		const active = toggleFlatShading();
-		if(active) flatShadingButton.classList.add('is-active');
-		else flatShadingButton.classList.remove('is-active');
-		rebuildSurface(fieldIndex, animateSurfaceGeneration);
-	}
-
-	if (e.key === "\\") {
-		toggleAnimateSurfaceGeneration();
-		if(animateSurfaceGeneration) animateSurfaceGenerationButton.classList.add('is-active');
-		else animateSurfaceGenerationButton.classList.remove('is-active');
-		if(animateSurfaceGeneration) rebuildSurface(fieldIndex, animateSurfaceGeneration);
-	}
-
+    if (e.key === 'X' || e.key === 'x') doXRotation();
+    if (e.key === 'Y' || e.key === 'y') doYRotation();
+    if (e.key === '=') doResetRotation();
+    if (e.key === 'ArrowRight') nextSurface();
+    if (e.key === 'ArrowLeft') previousSurface();
+	if (e.key === "\\") doAnimateGen();
+	if (e.key === "ArrowUp") doNextVariant();
+	if (e.key === "ArrowDown") doPrevVariant();
     if (e.key === "+" || e.key === "w") zoomIn();
-    if (e.key === "-" || e.key === "s") zoomOut();
+    if (e.key === "-" || e.key === "s") zoomOut();    
+    if (e.key === "h" || e.key === "H") toggleHideControls();
+	if (e.key === "/") processFlatShadingToggle();
+	if (e.key === "]") doNextColour();
+	if (e.key === "[") doPrevColour();
+	if (e.key === "1") doCubeLevel(1);
+	if (e.key === "2") doCubeLevel(2);
+	if (e.key === "3") doCubeLevel(3);
+	if (e.key === "4") doCubeLevel(4);
 
 });
-
-function setupHUDToggle() {
-    const hud = document.getElementById('hud');
-    const controls = document.getElementById('controls');
-    const hiddencontrols = document.getElementById('hiddencontrols');
-
-    window.addEventListener('keydown', (event) => {
-        // Check if the pressed key is "h" or "H"
-        if (event.key.toLowerCase() === 'h') {
-            hud.classList.toggle('hidden');
-            controls.classList.toggle('hidden');
-            hiddencontrols.classList.toggle('hidden');
-        }
-    });
-}
 
 // ============================================================
 //	Handle touch
@@ -363,7 +157,3 @@ window.addEventListener("mouseup", () => {
 	dragging = false;
 
 });
-
-
-// Initialize the listener
-setupHUDToggle();

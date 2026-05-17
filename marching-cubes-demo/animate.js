@@ -37,17 +37,17 @@ document.body.appendChild(renderer.domElement);
 export function zoomIn() { targetCameraZ -= step; }
 export function zoomOut() { targetCameraZ += step; }
 
-export function resetRotationVelocity() {
-	x_rotation_velocity = 0;
-	y_rotation_velocity = 0;
-	z_rotation_velocity = 0;
-}
-
 export function set_X_RotationVelocity(velocity) {
+	if(Math.abs(velocity) > 10)
+    	x_target_rotation_velocity = Math.abs(x_target_rotation_velocity) * Math.sign(velocity);
+
 	x_rotation_velocity = velocity;
 }
 
 export function set_Y_RotationVelocity(velocity) {
+	if(Math.abs(velocity) > 10)
+    	y_target_rotation_velocity = Math.abs(y_target_rotation_velocity) * Math.sign(velocity);
+		
 	y_rotation_velocity = velocity;
 }
 
@@ -77,6 +77,12 @@ export function set_Z_TargetRotationVelocity(target_velocity) {
 
 export function get_Z_TargetRotationVelocity() {
 	return z_target_rotation_velocity;
+}
+
+export function resetRotation() {
+	mesh.rotation.x = 0;
+	mesh.rotation.y = 0;
+	mesh.rotation.z = 0;
 }
 
 export function animate() {
