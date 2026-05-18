@@ -6,22 +6,15 @@ let accumulated_hours = 0;
 let previous_hours = 0;
 
 function intervalAction(animate = true) {
-	let now = new Date();
-    let ukTime = new Intl.DateTimeFormat('en-GB', { 
-        timeZone: 'Europe/London', 
-        hour12: false, 
-        hour: '2-digit', 
-        minute: '2-digit', 
-        second: '2-digit' 
-    }).format(now);
-
-    let [hours, minutes, seconds] = ukTime.split(':').map(Number);
-    
+    const now = new Date();
 	let second_hand = document.querySelector(".second-hand");
 	let minute_hand = document.querySelector(".minute-hand");
 	let hour_hand = document.querySelector(".hour-hand");
 
+	let milliseconds = now.getMilliseconds(); // Gets milliseconds (0-999)
+
 	// Seconds keep going up for continuous smooth animation
+    const seconds = now.getSeconds();
 	
 	if(seconds != previous_seconds)
 	{
@@ -30,30 +23,30 @@ function intervalAction(animate = true) {
 		previous_seconds = seconds;
 	}	
 
-	// Only move the minute hand once every 15 seconds. Less drawing needed.
-	const fminutes =	minutes + (Math.floor(seconds % 60 / 15) * 15) / 60;
+	// Only move the minute hand once every 5 seconds. Less drawing needed.
+	const minutes =	now.getMinutes() + (Math.floor(seconds % 60 / 15) * 15) / 60;
 	
-	if(fminutes != previous_minutes)
+	if(minutes != previous_minutes)
 	{
-		if(fminutes < previous_minutes)
+		if(minutes < previous_minutes)
 			accumulated_minutes += 60;
-		previous_minutes = fminutes;
+		previous_minutes = minutes;
 	}	
 	
 	// Hour hand is redrawn once every minute.
-	const fhours = hours % 12 + (minutes / 60);
+	const hours = now.getHours() % 12 + (now.getMinutes() / 60);
 
-	if(fhours != previous_hours)
+	if(hours != previous_hours)
 	{
-		if(fhours < previous_hours)
+		if(hours < previous_hours)
 			accumulated_hours += 12;
-		previous_hours = fhours;
+		previous_hours = hours;
 	}	
 
     // Calculate hand rotation in degrees
     const secondsDegrees = ((accumulated_seconds + seconds) / 60) * 360;
-    const minutesDegrees = ((accumulated_minutes + fminutes) / 60) * 360;
-    const hoursDegrees = ((accumulated_hours + fhours) / 12) * 360;
+    const minutesDegrees = ((accumulated_minutes + minutes) / 60) * 360;
+    const hoursDegrees = ((accumulated_hours + hours) / 12) * 360;
 
 	if(animate == false)
 	{
@@ -78,7 +71,7 @@ function intervalAction(animate = true) {
 
 intervalAction(false);
 
-const myInterval = setInterval(intervalAction, 1000);
+const myInterval = setInterval(intervalAction, 1);
 
 let resizeTimer;
 
@@ -87,7 +80,7 @@ window.addEventListener("resize", () => {
 	clearTimeout(resizeTimer);
 	resizeTimer = setTimeout(() => {
 		document.body.classList.remove("resize-animation-stopper");
-	}, 1000);
+	}, 1);
 });
 
 document.addEventListener("visibilitychange", () => {
@@ -96,7 +89,7 @@ document.addEventListener("visibilitychange", () => {
 		clearTimeout(resizeTimer);
 		resizeTimer = setTimeout(() => {
 			document.body.classList.remove("resize-animation-stopper");
-		}, 1000);
+		}, 1);
         // console.log("Tab is now visible.");
     } else if (document.visibilityState === "hidden") {
         // console.log("Tab is now hidden.");
