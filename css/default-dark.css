@@ -1,0 +1,115 @@
+:root {
+	--em-colour: orange;
+	--strong-colour: darkseagreen;
+	--anchor-colour: #89adf2;
+	--anchor-hover-colour: orange;
+	--body-background-colour: #1e1e1e;
+	--paragraph-colour: #adadad;
+	--paragraph-colour: #777;
+	--header-colour: #ddd;
+}
+
+strong {
+	color: var(--strong-colour);
+	background:rgba(143,188,143,0.1);
+	border-radius:2px;
+	padding-left: 2px;
+	padding-right: 2px;
+}
+
+a:focus-visible {
+    color: #F0A3C3;
+	background: rgba(255,255,255,0.1);
+}
+
+hr {
+    border-color: #1e1e1e;
+}
+
+code {
+	color: #aaa;
+}
+
+blockquote {
+  border-left: 1px solid #ddd;
+  color: #777;
+}
+
+.highlight pre, pre {
+	background-color: #111;
+	border-color: #ccc;
+	color: #999;
+}
+
+div.main_box {
+	background: #141414;
+}
+
+pre.log {
+	border-width: 0;
+    border-color: none;
+    color: #777;
+    background: #000;
+}
+
+div.nav_container a {
+	background-color: rgba(0,0,0,0.1);
+    color: #444;
+}
+
+div.nav_container a:hover {
+    background-color: #333;
+	color: #bbb;
+}
+
+p.copyright {
+    color: #333;
+}
+
+/* ---------- Form CSS ---------- */
+
+div.control_group label {
+	color: #adadad;
+}
+
+div.controls input[type="password"],
+div.controls input[type="text"],
+div.controls input[type="email"],
+div.controls input[type="file"],
+div.controls input[type="number"],
+div.controls textarea,
+div.controls select {
+	color: #adadad;
+	background-color: #0f0f0f;
+	border-color: black;
+}
+
+div.controls  input[type="button"],
+div.controls  input[type="submit"] {
+	background: #008F85;
+	background-image: none;
+	color: #fff;
+	box-shadow: none;
+	border-color: rgba(0,0,0,0.5);
+}
+
+div.controls input[type="button"]:hover,
+div.controls input[type="submit"]:hover {
+	background: #47B784;
+	background-image: none;
+	color: #fff;
+	box-shadow: none;
+	border-color: rgba(0,0,0,0.5);
+}
+
+div.controls select {
+	color: #adadad;
+	background-image: none;
+	background-color: #222;
+	border-color: #333;
+}
+
+div.controls textarea {
+	background-color: black;
+}
+

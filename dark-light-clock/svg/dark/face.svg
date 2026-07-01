@@ -1,0 +1,587 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 310 310" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g id="Watch-Face-Light" serif:id="Watch Face Light" transform="matrix(1,0,0,1,-95,-95)">
+        <g id="Face-Background" serif:id="Face Background" transform="matrix(1.368153,0,0,1.368153,-76.338593,-127.206098)">
+            <circle cx="238.525" cy="275.705" r="111.83" style="fill:url(#_Linear1);"/>
+        </g>
+        <g id="Inner-Tick-Marks" serif:id="Inner Tick Marks" transform="matrix(1,0,0,1,95,95)">
+            <g id="Hour-Ticks-12" serif:id="Hour Ticks 12" transform="matrix(0.866025,-0.5,0.5,0.866025,-56.733938,98.266062)">
+                <g id="Tick-0" serif:id="Tick 0" transform="matrix(0.246539,0,0,0.07705,93.822907,37.009975)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <path d="M256.256,175.244L256.256,298.541L240.031,298.541L240.031,175.244L256.256,175.244ZM252.2,188.223L244.087,188.223L244.087,285.562L252.2,285.562L252.2,188.223Z" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-01" serif:id="Tick 0" transform="matrix(0.056943,0.023587,-0.029486,0.071185,186.022762,40.138566)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-02" serif:id="Tick 0" transform="matrix(0.059535,0.015952,-0.019942,0.074424,170.764932,37.071939)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-03" serif:id="Tick 0" transform="matrix(0.061107,0.008045,-0.010057,0.076391,155.23736,36.023093)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+            </g>
+            <g id="Hour-Ticks-11" serif:id="Hour Ticks 11" transform="matrix(0.5,-0.866025,0.866025,0.5,-56.733938,211.733938)">
+                <g id="Tick-04" serif:id="Tick 0" transform="matrix(0.246539,0,0,0.07705,93.822907,37.009975)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <path d="M256.256,175.244L256.256,298.541L240.031,298.541L240.031,175.244L256.256,175.244ZM252.2,188.223L244.087,188.223L244.087,285.562L252.2,285.562L252.2,188.223Z" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-05" serif:id="Tick 0" transform="matrix(0.056943,0.023587,-0.029486,0.071185,186.022762,40.138566)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-06" serif:id="Tick 0" transform="matrix(0.059535,0.015952,-0.019942,0.074424,170.764932,37.071939)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-07" serif:id="Tick 0" transform="matrix(0.061107,0.008045,-0.010057,0.076391,155.23736,36.023093)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+            </g>
+            <g id="Hour-Ticks-10" serif:id="Hour Ticks 10" transform="matrix(-0,-1,1,-0,0,310)">
+                <g id="Tick-08" serif:id="Tick 0" transform="matrix(0.246539,0,0,0.07705,93.822907,37.009975)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <path d="M256.256,175.244L256.256,298.541L240.031,298.541L240.031,175.244L256.256,175.244ZM252.2,188.223L244.087,188.223L244.087,285.562L252.2,285.562L252.2,188.223Z" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-09" serif:id="Tick 0" transform="matrix(0.056943,0.023587,-0.029486,0.071185,186.022762,40.138566)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-010" serif:id="Tick 0" transform="matrix(0.059535,0.015952,-0.019942,0.074424,170.764932,37.071939)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-011" serif:id="Tick 0" transform="matrix(0.061107,0.008045,-0.010057,0.076391,155.23736,36.023093)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+            </g>
+            <g id="Hour-Ticks-09" serif:id="Hour Ticks 09" transform="matrix(-0.5,-0.866025,0.866025,-0.5,98.266062,366.733938)">
+                <g id="Tick-012" serif:id="Tick 0" transform="matrix(0.246539,0,0,0.07705,93.822907,37.009975)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <path d="M256.256,175.244L256.256,298.541L240.031,298.541L240.031,175.244L256.256,175.244ZM252.2,188.223L244.087,188.223L244.087,285.562L252.2,285.562L252.2,188.223Z" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-013" serif:id="Tick 0" transform="matrix(0.056943,0.023587,-0.029486,0.071185,186.022762,40.138566)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-014" serif:id="Tick 0" transform="matrix(0.059535,0.015952,-0.019942,0.074424,170.764932,37.071939)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-015" serif:id="Tick 0" transform="matrix(0.061107,0.008045,-0.010057,0.076391,155.23736,36.023093)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+            </g>
+            <g id="Hour-Ticks-08" serif:id="Hour Ticks 08" transform="matrix(-0.866025,-0.5,0.5,-0.866025,211.733938,366.733938)">
+                <g id="Tick-016" serif:id="Tick 0" transform="matrix(0.246539,0,0,0.07705,93.822907,37.009975)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <path d="M256.256,175.244L256.256,298.541L240.031,298.541L240.031,175.244L256.256,175.244ZM252.2,188.223L244.087,188.223L244.087,285.562L252.2,285.562L252.2,188.223Z" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-017" serif:id="Tick 0" transform="matrix(0.056943,0.023587,-0.029486,0.071185,186.022762,40.138566)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-018" serif:id="Tick 0" transform="matrix(0.059535,0.015952,-0.019942,0.074424,170.764932,37.071939)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-019" serif:id="Tick 0" transform="matrix(0.061107,0.008045,-0.010057,0.076391,155.23736,36.023093)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+            </g>
+            <g id="Hour-Ticks-07" serif:id="Hour Ticks 07" transform="matrix(-1,0,-0,-1,310,310)">
+                <g id="Tick-020" serif:id="Tick 0" transform="matrix(0.246539,0,0,0.07705,93.822907,37.009975)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <path d="M256.256,175.244L256.256,298.541L240.031,298.541L240.031,175.244L256.256,175.244ZM252.2,188.223L244.087,188.223L244.087,285.562L252.2,285.562L252.2,188.223Z" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-021" serif:id="Tick 0" transform="matrix(0.056943,0.023587,-0.029486,0.071185,186.022762,40.138566)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-022" serif:id="Tick 0" transform="matrix(0.059535,0.015952,-0.019942,0.074424,170.764932,37.071939)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-023" serif:id="Tick 0" transform="matrix(0.061107,0.008045,-0.010057,0.076391,155.23736,36.023093)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+            </g>
+            <g id="Hour-Ticks-06" serif:id="Hour Ticks 06" transform="matrix(-0.866025,0.5,-0.5,-0.866025,366.733938,211.733938)">
+                <g id="Tick-024" serif:id="Tick 0" transform="matrix(0.246539,0,0,0.07705,93.822907,37.009975)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <path d="M256.256,175.244L256.256,298.541L240.031,298.541L240.031,175.244L256.256,175.244ZM252.2,188.223L244.087,188.223L244.087,285.562L252.2,285.562L252.2,188.223Z" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-025" serif:id="Tick 0" transform="matrix(0.056943,0.023587,-0.029486,0.071185,186.022762,40.138566)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-026" serif:id="Tick 0" transform="matrix(0.059535,0.015952,-0.019942,0.074424,170.764932,37.071939)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-027" serif:id="Tick 0" transform="matrix(0.061107,0.008045,-0.010057,0.076391,155.23736,36.023093)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+            </g>
+            <g id="Hour-Ticks-05" serif:id="Hour Ticks 05" transform="matrix(-0.5,0.866025,-0.866025,-0.5,366.733938,98.266062)">
+                <g id="Tick-028" serif:id="Tick 0" transform="matrix(0.246539,0,0,0.07705,93.822907,37.009975)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <path d="M256.256,175.244L256.256,298.541L240.031,298.541L240.031,175.244L256.256,175.244ZM252.2,188.223L244.087,188.223L244.087,285.562L252.2,285.562L252.2,188.223Z" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-029" serif:id="Tick 0" transform="matrix(0.056943,0.023587,-0.029486,0.071185,186.022762,40.138566)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-030" serif:id="Tick 0" transform="matrix(0.059535,0.015952,-0.019942,0.074424,170.764932,37.071939)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-031" serif:id="Tick 0" transform="matrix(0.061107,0.008045,-0.010057,0.076391,155.23736,36.023093)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+            </g>
+            <g id="Hour-Ticks-04" serif:id="Hour Ticks 04" transform="matrix(0,1,-1,0,310,0)">
+                <g id="Tick-032" serif:id="Tick 0" transform="matrix(0.246539,0,0,0.07705,93.822907,37.009975)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <path d="M256.256,175.244L256.256,298.541L240.031,298.541L240.031,175.244L256.256,175.244ZM252.2,188.223L244.087,188.223L244.087,285.562L252.2,285.562L252.2,188.223Z" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-033" serif:id="Tick 0" transform="matrix(0.056943,0.023587,-0.029486,0.071185,186.022762,40.138566)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-034" serif:id="Tick 0" transform="matrix(0.059535,0.015952,-0.019942,0.074424,170.764932,37.071939)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-035" serif:id="Tick 0" transform="matrix(0.061107,0.008045,-0.010057,0.076391,155.23736,36.023093)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+            </g>
+            <g id="Hour-Ticks-03" serif:id="Hour Ticks 03" transform="matrix(0.5,0.866025,-0.866025,0.5,211.733938,-56.733938)">
+                <g id="Tick-036" serif:id="Tick 0" transform="matrix(0.246539,0,0,0.07705,93.822907,37.009975)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <path d="M256.256,175.244L256.256,298.541L240.031,298.541L240.031,175.244L256.256,175.244ZM252.2,188.223L244.087,188.223L244.087,285.562L252.2,285.562L252.2,188.223Z" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-037" serif:id="Tick 0" transform="matrix(0.056943,0.023587,-0.029486,0.071185,186.022762,40.138566)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-038" serif:id="Tick 0" transform="matrix(0.059535,0.015952,-0.019942,0.074424,170.764932,37.071939)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-039" serif:id="Tick 0" transform="matrix(0.061107,0.008045,-0.010057,0.076391,155.23736,36.023093)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+            </g>
+            <g id="Hour-Ticks-02" serif:id="Hour Ticks 02" transform="matrix(0.866025,0.5,-0.5,0.866025,98.266062,-56.733938)">
+                <g id="Tick-040" serif:id="Tick 0" transform="matrix(0.246539,0,0,0.07705,93.822907,37.009975)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <path d="M256.256,175.244L256.256,298.541L240.031,298.541L240.031,175.244L256.256,175.244ZM252.2,188.223L244.087,188.223L244.087,285.562L252.2,285.562L252.2,188.223Z" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-041" serif:id="Tick 0" transform="matrix(0.056943,0.023587,-0.029486,0.071185,186.022762,40.138566)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-042" serif:id="Tick 0" transform="matrix(0.059535,0.015952,-0.019942,0.074424,170.764932,37.071939)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-043" serif:id="Tick 0" transform="matrix(0.061107,0.008045,-0.010057,0.076391,155.23736,36.023093)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+            </g>
+            <g id="Hour-Ticks-01" serif:id="Hour Ticks 01">
+                <g id="Tick-044" serif:id="Tick 0" transform="matrix(0.246539,0,0,0.07705,93.822907,37.009975)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <path d="M256.256,175.244L256.256,298.541L240.031,298.541L240.031,175.244L256.256,175.244ZM252.2,188.223L244.087,188.223L244.087,285.562L252.2,285.562L252.2,188.223Z" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-045" serif:id="Tick 0" transform="matrix(0.056943,0.023587,-0.029486,0.071185,186.022762,40.138566)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-046" serif:id="Tick 0" transform="matrix(0.059535,0.015952,-0.019942,0.074424,170.764932,37.071939)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-047" serif:id="Tick 0" transform="matrix(0.061107,0.008045,-0.010057,0.076391,155.23736,36.023093)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+            </g>
+        </g>
+        <g id="Outer-Tick-Marks" serif:id="Outer Tick Marks">
+            <g id="Ticks-12" serif:id="Ticks 12" transform="matrix(0.866025,-0.5,0.5,0.866025,-91.506346,158.493379)">
+                <g id="Tick-24" serif:id="Tick 24" transform="matrix(0.056306,0.025069,-0.031339,0.070388,302.728564,93.966687)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-18" serif:id="Tick 18" transform="matrix(0.058618,0.019046,-0.02381,0.073279,286.129846,89.309862)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-12" serif:id="Tick 12" transform="matrix(0.060288,0.012815,-0.01602,0.075366,269.135288,86.413587)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-6" serif:id="Tick 6" transform="matrix(0.061297,0.006443,-0.008054,0.076628,251.931083,85.309593)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-048" serif:id="Tick 0" transform="matrix(0.246539,0,0,0.07705,188.821548,86.009975)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <path d="M256.256,175.244L256.256,298.541L240.031,298.541L240.031,175.244L256.256,175.244ZM252.2,188.223L244.087,188.223L244.087,285.562L252.2,285.562L252.2,188.223Z" style="fill:rgb(45,45,45);"/>
+                </g>
+            </g>
+            <g id="Ticks-11" serif:id="Ticks 11" transform="matrix(0.5,-0.866025,0.866025,0.5,-91.506476,341.505845)">
+                <g id="Tick-241" serif:id="Tick 24" transform="matrix(0.056306,0.025069,-0.031339,0.070388,302.728564,93.966687)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-181" serif:id="Tick 18" transform="matrix(0.058618,0.019046,-0.02381,0.073279,286.129846,89.309862)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-121" serif:id="Tick 12" transform="matrix(0.060288,0.012815,-0.01602,0.075366,269.135288,86.413587)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-61" serif:id="Tick 6" transform="matrix(0.061297,0.006443,-0.008054,0.076628,251.931083,85.309593)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-049" serif:id="Tick 0" transform="matrix(0.246539,0,0,0.07705,188.821548,86.009975)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <path d="M256.256,175.244L256.256,298.541L240.031,298.541L240.031,175.244L256.256,175.244ZM252.2,188.223L244.087,188.223L244.087,285.562L252.2,285.562L252.2,188.223Z" style="fill:rgb(45,45,45);"/>
+                </g>
+            </g>
+            <g id="Ticks-10" serif:id="Ticks 10" transform="matrix(-0,-1,1,-0,-0.000356,499.999354)">
+                <g id="Tick-242" serif:id="Tick 24" transform="matrix(0.056306,0.025069,-0.031339,0.070388,302.728564,93.966687)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-182" serif:id="Tick 18" transform="matrix(0.058618,0.019046,-0.02381,0.073279,286.129846,89.309862)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-122" serif:id="Tick 12" transform="matrix(0.060288,0.012815,-0.01602,0.075366,269.135288,86.413587)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-62" serif:id="Tick 6" transform="matrix(0.061297,0.006443,-0.008054,0.076628,251.931083,85.309593)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-050" serif:id="Tick 0" transform="matrix(0.246539,0,0,0.07705,188.821548,86.009975)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <path d="M256.256,175.244L256.256,298.541L240.031,298.541L240.031,175.244L256.256,175.244ZM252.2,188.223L244.087,188.223L244.087,285.562L252.2,285.562L252.2,188.223Z" style="fill:rgb(45,45,45);"/>
+                </g>
+            </g>
+            <g id="Ticks-09" serif:id="Ticks 09" transform="matrix(-0.5,-0.866025,0.866025,-0.5,158.493023,591.5057)">
+                <g id="Tick-243" serif:id="Tick 24" transform="matrix(0.056306,0.025069,-0.031339,0.070388,302.728564,93.966687)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-183" serif:id="Tick 18" transform="matrix(0.058618,0.019046,-0.02381,0.073279,286.129846,89.309862)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-123" serif:id="Tick 12" transform="matrix(0.060288,0.012815,-0.01602,0.075366,269.135288,86.413587)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-63" serif:id="Tick 6" transform="matrix(0.061297,0.006443,-0.008054,0.076628,251.931083,85.309593)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-051" serif:id="Tick 0" transform="matrix(0.246539,0,0,0.07705,188.821548,86.009975)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <path d="M256.256,175.244L256.256,298.541L240.031,298.541L240.031,175.244L256.256,175.244ZM252.2,188.223L244.087,188.223L244.087,285.562L252.2,285.562L252.2,188.223Z" style="fill:rgb(45,45,45);"/>
+                </g>
+            </g>
+            <g id="Ticks-08" serif:id="Ticks 08" transform="matrix(-0.866025,-0.5,0.5,-0.866025,341.505489,591.50583)">
+                <g id="Tick-244" serif:id="Tick 24" transform="matrix(0.056306,0.025069,-0.031339,0.070388,302.728564,93.966687)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-184" serif:id="Tick 18" transform="matrix(0.058618,0.019046,-0.02381,0.073279,286.129846,89.309862)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-124" serif:id="Tick 12" transform="matrix(0.060288,0.012815,-0.01602,0.075366,269.135288,86.413587)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-64" serif:id="Tick 6" transform="matrix(0.061297,0.006443,-0.008054,0.076628,251.931083,85.309593)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-052" serif:id="Tick 0" transform="matrix(0.246539,0,0,0.07705,188.821548,86.009975)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <path d="M256.256,175.244L256.256,298.541L240.031,298.541L240.031,175.244L256.256,175.244ZM252.2,188.223L244.087,188.223L244.087,285.562L252.2,285.562L252.2,188.223Z" style="fill:rgb(45,45,45);"/>
+                </g>
+            </g>
+            <g id="Ticks-07" serif:id="Ticks 07" transform="matrix(-1,-0,0,-1,499.998998,499.99971)">
+                <g id="Tick-245" serif:id="Tick 24" transform="matrix(0.056306,0.025069,-0.031339,0.070388,302.728564,93.966687)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-185" serif:id="Tick 18" transform="matrix(0.058618,0.019046,-0.02381,0.073279,286.129846,89.309862)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-125" serif:id="Tick 12" transform="matrix(0.060288,0.012815,-0.01602,0.075366,269.135288,86.413587)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-65" serif:id="Tick 6" transform="matrix(0.061297,0.006443,-0.008054,0.076628,251.931083,85.309593)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-053" serif:id="Tick 0" transform="matrix(0.246539,0,0,0.07705,188.821548,86.009975)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <path d="M256.256,175.244L256.256,298.541L240.031,298.541L240.031,175.244L256.256,175.244ZM252.2,188.223L244.087,188.223L244.087,285.562L252.2,285.562L252.2,188.223Z" style="fill:rgb(45,45,45);"/>
+                </g>
+            </g>
+            <g id="Ticks-06" serif:id="Ticks 06" transform="matrix(-0.866025,0.5,-0.5,-0.866025,591.505344,341.506331)">
+                <g id="Tick-246" serif:id="Tick 24" transform="matrix(0.056306,0.025069,-0.031339,0.070388,302.728564,93.966687)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-186" serif:id="Tick 18" transform="matrix(0.058618,0.019046,-0.02381,0.073279,286.129846,89.309862)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-126" serif:id="Tick 12" transform="matrix(0.060288,0.012815,-0.01602,0.075366,269.135288,86.413587)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-66" serif:id="Tick 6" transform="matrix(0.061297,0.006443,-0.008054,0.076628,251.931083,85.309593)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-054" serif:id="Tick 0" transform="matrix(0.246539,0,0,0.07705,188.821548,86.009975)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <path d="M256.256,175.244L256.256,298.541L240.031,298.541L240.031,175.244L256.256,175.244ZM252.2,188.223L244.087,188.223L244.087,285.562L252.2,285.562L252.2,188.223Z" style="fill:rgb(45,45,45);"/>
+                </g>
+            </g>
+            <g id="Ticks-05" serif:id="Ticks 05" transform="matrix(-0.5,0.866025,-0.866025,-0.5,591.505474,158.493865)">
+                <g id="Tick-247" serif:id="Tick 24" transform="matrix(0.056306,0.025069,-0.031339,0.070388,302.728564,93.966687)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-187" serif:id="Tick 18" transform="matrix(0.058618,0.019046,-0.02381,0.073279,286.129846,89.309862)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-127" serif:id="Tick 12" transform="matrix(0.060288,0.012815,-0.01602,0.075366,269.135288,86.413587)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-67" serif:id="Tick 6" transform="matrix(0.061297,0.006443,-0.008054,0.076628,251.931083,85.309593)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-055" serif:id="Tick 0" transform="matrix(0.246539,0,0,0.07705,188.821548,86.009975)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <path d="M256.256,175.244L256.256,298.541L240.031,298.541L240.031,175.244L256.256,175.244ZM252.2,188.223L244.087,188.223L244.087,285.562L252.2,285.562L252.2,188.223Z" style="fill:rgb(45,45,45);"/>
+                </g>
+            </g>
+            <g id="Ticks-04" serif:id="Ticks 04" transform="matrix(0,1,-1,0,500.000493,0.002606)">
+                <g id="Tick-248" serif:id="Tick 24" transform="matrix(0.056306,0.025069,-0.031339,0.070388,302.728564,93.966687)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-188" serif:id="Tick 18" transform="matrix(0.058618,0.019046,-0.02381,0.073279,286.129846,89.309862)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-128" serif:id="Tick 12" transform="matrix(0.060288,0.012815,-0.01602,0.075366,269.135288,86.413587)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-68" serif:id="Tick 6" transform="matrix(0.061297,0.006443,-0.008054,0.076628,251.931083,85.309593)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-056" serif:id="Tick 0" transform="matrix(0.246539,0,0,0.07705,188.821548,86.009975)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <path d="M256.256,175.244L256.256,298.541L240.031,298.541L240.031,175.244L256.256,175.244ZM252.2,188.223L244.087,188.223L244.087,285.562L252.2,285.562L252.2,188.223Z" style="fill:rgb(45,45,45);"/>
+                </g>
+            </g>
+            <g id="Ticks-03" serif:id="Ticks 03" transform="matrix(0.5,0.866025,-0.866025,0.5,341.507165,-91.504662)">
+                <g id="Tick-249" serif:id="Tick 24" transform="matrix(0.056306,0.025069,-0.031339,0.070388,302.728564,93.966687)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-189" serif:id="Tick 18" transform="matrix(0.058618,0.019046,-0.02381,0.073279,286.129846,89.309862)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-129" serif:id="Tick 12" transform="matrix(0.060288,0.012815,-0.01602,0.075366,269.135288,86.413587)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-69" serif:id="Tick 6" transform="matrix(0.061297,0.006443,-0.008054,0.076628,251.931083,85.309593)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-057" serif:id="Tick 0" transform="matrix(0.246539,0,0,0.07705,188.821548,86.009975)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <path d="M256.256,175.244L256.256,298.541L240.031,298.541L240.031,175.244L256.256,175.244ZM252.2,188.223L244.087,188.223L244.087,285.562L252.2,285.562L252.2,188.223Z" style="fill:rgb(45,45,45);"/>
+                </g>
+            </g>
+            <g id="Ticks-02" serif:id="Ticks 02" transform="matrix(0.866025,0.5,-0.5,0.866025,158.494282,-91.505615)">
+                <g id="Tick-2410" serif:id="Tick 24" transform="matrix(0.056306,0.025069,-0.031339,0.070388,302.728564,93.966687)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-1810" serif:id="Tick 18" transform="matrix(0.058618,0.019046,-0.02381,0.073279,286.129846,89.309862)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-1210" serif:id="Tick 12" transform="matrix(0.060288,0.012815,-0.01602,0.075366,269.135288,86.413587)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-610" serif:id="Tick 6" transform="matrix(0.061297,0.006443,-0.008054,0.076628,251.931083,85.309593)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-058" serif:id="Tick 0" transform="matrix(0.246539,0,0,0.07705,188.821548,86.009975)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <path d="M256.256,175.244L256.256,298.541L240.031,298.541L240.031,175.244L256.256,175.244ZM252.2,188.223L244.087,188.223L244.087,285.562L252.2,285.562L252.2,188.223Z" style="fill:rgb(45,45,45);"/>
+                </g>
+            </g>
+            <g id="Ticks-01" serif:id="Ticks 01">
+                <g id="Tick-2411" serif:id="Tick 24" transform="matrix(0.056306,0.025069,-0.031339,0.070388,302.728564,93.966687)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-1811" serif:id="Tick 18" transform="matrix(0.058618,0.019046,-0.02381,0.073279,286.129846,89.309862)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-1211" serif:id="Tick 12" transform="matrix(0.060288,0.012815,-0.01602,0.075366,269.135288,86.413587)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-611" serif:id="Tick 6" transform="matrix(0.061297,0.006443,-0.008054,0.076628,251.931083,85.309593)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                </g>
+                <g id="Tick-059" serif:id="Tick 0" transform="matrix(0.246539,0,0,0.07705,188.821548,86.009975)">
+                    <rect x="240.031" y="175.244" width="16.225" height="123.297" style="fill:rgb(45,45,45);"/>
+                    <path d="M256.256,175.244L256.256,298.541L240.031,298.541L240.031,175.244L256.256,175.244ZM252.2,188.223L244.087,188.223L244.087,285.562L252.2,285.562L252.2,188.223Z" style="fill:rgb(45,45,45);"/>
+                </g>
+            </g>
+        </g>
+        <g id="Rings" transform="matrix(1,0,0,1,95,95)">
+            <g id="Min-Inner-Ring" serif:id="Min Inner Ring" transform="matrix(6.902439,0,0,6.902439,-1180.621951,-656.036585)">
+                <circle cx="193.5" cy="117.5" r="20.5" style="fill:rgb(45,45,45);fill-opacity:0;"/>
+                <path d="M193.5,97C204.814,97 214,106.186 214,117.5C214,128.814 204.814,138 193.5,138C182.186,138 173,128.814 173,117.5C173,106.186 182.186,97 193.5,97ZM193.5,97.155C182.271,97.155 173.155,106.271 173.155,117.5C173.155,128.729 182.271,137.845 193.5,137.845C204.729,137.845 213.845,128.729 213.845,117.5C213.845,106.271 204.729,97.155 193.5,97.155Z" style="fill:rgb(45,45,45);"/>
+            </g>
+            <g id="Min-Outer-Ring" serif:id="Min Outer Ring" transform="matrix(7.365854,0,0,7.365854,-1270.292683,-710.487805)">
+                <circle cx="193.5" cy="117.5" r="20.5" style="fill:rgb(45,45,45);fill-opacity:0;"/>
+                <path d="M193.5,97C204.814,97 214,106.186 214,117.5C214,128.814 204.814,138 193.5,138C182.186,138 173,128.814 173,117.5C173,106.186 182.186,97 193.5,97ZM193.5,97.145C182.266,97.145 173.145,106.266 173.145,117.5C173.145,128.734 182.266,137.855 193.5,137.855C204.734,137.855 213.855,128.734 213.855,117.5C213.855,106.266 204.734,97.145 193.5,97.145Z" style="fill:rgb(45,45,45);"/>
+            </g>
+            <g id="Hour-Outer-Ring" serif:id="Hour Outer Ring" transform="matrix(5.121951,0,0,5.121951,-836.097561,-446.829268)">
+                <circle cx="193.5" cy="117.5" r="20.5" style="fill:rgb(45,45,45);fill-opacity:0;"/>
+                <path d="M193.5,97C204.814,97 214,106.186 214,117.5C214,128.814 204.814,138 193.5,138C182.186,138 173,128.814 173,117.5C173,106.186 182.186,97 193.5,97ZM193.5,97.208C182.301,97.208 173.208,106.301 173.208,117.5C173.208,128.699 182.301,137.792 193.5,137.792C204.699,137.792 213.792,128.699 213.792,117.5C213.792,106.301 204.699,97.208 193.5,97.208Z" style="fill:rgb(45,45,45);"/>
+            </g>
+            <g id="Hour-Inner-Ring" serif:id="Hour Inner Ring" transform="matrix(4.658537,0,0,4.658537,-746.426829,-392.378049)">
+                <circle cx="193.5" cy="117.5" r="20.5" style="fill:rgb(45,45,45);fill-opacity:0;"/>
+                <path d="M193.5,97C204.814,97 214,106.186 214,117.5C214,128.814 204.814,138 193.5,138C182.186,138 173,128.814 173,117.5C173,106.186 182.186,97 193.5,97ZM193.5,97.229C182.312,97.229 173.229,106.312 173.229,117.5C173.229,128.688 182.312,137.771 193.5,137.771C204.688,137.771 213.771,128.688 213.771,117.5C213.771,106.312 204.688,97.229 193.5,97.229Z" style="fill:rgb(45,45,45);"/>
+            </g>
+        </g>
+        <g id="_12-Hour-Numbers" serif:id="12 Hour Numbers">
+            <g transform="matrix(0.866025,0.5,-0.5,0.866025,270.314502,-10.780744)">
+                <g transform="matrix(26.666667,0,0,26.666667,107.637498,123.537714)">
+                    <path d="M0.222,-0L0.222,-0.583L0.01,-0.583L0.01,-0.713L0.377,-0.713L0.377,-0L0.222,-0Z" style="fill:rgb(153,153,153);fill-rule:nonzero;"/>
+                </g>
+            </g>
+            <g transform="matrix(0.5,0.866025,-0.866025,0.5,394.843246,28.875862)">
+                <g transform="matrix(26.666667,0,0,26.666667,107.637498,123.537714)">
+                    <path d="M0.03,-0L0.03,-0.212C0.03,-0.279 0.049,-0.33 0.086,-0.367C0.123,-0.404 0.178,-0.422 0.249,-0.422L0.578,-0.422C0.641,-0.422 0.673,-0.449 0.673,-0.503C0.673,-0.557 0.641,-0.584 0.578,-0.584L0.046,-0.584L0.046,-0.714L0.609,-0.714C0.678,-0.714 0.732,-0.695 0.77,-0.658C0.809,-0.621 0.828,-0.569 0.828,-0.503C0.828,-0.437 0.809,-0.385 0.77,-0.348C0.732,-0.311 0.678,-0.292 0.609,-0.292L0.271,-0.292C0.242,-0.292 0.221,-0.285 0.207,-0.271C0.192,-0.256 0.185,-0.236 0.185,-0.21L0.185,-0.129L0.809,-0.129L0.809,-0L0.03,-0Z" style="fill:rgb(153,153,153);fill-rule:nonzero;"/>
+                </g>
+            </g>
+            <g transform="matrix(0,1,-1,0,486,130.922502)">
+                <g transform="matrix(26.666667,0,0,26.666667,107.637498,123.537714)">
+                    <path d="M0.03,-0L0.03,-0.13L0.58,-0.13C0.605,-0.13 0.624,-0.137 0.637,-0.151C0.65,-0.166 0.656,-0.186 0.656,-0.211C0.656,-0.237 0.65,-0.257 0.637,-0.272C0.624,-0.287 0.605,-0.294 0.58,-0.294L0.124,-0.294L0.124,-0.423L0.579,-0.423C0.63,-0.423 0.656,-0.45 0.656,-0.504C0.656,-0.557 0.63,-0.584 0.579,-0.584L0.03,-0.584L0.03,-0.714L0.609,-0.714C0.678,-0.714 0.732,-0.697 0.77,-0.662C0.809,-0.628 0.828,-0.58 0.828,-0.519C0.828,-0.486 0.822,-0.454 0.809,-0.424C0.796,-0.395 0.775,-0.373 0.746,-0.359C0.775,-0.344 0.796,-0.323 0.809,-0.294C0.822,-0.266 0.828,-0.235 0.828,-0.201C0.828,-0.14 0.809,-0.092 0.77,-0.055C0.732,-0.018 0.678,-0 0.609,-0L0.03,-0Z" style="fill:rgb(153,153,153);fill-rule:nonzero;"/>
+                </g>
+            </g>
+            <g transform="matrix(1,0,0,1,124.546502,14)">
+                <g>
+                    <g transform="matrix(26.666667,0,0,26.666667,107.637498,123.537714)">
+                        <path d="M0.222,-0L0.222,-0.583L0.01,-0.583L0.01,-0.713L0.377,-0.713L0.377,-0L0.222,-0Z" style="fill:rgb(153,153,153);fill-rule:nonzero;"/>
+                    </g>
+                    <g transform="matrix(26.666667,0,0,26.666667,119.557498,123.537714)">
+                        <path d="M0.03,-0L0.03,-0.212C0.03,-0.279 0.049,-0.33 0.086,-0.367C0.123,-0.404 0.178,-0.422 0.249,-0.422L0.578,-0.422C0.641,-0.422 0.673,-0.449 0.673,-0.503C0.673,-0.557 0.641,-0.584 0.578,-0.584L0.046,-0.584L0.046,-0.714L0.609,-0.714C0.678,-0.714 0.732,-0.695 0.77,-0.658C0.809,-0.621 0.828,-0.569 0.828,-0.503C0.828,-0.437 0.809,-0.385 0.77,-0.348C0.732,-0.311 0.678,-0.292 0.609,-0.292L0.271,-0.292C0.242,-0.292 0.221,-0.285 0.207,-0.271C0.192,-0.256 0.185,-0.236 0.185,-0.21L0.185,-0.129L0.809,-0.129L0.809,-0L0.03,-0Z" style="fill:rgb(153,153,153);fill-rule:nonzero;"/>
+                    </g>
+                </g>
+            </g>
+            <g id="_10-Vectors" serif:id="10 Vectors" transform="matrix(0.5,-0.866025,0.866025,0.5,-17.820744,241.879136)">
+                <path d="M113.557,123.538L113.557,107.991L107.904,107.991L107.904,104.524L117.691,104.524L117.691,123.538L113.557,123.538Z" style="fill:rgb(153,153,153);fill-rule:nonzero;"/>
+                <path d="M131.504,123.671C128.073,123.671 125.402,122.858 123.491,121.231C121.58,119.604 120.624,117.191 120.624,113.991C120.624,110.809 121.58,108.404 123.491,106.778C125.402,105.151 128.073,104.338 131.504,104.338L134.971,104.338C138.42,104.338 141.095,105.151 142.997,106.778C144.9,108.404 145.851,110.809 145.851,113.991C145.851,117.191 144.9,119.604 142.997,121.231C141.095,122.858 138.42,123.671 134.971,123.671L131.504,123.671ZM140.064,109.564C138.104,107.551 135.477,107.804 134.677,107.804L131.797,107.804C129.557,107.804 127.86,108.293 126.704,109.271C125.549,110.249 124.971,111.822 124.971,113.991C124.971,115.929 125.423,117.422 126.384,118.418C128.326,120.431 130.98,120.204 131.797,120.204L134.677,120.204C136.917,120.204 138.615,119.711 139.771,118.724C140.926,117.738 141.504,116.16 141.504,113.991C141.504,112.053 141.038,110.565 140.064,109.564Z" style="fill:rgb(153,153,153);"/>
+            </g>
+            <g transform="matrix(0,-1,1,0,14,370.090831)">
+                <g transform="matrix(26.666667,0,0,26.666667,107.637498,123.537714)">
+                    <path d="M0.093,-0L0.093,-0.132L0.519,-0.132C0.579,-0.132 0.626,-0.146 0.661,-0.174C0.696,-0.202 0.718,-0.242 0.727,-0.293L0.249,-0.293C0.18,-0.293 0.127,-0.312 0.088,-0.35C0.049,-0.388 0.03,-0.439 0.03,-0.502C0.03,-0.566 0.049,-0.617 0.088,-0.655C0.127,-0.694 0.18,-0.713 0.249,-0.713L0.533,-0.713C0.611,-0.713 0.678,-0.698 0.733,-0.669C0.788,-0.64 0.831,-0.598 0.86,-0.545C0.889,-0.492 0.904,-0.429 0.904,-0.357C0.904,-0.285 0.889,-0.222 0.86,-0.169C0.831,-0.116 0.788,-0.074 0.733,-0.044C0.678,-0.015 0.611,-0 0.533,-0L0.093,-0ZM0.28,-0.423L0.727,-0.423C0.717,-0.474 0.695,-0.514 0.659,-0.541C0.624,-0.568 0.577,-0.582 0.517,-0.582L0.28,-0.582C0.228,-0.582 0.202,-0.555 0.202,-0.502C0.202,-0.449 0.228,-0.423 0.28,-0.423Z" style="fill:rgb(153,153,153);fill-rule:nonzero;"/>
+                </g>
+            </g>
+            <g transform="matrix(0.866025,-0.5,0.5,0.866025,29.15299,104.996754)">
+                <g>
+                    <g transform="matrix(26.666667,0,0,26.666667,107.637498,123.537714)">
+                        <path d="M0.222,-0L0.222,-0.583L0.01,-0.583L0.01,-0.713L0.377,-0.713L0.377,-0L0.222,-0Z" style="fill:rgb(153,153,153);fill-rule:nonzero;"/>
+                    </g>
+                    <g transform="matrix(26.666667,0,0,26.666667,119.557498,123.537714)">
+                        <path d="M0.222,-0L0.222,-0.583L0.01,-0.583L0.01,-0.713L0.377,-0.713L0.377,-0L0.222,-0Z" style="fill:rgb(153,153,153);fill-rule:nonzero;"/>
+                    </g>
+                </g>
+            </g>
+            <g transform="matrix(1,0,-0,1,129.642502,257.964572)">
+                <g transform="matrix(26.666667,0,0,26.666667,107.637498,123.537714)">
+                    <path d="M0.368,0.001C0.264,0.001 0.183,-0.03 0.126,-0.093C0.069,-0.157 0.04,-0.245 0.04,-0.358C0.04,-0.481 0.076,-0.572 0.147,-0.629C0.219,-0.686 0.319,-0.715 0.448,-0.715L0.851,-0.715L0.851,-0.585L0.459,-0.585C0.386,-0.585 0.329,-0.573 0.287,-0.548C0.244,-0.524 0.218,-0.482 0.208,-0.421L0.675,-0.421C0.749,-0.421 0.807,-0.403 0.85,-0.365C0.893,-0.329 0.914,-0.277 0.914,-0.212C0.914,-0.145 0.893,-0.092 0.85,-0.055C0.807,-0.018 0.749,0.001 0.675,0.001L0.368,0.001ZM0.379,-0.129L0.644,-0.129C0.681,-0.129 0.709,-0.136 0.729,-0.149C0.749,-0.163 0.759,-0.184 0.759,-0.211C0.759,-0.238 0.749,-0.258 0.729,-0.271C0.709,-0.284 0.681,-0.291 0.644,-0.291L0.208,-0.291C0.223,-0.183 0.28,-0.129 0.379,-0.129Z" style="fill:rgb(153,153,153);fill-rule:nonzero;"/>
+                </g>
+            </g>
+            <g transform="matrix(0.866025,0.5,-0.5,0.866025,142.639542,197.212107)">
+                <g transform="matrix(26.666667,0,0,26.666667,107.637498,123.537714)">
+                    <path d="M0.169,-0L0.653,-0.583L0.035,-0.583L0.035,-0.713L0.845,-0.713L0.845,-0.582L0.362,-0L0.169,-0Z" style="fill:rgb(153,153,153);fill-rule:nonzero;"/>
+                </g>
+            </g>
+            <g transform="matrix(0.5,0.866025,-0.866025,0.5,182.537062,149.079909)">
+                <g transform="matrix(26.666667,0,0,26.666667,107.637498,123.537714)">
+                    <path d="M0.289,-0C0.22,-0 0.167,-0.019 0.128,-0.058C0.089,-0.097 0.07,-0.148 0.07,-0.211C0.07,-0.278 0.09,-0.331 0.131,-0.37C0.104,-0.405 0.09,-0.45 0.09,-0.505C0.09,-0.568 0.109,-0.619 0.148,-0.657C0.187,-0.695 0.24,-0.714 0.309,-0.714L0.703,-0.714C0.772,-0.714 0.826,-0.695 0.865,-0.657C0.903,-0.619 0.922,-0.568 0.922,-0.505C0.922,-0.45 0.908,-0.405 0.881,-0.37C0.922,-0.331 0.942,-0.278 0.942,-0.211C0.942,-0.148 0.923,-0.097 0.885,-0.058C0.846,-0.019 0.792,-0 0.723,-0L0.289,-0ZM0.34,-0.426L0.672,-0.426C0.725,-0.426 0.751,-0.453 0.751,-0.506C0.751,-0.557 0.725,-0.582 0.672,-0.582L0.34,-0.582C0.287,-0.582 0.261,-0.557 0.261,-0.506C0.261,-0.453 0.287,-0.426 0.34,-0.426ZM0.32,-0.131L0.692,-0.131C0.745,-0.131 0.771,-0.158 0.771,-0.212C0.771,-0.267 0.745,-0.294 0.692,-0.294L0.32,-0.294C0.268,-0.294 0.242,-0.267 0.242,-0.212C0.242,-0.158 0.268,-0.131 0.32,-0.131Z" style="fill:rgb(153,153,153);fill-rule:nonzero;"/>
+                </g>
+            </g>
+            <g transform="matrix(0.5,-0.866025,0.866025,0.5,196.718773,358.214937)">
+                <g transform="matrix(26.666667,0,0,26.666667,107.637498,123.537714)">
+                    <path d="M0.04,-0.131L0.04,-0.262L0.416,-0.714L0.613,-0.714L0.231,-0.261L0.617,-0.261L0.617,-0.425L0.772,-0.425L0.772,-0.261L0.94,-0.261L0.94,-0.131L0.772,-0.131L0.772,-0L0.617,-0L0.617,-0.131L0.04,-0.131Z" style="fill:rgb(153,153,153);fill-rule:nonzero;"/>
+                </g>
+            </g>
+            <g transform="matrix(0.866025,-0.5,0.5,0.866025,149.749636,317.076271)">
+                <g transform="matrix(26.666667,0,0,26.666667,107.637498,123.537714)">
+                    <path d="M0.07,-0L0.07,-0.13L0.601,-0.13C0.664,-0.13 0.696,-0.157 0.696,-0.211C0.696,-0.265 0.664,-0.292 0.601,-0.292L0.07,-0.292L0.07,-0.714L0.822,-0.714L0.822,-0.585L0.225,-0.585L0.225,-0.422L0.632,-0.422C0.701,-0.422 0.755,-0.403 0.793,-0.366C0.832,-0.329 0.851,-0.277 0.851,-0.211C0.851,-0.145 0.832,-0.093 0.793,-0.056C0.755,-0.019 0.701,-0 0.632,-0L0.07,-0Z" style="fill:rgb(153,153,153);fill-rule:nonzero;"/>
+                </g>
+            </g>
+        </g>
+        <g id="Text">
+        </g>
+    </g>
+    <defs>
+        <linearGradient id="_Linear1" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(-0.000008,223.659174,-223.659174,-0.000008,238.524911,163.875002)"><stop offset="0" style="stop-color:black;stop-opacity:1"/><stop offset="1" style="stop-color:rgb(17,17,17);stop-opacity:1"/></linearGradient>
+    </defs>
+</svg>

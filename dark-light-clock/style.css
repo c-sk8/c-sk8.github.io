@@ -1,0 +1,131 @@
+:root {
+  --clock_size: 100vmin;
+}
+
+html, body {
+    position: fixed;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+body, svg {
+    /* Prevents the user from selecting text or UI elements */
+    -webkit-user-select: none; 
+    user-select: none;
+    
+    /* Prevents default iOS tap highlight flash */
+    -webkit-tap-highlight-color: transparent; 
+    
+    /* Disables pinch-to-zoom over the clock */
+    touch-action: none; 
+}
+
+body {
+	margin:0px;
+	padding:0px;
+	min-height: 100vh;
+	background-image: none;
+	background-color: #F2F2F7;
+}
+
+body.dark {
+	background-color: #1E1E1E;
+}
+
+body.light {
+	background-color: #F2F2F7;
+}
+
+
+body.dark .face::before { 
+    content: url("svg/dark/face.svg");
+}
+body.dark .hour-hand::before { 
+    content: url("svg/dark/hour-hand.svg");
+}
+body.dark .minute-hand::before { 
+    content: url("svg/dark/minute-hand.svg");
+}
+body.dark .second-hand::before { 
+    content: url("svg/dark/second-hand.svg");
+}
+body.dark .hands-pin::before { 
+    content: url("svg/dark/hands-pin.svg");
+}
+
+body.dark .controls button {
+    color: #000;
+    background-color: rgba(255,255,255,0.05);
+}
+
+body.light .face::before {
+    content: url("svg/light/face.svg");
+}
+body.light .hour-hand::before { 
+    content: url("svg/light/hour-hand.svg");
+}
+body.light .minute-hand::before { 
+    content: url("svg/light/minute-hand.svg");
+}
+body.light .second-hand::before { 
+    content: url("svg/light/second-hand.svg");
+}
+body.light .hands-pin::before { 
+    content: url("svg/light/hands-pin.svg");
+}
+
+body.light .controls button {
+    color: #fff;
+    background-color: rgba(0,0,0,0.05);
+}
+
+.clock-box {
+	margin-top: 0px;
+	position: relative;
+	width: var(--clock_size);
+	height: var(--clock_size);
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.face, .second-hand, .minute-hand, .hour-hand, .hands-pin {
+	width: var(--clock_size);
+	height: var(--clock_size);
+	position: absolute;
+}
+
+.resize-animation-stopper * {
+	transition: none !important;
+	animation: none !important;
+}
+
+.controls {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    display: flex;
+    display: none;
+    flex-wrap: wrap;
+    justify-content: left;
+    gap: 0px;
+    padding: 0 20px;
+    box-sizing: border-box;
+    touch-action: manipulation;
+}
+
+.group {
+    display: flex;
+    gap: 0px;
+}
+
+.controls button {
+    padding: 10px 20px;
+    border: none;
+    margin-right: 2px;
+    margin-bottom: 2px;
+    font-size: 20px;
+	font-weight: 400;
+	font-style: normal;
+}
+

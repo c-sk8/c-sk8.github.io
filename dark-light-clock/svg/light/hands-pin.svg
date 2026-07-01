@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 310 310" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g id="Hands" transform="matrix(1,0,0,1,-95,-95)">
+        <g id="Hands-Pin" serif:id="Hands Pin" transform="matrix(0.720148,0,0,0.720148,69.787993,70.454907)">
+            <circle cx="250.243" cy="249.317" r="2.882" style="fill:rgb(96,1,0);"/>
+            <path d="M250.243,245.51C252.344,245.51 254.05,247.216 254.05,249.317C254.05,251.418 252.344,253.124 250.243,253.124C248.142,253.124 246.436,251.418 246.436,249.317C246.436,247.216 248.142,245.51 250.243,245.51ZM250.243,246.436C248.653,246.436 247.362,247.727 247.362,249.317C247.362,250.907 248.653,252.199 250.243,252.199C251.833,252.199 253.125,250.907 253.125,249.317C253.125,247.727 251.833,246.436 250.243,246.436Z" style="fill-opacity:0.73;"/>
+        </g>
+    </g>
+</svg>
