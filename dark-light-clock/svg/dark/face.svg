@@ -3,7 +3,7 @@
 <svg width="100%" height="100%" viewBox="0 0 310 310" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
     <g id="Watch-Face-Light" serif:id="Watch Face Light" transform="matrix(1,0,0,1,-95,-95)">
         <g id="Face-Background" serif:id="Face Background" transform="matrix(1.368153,0,0,1.368153,-76.338593,-127.206098)">
-            <circle cx="238.525" cy="275.705" r="111.83" style="fill:url(#_Linear1);"/>
+            <path d="M238.525,163.875C300.245,163.875 350.354,213.984 350.354,275.705C350.354,337.425 300.245,387.534 238.525,387.534C176.804,387.534 126.695,337.425 126.695,275.705C126.695,213.984 176.804,163.875 238.525,163.875ZM238.525,208.095C201.21,208.095 170.916,238.39 170.916,275.705C170.916,313.019 201.21,343.314 238.525,343.314C275.84,343.314 306.134,313.019 306.134,275.705C306.134,238.39 275.84,208.095 238.525,208.095Z" style="fill:url(#_Linear1);"/>
         </g>
         <g id="Inner-Tick-Marks" serif:id="Inner Tick Marks" transform="matrix(1,0,0,1,95,95)">
             <g id="Hour-Ticks-12" serif:id="Hour Ticks 12" transform="matrix(0.866025,-0.5,0.5,0.866025,-56.733938,98.266062)">
