@@ -18,7 +18,7 @@ body, svg {
     -webkit-tap-highlight-color: transparent; 
     
     /* Disables pinch-to-zoom over the clock */
-    touch-action: none; 
+    /* touch-action: none; */
 }
 
 body {
