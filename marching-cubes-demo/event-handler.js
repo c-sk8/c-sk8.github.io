@@ -61,6 +61,7 @@ window.addEventListener('keydown', (e) => {
 	if (e.key === "2") doCubeLevel(2);
 	if (e.key === "3") doCubeLevel(3);
 	if (e.key === "4") doCubeLevel(4);
+	if (e.key === "5") doCubeLevel(5);
 
 });
 

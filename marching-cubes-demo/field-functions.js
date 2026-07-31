@@ -5,6 +5,8 @@
 // Free Software Foundation, version 3.
 // =====================================================================================
 
+import {	noise3D } from './noise-3d.js';
+
 // Pre-calculate constants for efficiency
 const SQRT3 = Math.sqrt(3);
 const TWO_PI = 2 * Math.PI;
@@ -684,3 +686,58 @@ export function LidinoidSurface(x, y, z, params) {
 
     return smoothMax(lidinoid, sphere, softness);
 }
+
+export function NoiseSphere(x, y, z, params, shared_params) {
+
+	const radius = params[0];
+	const noise_scale = params[1];
+	const wave_scale = params[2];
+
+	const noise_function_scale = shared_params[0];
+	const frequency = shared_params[1];
+
+	const n = noise3D(	x * noise_function_scale,
+						y * noise_function_scale,
+						z * noise_function_scale);
+	
+	const t = 0.5 + 0.5 * Math.sin(n * frequency);
+	
+	const r = radius + n * noise_scale + (t - 0.5) * wave_scale;
+	
+	return x*x + y*y + z*z - r*r;
+}
+
+export function SurfaceNoise(x, y, z, params, shared_params) {
+	const vertical_scale = params[0];
+	const noise_function_scale = shared_params[0];
+	const frequency = shared_params[1];
+
+	const n = noise3D(	x * noise_function_scale,
+						y * noise_function_scale,
+						z * noise_function_scale);
+						
+	const t = vertical_scale * Math.sin(n * frequency);
+	return y - t;
+}
+
+export function BlobNoise(x, y, z, params, shared_params) {
+	const radius = params[0];
+	const threshold = params[1];
+	let frequency = params[2];
+
+	let noise_scale = 2;
+
+	if(params != null)
+		noise_scale = shared_params[0];
+
+    let n = noise3D(x * noise_scale, y * noise_scale, z * noise_scale);
+
+    let t = 0.5 + 0.5 * Math.sin(n * frequency);
+
+	const sphere = radius - Math.sqrt(x * x + y * y + z * z);
+
+	const blobs = t - threshold;
+
+	return smoothMin(sphere, blobs, 1);
+}
+

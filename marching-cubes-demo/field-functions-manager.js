@@ -10,7 +10,8 @@ import {	Decocube, Tooth, SuperSphere, GumdropTorus, SinusoidalSphere,
 			MoebiusStrip, AlgebraicSurface, SurfacePattern, BlobRing,
 			PiriformDiabolo, SuperSphereCluster, Tetrahedral, ThreeTori,
 			RadialWaveSphere, FlattenedWavePattern, SpheredSchwarzP,
-			Rhombicuboctahedron, GyroidFloor, LidinoidSurface
+			Rhombicuboctahedron, GyroidFloor, LidinoidSurface, NoiseSphere,
+			SurfaceNoise, BlobNoise
  			} from './field-functions.js';
 
 export function getNextFieldFunctionIndex(index) {
@@ -47,6 +48,12 @@ export function getFieldFunction(index) {
 export function getFieldFunctionParams(index) {
 	const v_index = fieldList[index].currentVariant;
 	return fieldList[index].variants[v_index].params;
+}
+
+export function getSharedParams(index) {
+	const default_shared_params = [1, 50];
+	const v_index = fieldList[index].currentVariant;
+	return fieldList[index].variants[v_index]?.shared_params ?? default_shared_params;
 }
 
 export function getColourMode(index) {
@@ -380,7 +387,7 @@ const fieldList = [
 	currentVariant: 0,
 	variants: [
 		{ params: [10, 14, 2], bounds: [-2,2,-0.04,0.04,-2,2] },
-		{ params: [10, 7, 2], bounds: [-2,2,-0.09,0.09,-2,2] }
+		{ params: [10, 7, 2], bounds: [-2,2,-0.08,0.09,-2,2] }
 	]
 },
 {
@@ -434,6 +441,40 @@ const fieldList = [
 	variants: [
 		{ params: [2.2,1,2] },
 		{ params: [3,0.8,1.5] }
+	]
+},
+{
+	name: "Noise+Sine Sphere",
+	fn: NoiseSphere,
+	colourMode: 16,
+	currentVariant: 0,
+	bounds: [-1.3,1.3,-1.3,1.3,-1.3,1.3],
+	variants: [
+		{ params: [1.0,0.3,0.04], shared_params: [1, 80] },
+		{ params: [1.0,0.3,0.06], shared_params: [2, 50] },
+		{ params: [0.8,1.0,0.04], shared_params: [2, 70] },
+		{ params: [0.8,1.0,0.09], shared_params: [2, 50] }
+	]
+},
+{
+	name: "Surface Noise",
+	fn: SurfaceNoise,
+	colourMode: 0,
+	currentVariant: 0,
+	variants: [
+		{ params: [0.05], shared_params: [1, 50], bounds: [-3,3,-0.06,0.07,-3,3] },
+		{ params: [0.2], shared_params: [1, 20], bounds: [-3,3,-0.2,0.22,-3,3] }
+	]
+},
+{
+	name: "Noise Isosurface",
+	fn: BlobNoise,
+	colourMode: 15,
+	currentVariant: 0,
+	variants: [
+		{ params: [0.95, 0.2, 25], shared_params: [2, 100] },
+		{ params: [0.95, 0.2, 80], shared_params: [1, 160] },
+		{ params: [1.39, 0.2, 20], shared_params: [1.7, 80], bounds: [-1.4,1.4,-1.4,1.4,-1.4,1.4] }
 	]
 }
 ];

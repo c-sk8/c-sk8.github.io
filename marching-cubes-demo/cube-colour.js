@@ -7,6 +7,7 @@
 
 import * as THREE from './three.module.js';
 import {	Sampling } from './sampling.js';
+import {	noise3D } from './noise-3d.js';
 
 export function getColourModeName(index) {
 	return cubeCols[index].name;
@@ -80,64 +81,14 @@ export function ColourBands(x, y, z, sampling, palette) {
     return { r: tempColor.r, g: tempColor.g, b: tempColor.b};
 }
 
-function lerp(a, b, t) {
-    return a + (b - a) * t;
-}
+export function ValueNoise(vx, vy, vz, x, y, z, sampling, params) {
 
-function fade(t) {
-    return t * t * (3.0 - 2.0 * t);
-}
+	let noise_scale = 2;
 
-function hash(x, y, z) {
-    let h = x * 374761393 + y * 668265263 + z * 2147483647;
-    h = (h ^ (h >> 13)) * 1274126177;
-    return ((h ^ (h >> 16)) >>> 0) / 4294967295;
-}
+ 	if(params != null)
+		noise_scale = params[0];
 
-function noise3D(x, y, z) {
-
-    const xi = Math.floor(x);
-    const yi = Math.floor(y);
-    const zi = Math.floor(z);
-
-    const xf = x - xi;
-    const yf = y - yi;
-    const zf = z - zi;
-
-    const u = fade(xf);
-    const v = fade(yf);
-    const w = fade(zf);
-
-    const n000 = hash(xi,     yi,     zi);
-    const n100 = hash(xi + 1, yi,     zi);
-    const n010 = hash(xi,     yi + 1, zi);
-    const n110 = hash(xi + 1, yi + 1, zi);
-
-    const n001 = hash(xi,     yi,     zi + 1);
-    const n101 = hash(xi + 1, yi,     zi + 1);
-    const n011 = hash(xi,     yi + 1, zi + 1);
-    const n111 = hash(xi + 1, yi + 1, zi + 1);
-
-    const x00 = lerp(n000, n100, u);
-    const x10 = lerp(n010, n110, u);
-    const x01 = lerp(n001, n101, u);
-    const x11 = lerp(n011, n111, u);
-
-    const y0 = lerp(x00, x10, v);
-    const y1 = lerp(x01, x11, v);
-
-    return lerp(y0, y1, w);
-}
-
-export function ValueNoise(vx, vy, vz, x, y, z, sampling) {
-
-    const scale = 5;
-
-	const nx = (vx - sampling.bounds.min_x) / (sampling.bounds.max_x - sampling.bounds.min_x);
-	const ny = (vy - sampling.bounds.min_y) / (sampling.bounds.max_y - sampling.bounds.min_y);
-	const nz = (vz - sampling.bounds.min_z) / (sampling.bounds.max_z - sampling.bounds.min_z);
-
-    let n = noise3D(nx * scale, ny * scale, nz * scale);
+	let n = noise3D(vx * noise_scale, vy * noise_scale, vz * noise_scale);
 
 	let l = 0.5;
 	if(!(y % 3)) l *= 0.95;
@@ -151,18 +102,17 @@ export function ValueNoise(vx, vy, vz, x, y, z, sampling) {
 
 }
 
-export function CyclicNoise(vx, vy, vz, sampling, colours, scale, frequency) {
+export function CyclicNoise(vx, vy, vz, sampling, params, colours) {
 
-     const nx = (vx - sampling.bounds.min_x) /
-               (sampling.bounds.max_x - sampling.bounds.min_x);
+	let noise_scale = 2;
+	let frequency = 80;
 
-    const ny = (vy - sampling.bounds.min_y) /
-               (sampling.bounds.max_y - sampling.bounds.min_y);
+	if(params != null) {
+		noise_scale = params[0];
+		frequency = params[1];
+	}
 
-    const nz = (vz - sampling.bounds.min_z) /
-               (sampling.bounds.max_z - sampling.bounds.min_z);
-
-    let n = noise3D(nx * scale, ny * scale, nz * scale);
+    let n = noise3D(vx * noise_scale, vy * noise_scale, vz * noise_scale);
 
     let t = 0.5 + 0.5 * Math.sin(n * frequency);
 
@@ -240,63 +190,69 @@ const mag_cyan_noise = [		{ r: 0.6, g: 0.0, b: 0.6 },
 const yellow_green_noise = [	{ r: 0.0, g: 0.4, b: 0.0 },
 								{ r: 0.0, g: 0.1, b: 0.0 },
         						{ r: 0.9, g: 0.55, b: 0.0 } ];
-
+const greens_blues_noise = [	{ r: 0.0, g: 0.0, b: 0.2 },
+								{ r: 0.0, g: 0.2, b: 0.3 },
+        						{ r: 0.1, g: 0.5, b: 0.0 },
+								{ r: 0.0, g: 0.2, b: 0.0 } ];
 export const cubeCols = [
   	{	name: "Aqua",
-		fn: (x, y, z, vc, sampling) => SmoothGradient(y, vc[1], sampling, aqua)
+		fn: (x, y, z, vc, sampling, params) => SmoothGradient(y, vc[1], sampling, aqua)
     },
   	{	name: "Yellow Red",
-		fn: (x, y, z, vc, sampling) => SmoothGradient(y, vc[1], sampling, yellow_red)
+		fn: (x, y, z, vc, sampling, params) => SmoothGradient(y, vc[1], sampling, yellow_red)
     },
   	{	name: "Spring Greens",
-		fn: (x, y, z, vc, sampling) => SmoothGradient(y, vc[1], sampling, spring_greens)
+		fn: (x, y, z, vc, sampling, params) => SmoothGradient(y, vc[1], sampling, spring_greens)
     },
   	{	name: "Blues",
-		fn: (x, y, z, vc, sampling) => SmoothGradient(y, vc[1], sampling, blues)
+		fn: (x, y, z, vc, sampling, params) => SmoothGradient(y, vc[1], sampling, blues)
     },
   	{	name: "Orange",
-		fn: (x, y, z, vc, sampling) => SmoothGradient(y, vc[1], sampling, orange)
+		fn: (x, y, z, vc, sampling, params) => SmoothGradient(y, vc[1], sampling, orange)
     },
   	{	name: "Pink Purple",
-		fn: (x, y, z, vc, sampling) => SmoothGradient(y, vc[1], sampling, pink_purple)
+		fn: (x, y, z, vc, sampling, params) => SmoothGradient(y, vc[1], sampling, pink_purple)
     },
   	{	name: "Yellow Green",
-		fn: (x, y, z, vc, sampling) => SmoothGradient(y, vc[1], sampling, yellow_green)
+		fn: (x, y, z, vc, sampling, params) => SmoothGradient(y, vc[1], sampling, yellow_green)
     },
   	{	name: "Vibrant Sky",
-		fn: (x, y, z, vc, sampling) => SmoothGradient(y, vc[1], sampling, vibrant_sky)
+		fn: (x, y, z, vc, sampling, params) => SmoothGradient(y, vc[1], sampling, vibrant_sky)
     },
   	{	name: "Wood",
-		fn: (x, y, z, vc, sampling) => SmoothGradient(y, vc[1], sampling, wood)
+		fn: (x, y, z, vc, sampling, params) => SmoothGradient(y, vc[1], sampling, wood)
     },
   	{	name: "Orange Blue Bands",
-		fn: (x, y, z, vc, sampling) => ColourBands(x, y, z, sampling, orange_blue_bands)
+		fn: (x, y, z, vc, sampling, params) => ColourBands(x, y, z, sampling, orange_blue_bands)
     },
   	{	name: "Orange Green Bands",
-		fn: (x, y, z, vc, sampling) => ColourBands(x, y, z, sampling, orange_green_bands)
+		fn: (x, y, z, vc, sampling, params) => ColourBands(x, y, z, sampling, orange_green_bands)
     },
   	{	name: "Meadow Green Bands",
-		fn: (x, y, z, vc, sampling) => ColourBands(x, y, z, sampling, meadow_green_bands)
+		fn: (x, y, z, vc, sampling, params) => ColourBands(x, y, z, sampling, meadow_green_bands)
     },
   	{	name: "Creamy Bands",
-		fn: (x, y, z, vc, sampling) => ColourBands(x, y, z, sampling, creamy_bands)
+		fn: (x, y, z, vc, sampling, params) => ColourBands(x, y, z, sampling, creamy_bands)
     },
   	{	name: "Volcanic Fire",
-		fn: (x, y, z, vc, sampling) => ColourBands(x, y, z, sampling, volcanic_fire)
+		fn: (x, y, z, vc, sampling, params) => ColourBands(x, y, z, sampling, volcanic_fire)
     },
   	{	name: "Vibrant Summer",
-		fn: (x, y, z, vc, sampling) => ColourBands(x, y, z, sampling, vibrant_summer)
+		fn: (x, y, z, vc, sampling, params) => ColourBands(x, y, z, sampling, vibrant_summer)
     },
   	{	name: "Full Colour Noise",
-		fn: (x, y, z, vc, sampling) => ValueNoise(vc[0], vc[1], vc[2], x, y, z, sampling)
+		fn: (x, y, z, vc, sampling, params) => ValueNoise(vc[0], vc[1], vc[2], x, y, z, sampling, params)
     },
   	{	name: "Blue White Noise",
-		fn: (x, y, z, vc, sampling) => CyclicNoise(vc[0], vc[1], vc[2], sampling, blue_white_noise, 6, 100)
+		fn: (x, y, z, vc, sampling, params) => CyclicNoise(vc[0], vc[1], vc[2], sampling, params, blue_white_noise)
     },
   	{	name: "Magenta Cyan Noise",
-		fn: (x, y, z, vc, sampling) => CyclicNoise(vc[0], vc[1], vc[2], sampling, mag_cyan_noise, 2, 150)
+		fn: (x, y, z, vc, sampling, params) => CyclicNoise(vc[0], vc[1], vc[2], sampling, params, mag_cyan_noise)
     },
   	{	name: "Yellow Green Noise",
-		fn: (x, y, z, vc, sampling) => CyclicNoise(vc[0], vc[1], vc[2], sampling, yellow_green_noise, 5, 50)
+		fn: (x, y, z, vc, sampling, params) => CyclicNoise(vc[0], vc[1], vc[2], sampling, params, yellow_green_noise)
+    },
+  	{	name: "Greens And Blues Noise",
+		fn: (x, y, z, vc, sampling, params) => CyclicNoise(vc[0], vc[1], vc[2], sampling, params, greens_blues_noise)
     }
 ];

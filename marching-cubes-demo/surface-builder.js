@@ -10,7 +10,8 @@ import { 	scene } from './scene.js';
 import {	resetVertexCount, getVertexCount, XYCubeMarcher, CubeMarcher, 
 			vertexCount, computeSlice, setMaxVertices } from './cube-marcher.js';
 import { 	updateVertexCount, clearSurfaceGenerationTime  } from './hud.js';
-import { 	getFieldFunction, getFieldFunctionParams, getColourMode }
+import { 	getFieldFunction, getFieldFunctionParams, getColourMode,
+			getSharedParams }
 			from './field-functions-manager.js';
 import {	positions, colors, normals } from './cube-marcher.js';
 import {	getColourFunction} from './cube-colour.js';
@@ -62,6 +63,7 @@ function generateAllGeometry(fieldIndex) {
 	CubeMarcher(flatShading, sampling,
 				getFieldFunction(fieldIndex),
 				getFieldFunctionParams(fieldIndex),
+				getSharedParams(fieldIndex),
 				getColourFunction(getColourMode(fieldIndex)));
 		
 	//const elapsed = performance.now() - generationStartTime;
@@ -84,16 +86,18 @@ function generateGeometry(token, fieldIndex) {
 	
 	const field_fn = getFieldFunction(fieldIndex);
 	const field_fn_params = getFieldFunctionParams(fieldIndex);
+	const shared_params = getSharedParams(fieldIndex);
 
 	if(zIndex == null) {
 		zIndex = 0;
-		slice0 = computeSlice(	0, sampling, field_fn, field_fn_params);
-		slice1 = computeSlice(	1, sampling, field_fn, field_fn_params);
+		slice0 = computeSlice(	0, sampling, field_fn, field_fn_params, shared_params);
+		slice1 = computeSlice(	1, sampling, field_fn, field_fn_params, shared_params);
 	}
 
 	XYCubeMarcher(	zIndex, slice0, slice1, sampling, flatShading,
 					getFieldFunction(fieldIndex),
 					getFieldFunctionParams(fieldIndex),
+					getSharedParams(fieldIndex),
 					getColourFunction(getColourMode(fieldIndex)) );
 	zIndex++;
 		
@@ -111,7 +115,7 @@ function generateGeometry(token, fieldIndex) {
     
 	if (zIndex < sampling.dimensions.depth) {
 		slice0 = slice1;
-		slice1 = computeSlice(	zIndex + 1, sampling, field_fn, field_fn_params);
+		slice1 = computeSlice(	zIndex + 1, sampling, field_fn, field_fn_params, shared_params);
 		requestAnimationFrame(() => generateGeometry(token, fieldIndex));
 	}
 }

@@ -9,7 +9,7 @@ export class Sampling {
 	
     constructor() {
     
-    	this.levelSteps = [0.04, 0.02, 0.0133, 0.01];
+    	this.levelSteps = [0.04, 0.02, 0.0133, 0.01, 0.008];
         this.sampling_level = 2;
 
         this.dimensions = {
@@ -62,7 +62,7 @@ export class Sampling {
     }
     
     setSamplingLevel(level) {
-    	this.sampling_level = Math.max(0, Math.min(3, level));
+    	this.sampling_level = Math.max(0, Math.min(4, level));
     	this.setStep(this.levelSteps[this.sampling_level]);
     	this.calculateDimensions();
     }

@@ -85,7 +85,7 @@ export function animate() {
 	y_rotation_velocity += (y_target_rotation_velocity - y_rotation_velocity) * MOTION_DAMPENER;
 	mesh.rotation.y += y_rotation_velocity * VELOCITY_SCALE * delta;
 	
-	cameraZ += (targetCameraZ - cameraZ) * 0.1;
+	cameraZ += (targetCameraZ - cameraZ) * 0.08;
 	camera.position.z = cameraZ;
 	camera.lookAt(0, 0, 0);
 

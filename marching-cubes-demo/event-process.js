@@ -171,10 +171,10 @@ export function doCubeLevel(level) {
 	sizeButtons.forEach(btn => btn.classList.remove('is-active'));
 	
 	// 3. Add 'is-active' only to the one we clicked
-	sizeButtons[level-1].classList.add('is-active');
+	if(level <= 4) sizeButtons[level-1].classList.add('is-active');
 
 	// 4. Get the size value from the data attribute (convert string to number)
-	const size = parseInt(sizeButtons[level-1].dataset.size);
+	//const size = parseInt(sizeButtons[level-1].dataset.size);
 
 	// 5. Run your shared geometry logic once
 	destroyGeometry();
