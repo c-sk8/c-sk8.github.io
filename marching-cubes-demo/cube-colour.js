@@ -81,19 +81,17 @@ export function ColourBands(x, y, z, sampling, palette) {
     return { r: tempColor.r, g: tempColor.g, b: tempColor.b};
 }
 
-export function ValueNoise(vx, vy, vz, x, y, z, sampling, params) {
+export function ValueNoise(vx, vy, vz, x, y, z, sampling, noise) {
 
 	let noise_scale = 2;
-
- 	if(params != null)
-		noise_scale = params[0];
+ 	if(noise != null) noise_scale = noise[0];
 
 	let n = noise3D(vx * noise_scale, vy * noise_scale, vz * noise_scale);
 
 	let l = 0.5;
-	if(!(y % 3)) l *= 0.95;
-	if(!(x % 3)) l *= 0.95;
-	if(!(z % 3)) l *= 0.95;
+	if(!(y % 2)) l *= 0.97;
+//	if(!(x % 2)) l *= 0.97;
+//	if(!(z % 2)) l *= 0.97;
 
 	tempColor.setHSL( n * 3, 0.6, l);
 	tempColor.convertSRGBToLinear();
@@ -102,14 +100,14 @@ export function ValueNoise(vx, vy, vz, x, y, z, sampling, params) {
 
 }
 
-export function CyclicNoise(vx, vy, vz, sampling, params, colours) {
+export function CyclicNoise(vx, vy, vz, y, sampling, noise, colours) {
 
 	let noise_scale = 2;
 	let frequency = 80;
 
-	if(params != null) {
-		noise_scale = params[0];
-		frequency = params[1];
+	if(noise != null) {
+		noise_scale = noise[0];
+		frequency = noise[1];
 	}
 
     let n = noise3D(vx * noise_scale, vy * noise_scale, vz * noise_scale);
@@ -119,16 +117,19 @@ export function CyclicNoise(vx, vy, vz, sampling, params, colours) {
 	const scaled = t * (colours.length - 1);
 	
 	const i = Math.floor(scaled);
-	const f = scaled - i;
+	let f = scaled - i;
 	
 	const c1 = colours[i];
 	const c2 = colours[i + 1];
 	
-	return {
-		r: c1.r + (c2.r - c1.r) * f,
-		g: c1.g + (c2.g - c1.g) * f,
-		b: c1.b + (c2.b - c1.b) * f
-	};
+	tempColor.setRGB(
+		c1.r + (c2.r - c1.r) * f,
+		c1.g + (c2.g - c1.g) * f,
+		c1.b + (c2.b - c1.b) * f);
+
+	if(!(y % 2)) tempColor.offsetHSL(0, 0, 0.02);
+	
+    return { r: tempColor.r, g: tempColor.g, b: tempColor.b};
 }
 
 const aqua =			[[160, 1, 0.5], [200, 1, 0.5]];
@@ -241,18 +242,18 @@ export const cubeCols = [
 		fn: (x, y, z, vc, sampling, params) => ColourBands(x, y, z, sampling, vibrant_summer)
     },
   	{	name: "Full Colour Noise",
-		fn: (x, y, z, vc, sampling, params) => ValueNoise(vc[0], vc[1], vc[2], x, y, z, sampling, params)
+		fn: (x, y, z, vc, sampling, noise) => ValueNoise(vc[0], vc[1], vc[2], x, y, z, sampling, noise)
     },
   	{	name: "Blue White Noise",
-		fn: (x, y, z, vc, sampling, params) => CyclicNoise(vc[0], vc[1], vc[2], sampling, params, blue_white_noise)
+		fn: (x, y, z, vc, sampling, noise) => CyclicNoise(vc[0], vc[1], vc[2], y, sampling, noise, blue_white_noise)
     },
   	{	name: "Magenta Cyan Noise",
-		fn: (x, y, z, vc, sampling, params) => CyclicNoise(vc[0], vc[1], vc[2], sampling, params, mag_cyan_noise)
+		fn: (x, y, z, vc, sampling, noise) => CyclicNoise(vc[0], vc[1], vc[2], y, sampling, noise, mag_cyan_noise)
     },
   	{	name: "Yellow Green Noise",
-		fn: (x, y, z, vc, sampling, params) => CyclicNoise(vc[0], vc[1], vc[2], sampling, params, yellow_green_noise)
+		fn: (x, y, z, vc, sampling, noise) => CyclicNoise(vc[0], vc[1], vc[2], y, sampling, noise, yellow_green_noise)
     },
   	{	name: "Greens And Blues Noise",
-		fn: (x, y, z, vc, sampling, params) => CyclicNoise(vc[0], vc[1], vc[2], sampling, params, greens_blues_noise)
+		fn: (x, y, z, vc, sampling, noise) => CyclicNoise(vc[0], vc[1], vc[2], y, sampling, noise, greens_blues_noise)
     }
 ];

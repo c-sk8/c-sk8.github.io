@@ -11,7 +11,7 @@ import {	resetVertexCount, getVertexCount, XYCubeMarcher, CubeMarcher,
 			vertexCount, computeSlice, setMaxVertices } from './cube-marcher.js';
 import { 	updateVertexCount, clearSurfaceGenerationTime  } from './hud.js';
 import { 	getFieldFunction, getFieldFunctionParams, getColourMode,
-			getSharedParams }
+			getNoiseParams }
 			from './field-functions-manager.js';
 import {	positions, colors, normals } from './cube-marcher.js';
 import {	getColourFunction} from './cube-colour.js';
@@ -28,6 +28,15 @@ let slice0 = null;
 let slice1 = null;
 //let generationStartTime = 0;
 
+	material = new THREE.MeshPhongMaterial({
+		vertexColors: true,
+		side: THREE.DoubleSide,
+		shininess: 50,
+		specular: new THREE.Color(0x333333),
+		flatShading: false
+	});
+
+
 export function initialiseGeometry()
 {
 	geometry = new THREE.BufferGeometry();
@@ -40,14 +49,18 @@ export function initialiseGeometry()
 		new THREE.BufferAttribute(colors, 3).setUsage(THREE.DynamicDrawUsage));	
 
 	geometry.setDrawRange(0, 0); // nothing visible yet
+
+    mesh = new THREE.Mesh(geometry, material);
+
+    scene.add(mesh);
 }
 
-export function destroyGeometry()
-{
-	scene.remove(mesh);
-	mesh.geometry.dispose();
-	mesh.material.dispose();
-}
+//export function destroyGeometry()
+//{
+//	scene.remove(mesh);
+//	mesh.geometry.dispose();
+//	mesh.material.dispose();
+//}
 
 export function toggleFlatShading() {
 	flatShading = !flatShading
@@ -63,7 +76,7 @@ function generateAllGeometry(fieldIndex) {
 	CubeMarcher(flatShading, sampling,
 				getFieldFunction(fieldIndex),
 				getFieldFunctionParams(fieldIndex),
-				getSharedParams(fieldIndex),
+				getNoiseParams(fieldIndex),
 				getColourFunction(getColourMode(fieldIndex)));
 		
 	//const elapsed = performance.now() - generationStartTime;
@@ -86,18 +99,16 @@ function generateGeometry(token, fieldIndex) {
 	
 	const field_fn = getFieldFunction(fieldIndex);
 	const field_fn_params = getFieldFunctionParams(fieldIndex);
-	const shared_params = getSharedParams(fieldIndex);
+	const noise = getNoiseParams(fieldIndex);
 
 	if(zIndex == null) {
 		zIndex = 0;
-		slice0 = computeSlice(	0, sampling, field_fn, field_fn_params, shared_params);
-		slice1 = computeSlice(	1, sampling, field_fn, field_fn_params, shared_params);
+		slice0 = computeSlice(	0, sampling, field_fn, field_fn_params, noise);
+		slice1 = computeSlice(	1, sampling, field_fn, field_fn_params, noise);
 	}
 
 	XYCubeMarcher(	zIndex, slice0, slice1, sampling, flatShading,
-					getFieldFunction(fieldIndex),
-					getFieldFunctionParams(fieldIndex),
-					getSharedParams(fieldIndex),
+					field_fn, field_fn_params, noise,
 					getColourFunction(getColourMode(fieldIndex)) );
 	zIndex++;
 		
@@ -115,55 +126,55 @@ function generateGeometry(token, fieldIndex) {
     
 	if (zIndex < sampling.dimensions.depth) {
 		slice0 = slice1;
-		slice1 = computeSlice(	zIndex + 1, sampling, field_fn, field_fn_params, shared_params);
+		slice1 = computeSlice(	zIndex + 1, sampling, field_fn, field_fn_params, noise);
 		requestAnimationFrame(() => generateGeometry(token, fieldIndex));
 	}
 }
 
-export function destroyMesh()
-{
-	if(mesh !== null) {
-		scene.remove(mesh);
-		mesh.geometry.dispose();
-		mesh.material.dispose();
-	}
-}
+//export function destroyMesh()
+//{
+//	if(mesh !== null) {
+//		scene.remove(mesh);
+//		mesh.geometry.dispose();
+//		mesh.material.dispose();
+//	}
+//}
 
 export function rebuildSurface(fieldIndex = 0, animateSurfaceGeneration = false) {
  
- 	let rotation_x = 0;
- 	let rotation_y = 0;
+ 	//let rotation_x = 0;
+ 	//let rotation_y = 0;
  	
-	if(mesh !== null) {
-		rotation_x = mesh.rotation.x;
-		rotation_y = mesh.rotation.y;
+	//if(mesh !== null) {
+	//	rotation_x = mesh.rotation.x;
+	//	rotation_y = mesh.rotation.y;
 		
-		scene.remove(mesh);
-		mesh.geometry.dispose();
-		mesh.material.dispose();
-	}
+	//	scene.remove(mesh);
+	//	mesh.geometry.dispose();
+	//	mesh.material.dispose();
+	//}
 
-	material = new THREE.MeshPhongMaterial({
-		vertexColors: true,
-		side: THREE.DoubleSide,
-		shininess: 150,
-		specular: new THREE.Color(0x333333),
-		flatShading: false
-	});
+	//material = new THREE.MeshPhongMaterial({
+	//	vertexColors: true,
+	//	side: THREE.DoubleSide,
+	//	shininess: 150,
+	//	specular: new THREE.Color(0x333333),
+	//	flatShading: false
+	//});
 
-	zIndex = null;
-	resetVertexCount();
-    mesh = new THREE.Mesh(geometry, material);
-    mesh.rotation.x = rotation_x;
-    mesh.rotation.y = rotation_y;
+    //mesh = new THREE.Mesh(geometry, material);
+    //mesh.rotation.x = rotation_x;
+    //mesh.rotation.y = rotation_y;
 
-    scene.add(mesh);
+    //scene.add(mesh);
 
 	if(animateSurfaceGeneration)
 	{
 		generationToken++;
 		const myToken = generationToken;
 		
+		zIndex = null;
+		resetVertexCount();
     	generateGeometry(myToken, fieldIndex);
     }
     else

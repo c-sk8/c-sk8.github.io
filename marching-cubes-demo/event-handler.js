@@ -6,10 +6,10 @@
 // =====================================================================================
 
 import {	zoomIn, zoomOut, set_X_RotationVelocity, set_Y_RotationVelocity,
-			isUpsideDown } from './animate.js';
+			isUpsideDown, toggleHideMousePointer, showMousePointer } from './animate.js';
 import {	toggleHideControls, processFlatShadingToggle,
 			nextSurface, previousSurface, fieldIndex, animateGen,
-			doXRotation, doYRotation, doResetRotation,
+			doXRotation, doYRotation, doZMovement, doResetRotation,
 			doAnimateGen, doNextVariant, doPrevVariant,
 			doNextColour, doPrevColour, doCubeLevel } from './event-process.js';
 
@@ -27,6 +27,7 @@ document.getElementById("nextSurface").onclick = () => { nextSurface(); }
 document.getElementById("prevSurface").onclick = () => { previousSurface(); }
 document.getElementById("xRotation").onclick = () => { doXRotation(); }
 document.getElementById("yRotation").onclick = () => { doYRotation(); }
+document.getElementById("zMovement").onclick = () => { doZMovement(); }
 document.getElementById("resetRotation").onclick = () => { doResetRotation(); }
 document.getElementById("nextVariant").onclick = () => { doNextVariant(); }
 document.getElementById("prevVariant").onclick = () => { doPrevVariant(); }
@@ -36,6 +37,7 @@ document.getElementById("num1").onclick  = () => { doCubeLevel(1); }
 document.getElementById("num2").onclick  = () => { doCubeLevel(2); }
 document.getElementById("num3").onclick  = () => { doCubeLevel(3); }
 document.getElementById("num4").onclick  = () => { doCubeLevel(4); }
+document.getElementById("num5").onclick  = () => { doCubeLevel(5); }
 
 // =====================================================================================
 //	Handle key presses
@@ -45,6 +47,7 @@ window.addEventListener('keydown', (e) => {
     
     if (e.key === 'X' || e.key === 'x') doXRotation();
     if (e.key === 'Y' || e.key === 'y') doYRotation();
+    if (e.key === 'Z' || e.key === 'z') doZMovement();
     if (e.key === '=') doResetRotation();
     if (e.key === 'ArrowRight') nextSurface();
     if (e.key === 'ArrowLeft') previousSurface();
@@ -62,6 +65,7 @@ window.addEventListener('keydown', (e) => {
 	if (e.key === "3") doCubeLevel(3);
 	if (e.key === "4") doCubeLevel(4);
 	if (e.key === "5") doCubeLevel(5);
+    if (e.key === 'm' || e.key === 'M') toggleHideMousePointer();
 
 });
 
@@ -114,6 +118,8 @@ window.addEventListener("mousedown", e => {
 
 window.addEventListener("mousemove", e => {
 
+	showMousePointer();
+	
 	if (!dragging) return;
 
 	const dx = e.clientX - lastX;

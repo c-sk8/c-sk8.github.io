@@ -6,9 +6,7 @@
 // =====================================================================================
 
 import {	toggleFlatShading,
-			rebuildSurface,
-			initialiseGeometry,
-			destroyGeometry }		from './surface-builder.js';
+			rebuildSurface }		from './surface-builder.js';
 import {	getNextFieldIndex,
 			getPreviousFieldIndex }	from './field-functions-manager.js';
 import { 	updateHUD }				from './hud.js';
@@ -24,6 +22,8 @@ import {	set_X_RotationVelocity,
 			set_Y_TargetRotationVelocity,
 			get_Y_TargetRotationVelocity,
 			isUpsideDown,
+			toggleZMovement,
+			disableZMovement,
 			resetRotation }			from './animate.js';
 import {	getColourModeCount }	from './cube-colour.js';
 import {	sampling }				from './sampling.js';
@@ -41,6 +41,7 @@ const hiddencontrols = document.getElementById('hiddencontrols');
 const flatShadingButton = document.getElementById("flatShading");
 const xRotationButton = document.getElementById("xRotation");
 const yRotationButton = document.getElementById("yRotation");
+const zMovementButton = document.getElementById("zMovement");
 const animateGenButton = document.getElementById("animateGen");
 const sizeButtons = document.querySelectorAll('.size-btn');
 
@@ -112,6 +113,11 @@ export function doYRotation() {
 	updateRotationSpeeds();
 };
 
+export function doZMovement() {
+	zMovementButton.classList.toggle('is-active');
+	toggleZMovement();
+}
+
 export function doResetRotation() {
 	set_X_RotationVelocity(0);
 	set_X_TargetRotationVelocity(0);
@@ -122,6 +128,9 @@ export function doResetRotation() {
 	set_Y_TargetRotationVelocity(0);
 	yRotationButton.classList.remove('is-active');
 	yEnabled = false;
+	
+	disableZMovement();
+	zMovementButton.classList.remove('is-active');
 	
 	resetRotation();
 }
@@ -177,11 +186,11 @@ export function doCubeLevel(level) {
 	//const size = parseInt(sizeButtons[level-1].dataset.size);
 
 	// 5. Run your shared geometry logic once
-	destroyGeometry();
+	//destroyGeometry();
 	sampling.setSamplingLevel(level - 1);
 	updateSampling(fieldIndex);
     updateHUD();
-	initialiseGeometry();
+	//initialiseGeometry();
 	rebuildSurface(fieldIndex, animateGen);
 }
 

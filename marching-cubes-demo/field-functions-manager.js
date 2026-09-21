@@ -50,10 +50,10 @@ export function getFieldFunctionParams(index) {
 	return fieldList[index].variants[v_index].params;
 }
 
-export function getSharedParams(index) {
-	const default_shared_params = [1, 50];
+export function getNoiseParams(index) {
+	const default_noise_params = [1.5, 70];
 	const v_index = fieldList[index].currentVariant;
-	return fieldList[index].variants[v_index]?.shared_params ?? default_shared_params;
+	return fieldList[index].variants[v_index]?.noise ?? default_noise_params;
 }
 
 export function getColourMode(index) {
@@ -100,8 +100,6 @@ export function previousColourMode(index, col_modes_count) {
 	fieldList[index].colourMode = prev_col_mode;
 }
 
-// =====================================================================================
-
 export function getFieldFunctionName(index) {
 	return fieldList[index].fn.name;
 }
@@ -113,6 +111,16 @@ export function getCurrentVariant(index) {
 }
 export function getFieldsCount() {
 	return fieldList.length;
+}
+
+export function getAnimationStartParams(index) {
+	const start_variant = fieldList[index].animation.startVariant;
+	return fieldList[index].variants[start_variant].params;
+}
+
+export function getAnimationEndParams(index) {
+	const end_variant = fieldList[index].animation.endVariant;
+	return fieldList[index].variants[end_variant].params;
 }
 
 // =====================================================================================
@@ -129,7 +137,12 @@ const fieldList = [
 		{ params: [1.16, 0.55, 0.07] },
 		{ params: [1.16, 0.75, 0.05] },
 		{ params: [1.16, 1.00, 0.03] }
-	]
+	],
+	animation: {
+		startVariant: 0,
+		endVariant: 4,
+		frames: 120
+	}
 },
 {
 	name: "Tooth",
@@ -409,13 +422,18 @@ const fieldList = [
 {
 	name: "Sphered Schwarz P",
 	fn: SpheredSchwarzP,
-	colourMode: 2,
+	colourMode: 7,
 	currentVariant: 0,
 	variants: [
-		{ params: [1.2, 1, 0.9] },
-		{ params: [1.45, 1, 1.5] },
-		{ params: [0.7, 1, 2.5] }
-	]
+		{ params: [1.6, 1, 1.5] },
+		{ params: [1.0, 1, 1.5] },
+		{ params: [0.575, 1, 1.5] }
+	],
+	animation: {
+		startVariant: 0,
+		endVariant: 2,
+		frames: 120
+	}
 },
 {
 	name: "Gyroid Floor",
@@ -446,35 +464,38 @@ const fieldList = [
 {
 	name: "Noise+Sine Sphere",
 	fn: NoiseSphere,
-	colourMode: 16,
-	currentVariant: 0,
+	colourMode: 15,
+	currentVariant: 1,
 	bounds: [-1.3,1.3,-1.3,1.3,-1.3,1.3],
 	variants: [
-		{ params: [1.0,0.3,0.04], shared_params: [1, 80] },
-		{ params: [1.0,0.3,0.06], shared_params: [2, 50] },
-		{ params: [0.8,1.0,0.04], shared_params: [2, 70] },
-		{ params: [0.8,1.0,0.09], shared_params: [2, 50] }
+		{ params: [1.0,0.3,0.02], noise: [1.0, 90] },
+		{ params: [0.9,0.6,0.05], noise: [1.0, 70] },
+		{ params: [0.8,0.9,0.06], noise: [1.0, 60] },
+		{ params: [0.7,1.2,0.07], noise: [1.1, 60] },
+		{ params: [0.6,1.4,0.11], noise: [1.1, 60] }
 	]
-},
+}
+/*
 {
 	name: "Surface Noise",
 	fn: SurfaceNoise,
-	colourMode: 0,
+	colourMode: 15,
 	currentVariant: 0,
 	variants: [
-		{ params: [0.05], shared_params: [1, 50], bounds: [-3,3,-0.06,0.07,-3,3] },
-		{ params: [0.2], shared_params: [1, 20], bounds: [-3,3,-0.2,0.22,-3,3] }
+		{ params: [0.05], noise: [1, 50], bounds: [-3,3,-0.06,0.07,-3,3] },
+		{ params: [0.2], noise: [1, 20], bounds: [-3,3,-0.2,0.22,-3,3] }
 	]
 },
 {
 	name: "Noise Isosurface",
 	fn: BlobNoise,
 	colourMode: 15,
-	currentVariant: 0,
+	currentVariant: 2,
 	variants: [
-		{ params: [0.95, 0.2, 25], shared_params: [2, 100] },
-		{ params: [0.95, 0.2, 80], shared_params: [1, 160] },
-		{ params: [1.39, 0.2, 20], shared_params: [1.7, 80], bounds: [-1.4,1.4,-1.4,1.4,-1.4,1.4] }
+		{ params: [0.95, 0.2, 20], noise: [1.7, 100] },
+		{ params: [0.95, 0.2, 35], noise: [1.2, 120] },
+		{ params: [0.95, 0.2, 60], noise: [1, 160] }
 	]
 }
+*/
 ];
